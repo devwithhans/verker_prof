@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17.83" height="21.612" viewBox="0 0 17.83 21.612">
+  <g id="project" transform="translate(-225.693 -1.467)">
+    <g id="_050-clipboard" data-name="050-clipboard" transform="translate(225.693 1.467)">
+      <g id="Group_349" data-name="Group 349" transform="translate(0)">
+        <g id="Group_348" data-name="Group 348">
+          <path id="Path_144" data-name="Path 144" d="M60.739,0H46.691A1.893,1.893,0,0,0,44.8,1.891v17.83a1.893,1.893,0,0,0,1.891,1.891H60.739a1.893,1.893,0,0,0,1.891-1.891V1.891A1.893,1.893,0,0,0,60.739,0Zm.27,19.721a.274.274,0,0,1-.27.27H46.691a.274.274,0,0,1-.27-.27V1.891a.274.274,0,0,1,.27-.27H60.739a.274.274,0,0,1,.27.27Z" transform="translate(-44.8)"/>
+        </g>
+      </g>
+      <g id="Group_351" data-name="Group 351" transform="translate(5.403 9.185)">
+        <g id="Group_350" data-name="Group 350">
+          <path id="Path_145" data-name="Path 145" d="M178.743,217.6H173.61a.81.81,0,0,0,0,1.621h5.133a.81.81,0,1,0,0-1.621Z" transform="translate(-172.8 -217.6)"/>
+        </g>
+      </g>
+      <g id="Group_353" data-name="Group 353" transform="translate(3.782 12.427)">
+        <g id="Group_352" data-name="Group 352">
+          <path id="Path_146" data-name="Path 146" d="M143.855,294.4H135.21a.81.81,0,0,0,0,1.621h8.645a.81.81,0,1,0,0-1.621Z" transform="translate(-134.4 -294.4)"/>
+        </g>
+      </g>
+      <g id="Group_355" data-name="Group 355" transform="translate(3.782 15.668)">
+        <g id="Group_354" data-name="Group 354">
+          <path id="Path_147" data-name="Path 147" d="M143.855,371.2H135.21a.81.81,0,0,0,0,1.621h8.645a.81.81,0,1,0,0-1.621Z" transform="translate(-134.4 -371.2)"/>
+        </g>
+      </g>
+      <g id="Group_357" data-name="Group 357" transform="translate(4.863 0.81)">
+        <g id="Group_356" data-name="Group 356">
+          <path id="Path_148" data-name="Path 148" d="M166.483,19.2v2.7h-4.863V19.2H160v3.512a.81.81,0,0,0,.81.81h6.483a.81.81,0,0,0,.81-.81V19.2Z" transform="translate(-160 -19.2)"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
