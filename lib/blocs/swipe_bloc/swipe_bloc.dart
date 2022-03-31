@@ -49,7 +49,6 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
 
     QueryResult result;
     try {
-      print(state.maxDistance);
       result = await graphQLService.performQuery(
         getProjects,
         variables: {

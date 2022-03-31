@@ -35,7 +35,9 @@ class ProjectTile extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => StreamChannel(
                     channel: channel,
-                    child: ChannelPage(),
+                    child: ChannelPage(
+                      outreach: outreach,
+                    ),
                   ),
                 ),
               );

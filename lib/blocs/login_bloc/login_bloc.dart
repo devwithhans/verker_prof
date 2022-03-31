@@ -18,8 +18,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   })  : _authenticationRepository = authenticationRepository,
         super(LoginInitial()) {
     on<Login>(_onLogin);
-    // TODO Make it posible to logout (Currently executed in the authBloC)
-    // TODO Make the registration process
   }
 
   void selectScreen(screen) {
@@ -40,7 +38,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(Succes());
       }
     } catch (e) {
-      print(e);
       emit(LoginFailed());
     }
   }

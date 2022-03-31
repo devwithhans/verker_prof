@@ -17,5 +17,5 @@ class ProjectsState extends Equatable {
   }
 
   @override
-  List<Object> get props => [projects, projects];
+  List<Object> get props => [projects, projects, status];
 }

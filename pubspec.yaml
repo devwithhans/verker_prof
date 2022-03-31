@@ -46,6 +46,8 @@ dependencies:
   video_thumbnail: ^0.4.3
   camera: ^0.9.4
   cached_network_image: ^3.2.0
+  syncfusion_flutter_datepicker: ^19.4.56
+
 
 
 

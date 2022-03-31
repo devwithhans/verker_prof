@@ -73,7 +73,6 @@ class _RegisterScreenState extends State<LoginScreen> {
                                         ),
                                       );
                                   Navigator.pop(context);
-                                  // TODO: If a error happens the widget will pop anyways, leaving the user to start over...
                                 }
                               },
                             );

@@ -14,6 +14,6 @@ class BrowsingLoading extends BrowseProjectState {}
 class BrowsingFailed extends BrowseProjectState {}
 
 class BrowsingSucces extends BrowseProjectState {
-  List<ProjectModel> projects;
-  BrowsingSucces(this.projects);
+  final List<ProjectModel> projects;
+  const BrowsingSucces(this.projects);
 }

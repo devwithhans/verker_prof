@@ -167,7 +167,7 @@ class _ProjectSwipeCardState extends State<ProjectSwipeCard> {
                       builder: (_) => BlocProvider.value(
                         value: context.read<SwipeBloc>(),
                         child: BlocProvider.value(
-                          value: context.read<ProjectsCubit>(),
+                          value: context.read<ProjectsBloc>(),
                           child: ProjectDetails(
                             project: widget.project,
                           ),

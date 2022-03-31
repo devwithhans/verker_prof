@@ -4,6 +4,7 @@ import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
 import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
 import 'package:verker_prof/blocs/projects_bloc/projects_cubit.dart';
+import 'package:verker_prof/blocs/projects_bloc/projects_event.dart';
 import 'package:verker_prof/repositories/authRepo.dart';
 import 'package:verker_prof/repositories/chatRepo.dart';
 import 'package:verker_prof/screens/login_screens/login.dart';
@@ -14,7 +15,7 @@ void main() async {
   runApp(App());
 }
 
-/// App is the topwidget responisble for initializing global BLoC, repositories and
+/// App is the topwidget responisble for initializing global BLoC, repositories and,
 /// other dependisies.
 
 class App extends StatelessWidget {
@@ -49,8 +50,9 @@ class App extends StatelessWidget {
                   context.read<AuthenticationRepository>(),
             ),
           ),
-          BlocProvider<ProjectsCubit>(
-            create: (BuildContext context) => ProjectsCubit(_streamChatClient),
+          BlocProvider<ProjectsBloc>(
+            create: (BuildContext context) =>
+                ProjectsBloc(_streamChatClient)..add(FetchMyProjects()),
           )
         ],
         child: MaterialApp(

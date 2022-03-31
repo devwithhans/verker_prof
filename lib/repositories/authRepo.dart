@@ -35,7 +35,6 @@ class AuthenticationRepository {
       }
       if (result.data != null) {
         UserData userData = UserData.convert(result.data!['getUser']);
-        dynamic user;
         try {
           dynamic user = await chatRepository.connectUser(userData);
           if (user != null) {

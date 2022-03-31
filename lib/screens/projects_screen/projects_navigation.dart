@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/projects_bloc/projects_cubit.dart';
+import 'package:verker_prof/blocs/projects_bloc/projects_event.dart';
 import 'package:verker_prof/models/outreach.dart';
 import 'package:verker_prof/screens/projects_screen/project_tile.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
@@ -11,11 +12,12 @@ class ProjectTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ProjectsCubit>().getMyProjects();
     return DefaultTabController(
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 4,
           title: const Text(
             'Projekter',
             style: kTextSmallBold,
@@ -32,8 +34,9 @@ class ProjectTab extends StatelessWidget {
             ],
           ),
         ),
-        body: BlocBuilder<ProjectsCubit, ProjectsState>(
+        body: BlocBuilder<ProjectsBloc, ProjectsState>(
           builder: (context, state) {
+            print(state.status);
             if (state.status == ProjectsStatus.succes) {
               List<Outreach> pendingOutreaches = state.projects
                   .where((element) => element.status == 'PENDING')
@@ -48,10 +51,11 @@ class ProjectTab extends StatelessWidget {
               return TabBarView(
                 children: [
                   tabList(pendingOutreaches,
-                      'Du har endnu ingen færdige projekter'),
-                  tabList(
-                      activeProjects, 'Du har endnu ingen færdige projekter'),
-                  tabList(doneProjects, 'Du har endnu ingen færdige projekter'),
+                      'Du har endnu ingen færdige projekter', context),
+                  tabList(activeProjects,
+                      'Du har endnu ingen færdige projekter', context),
+                  tabList(doneProjects, 'Du har endnu ingen færdige projekter',
+                      context),
                 ],
               );
             }
@@ -67,14 +71,20 @@ class ProjectTab extends StatelessWidget {
     );
   }
 
-  Widget tabList(List<Outreach> outreaches, String besked) {
+  Widget tabList(
+      List<Outreach> outreaches, String besked, BuildContext context) {
     return outreaches.isNotEmpty
-        ? ListView.builder(
-            padding: const EdgeInsets.only(top: 20),
-            itemCount: outreaches.length,
-            itemBuilder: ((context, index) {
-              return ProjectTile(outreach: outreaches[index]);
-            }),
+        ? RefreshIndicator(
+            onRefresh: () async {
+              context.read<ProjectsBloc>().add(FetchMyProjects());
+            },
+            child: ListView.builder(
+              padding: const EdgeInsets.only(top: 20),
+              itemCount: outreaches.length,
+              itemBuilder: ((context, index) {
+                return ProjectTile(outreach: outreaches[index]);
+              }),
+            ),
           )
         : CenterText(besked);
   }

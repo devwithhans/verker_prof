@@ -29,7 +29,6 @@ class BrowseProjectCubit extends Cubit<BrowseProjectState> {
         for (var i in result.data!['browseProjects']) {
           projects.add(ProjectModel.convert(i));
         }
-        print(projects.first.images);
 
         emit(BrowsingSucces(projects));
       }

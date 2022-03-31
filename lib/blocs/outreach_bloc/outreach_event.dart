@@ -8,8 +8,11 @@ abstract class OutreachEvent extends Equatable {
 }
 
 class SendOutreach extends OutreachEvent {
-  String message;
-  String projectId;
+  final String message;
+  final String projectId;
 
-  SendOutreach({required this.message, required this.projectId});
+  const SendOutreach({
+    required this.message,
+    required this.projectId,
+  });
 }
