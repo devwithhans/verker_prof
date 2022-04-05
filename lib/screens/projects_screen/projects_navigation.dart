@@ -36,7 +36,6 @@ class ProjectTab extends StatelessWidget {
         ),
         body: BlocBuilder<ProjectsBloc, ProjectsState>(
           builder: (context, state) {
-            print(state.status);
             if (state.status == ProjectsStatus.succes) {
               List<Outreach> pendingOutreaches = state.projects
                   .where((element) => element.status == 'PENDING')

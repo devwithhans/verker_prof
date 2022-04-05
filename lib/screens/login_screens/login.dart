@@ -35,11 +35,13 @@ class _RegisterScreenState extends State<LoginScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Log Ind.',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                        )),
+                    const Text(
+                      'Log Ind.',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
+                    ),
                     const SizedBox(
                       height: 40,
                     ),

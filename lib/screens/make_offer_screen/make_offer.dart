@@ -1,198 +1,111 @@
 import 'package:flutter/material.dart';
-import 'package:verker_prof/theme/constants/textstyle.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:verker_prof/blocs/offer_bloc/offer_bloc.dart';
+import 'package:verker_prof/screens/make_offer_screen/materials/materials.dart';
+import 'package:verker_prof/screens/make_offer_screen/offer_description.dart';
+import 'package:verker_prof/screens/make_offer_screen/preferences.dart';
+import 'package:verker_prof/screens/make_offer_screen/salary.dart';
 
-class MakeOffer extends StatelessWidget {
-  const MakeOffer({Key? key}) : super(key: key);
+List<Widget> steps = [
+  OfferDesciption(),
+  NewMaterial(),
+  Salary(),
+  Preferences(),
+  Center(
+    child: Text('2'),
+  ),
+];
+
+class OfferFormWrap extends StatelessWidget {
+  const OfferFormWrap({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    OfferBloc offerBloc = context.read<OfferBloc>();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 2,
-        actions: [],
         titleSpacing: 5,
         title: Text(
           'Lav tilbud',
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: ListView(
-          children: [
-            Text(
-              'Lav et udførligt tilbud til kunden',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 20),
-                Text(
-                  'Beskrivelse',
-                  style: kTextSmallBold,
-                ),
-                TextFormField(
-                  autofocus: true,
-                  keyboardType: TextInputType.multiline,
-                  textCapitalization: TextCapitalization.sentences,
-                  maxLines: null,
-                  onChanged: (v) {},
-                  validator: (v) {},
-                  cursorColor: Colors.black,
-                  style: const TextStyle(fontSize: 18),
-                  decoration: InputDecoration(
-                    enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    focusedBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    hintMaxLines: 20,
-                    hintText: 'Beskriv hvad dit tilbud indbefatter',
-                  ),
-                ),
-                SizedBox(height: 20),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: outreachFormField(
-                      title: 'Timer',
-                      onChanged: (v) {},
-                      validator: (v) {},
-                      hintText: 'Antal timer',
-                      number: true),
-                ),
-                SizedBox(width: 20),
-                Expanded(
-                  child: outreachFormField(
-                      title: 'Timepris',
-                      onChanged: (v) {},
-                      validator: (v) {},
-                      hintText: 'Timepris',
-                      price: true,
-                      number: true),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Materialer',
-                  style: kTextSmallBold,
-                ),
-                // Row(
-                //   children: [
-                //     Expanded(
-                //       flex: 4,
-                //       child: outreachFormField(
-                //         onChanged: (v) {},
-                //         validator: (v) {},
-                //         hintText: 'Materiale',
-                //       ),
-                //     ),
-                //     SizedBox(width: 10),
-                //     Expanded(
-                //       flex: 3,
-                //       child: outreachFormField(
-                //         price: true,
-                //         number: true,
-                //         onChanged: (v) {},
-                //         validator: (v) {},
-                //         hintText: 'Pris',
-                //       ),
-                //     ),
-                //     SizedBox(width: 10),
-                //     Expanded(
-                //       flex: 2,
-                //       child: outreachFormField(
-                //         number: true,
-                //         onChanged: (v) {},
-                //         validator: (v) {},
-                //         hintText: 'Stk',
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                GestureDetector(
-                  onTap: () {
-                    showModalBottomSheet(
-                        context: context, builder: (context) => Container());
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.all(Radius.circular(5))),
+      body: BlocBuilder<OfferBloc, OfferState>(
+        builder: (context, state) {
+          bool validForm = state.finishedSteps.contains(state.currentPage);
+          bool atEnd = state.currentPage == steps.length - 1;
+          bool atStart = state.currentPage == 0;
+          return Stack(children: [
+            steps[state.currentPage],
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
                     child: Row(
                       children: [
-                        Icon(Icons.add_circle_outline_rounded),
-                        Text('Tilføj materiale')
+                        !atStart
+                            ? Expanded(
+                                child: VerkerButton(
+                                  active: true,
+                                  onPressed: () {
+                                    offerBloc
+                                        .add(GoToStep(state.currentPage - 1));
+                                  },
+                                  text: 'Tilbage',
+                                ),
+                              )
+                            : SizedBox(),
+                        SizedBox(width: !atStart ? 10 : 0),
+                        !atEnd
+                            ? Expanded(
+                                child: VerkerButton(
+                                  active: validForm,
+                                  onPressed: () {
+                                    offerBloc
+                                        .add(GoToStep(state.currentPage + 1));
+                                  },
+                                  text: 'Næste',
+                                ),
+                              )
+                            : SizedBox(),
                       ],
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
+                    )))
+          ]);
+        },
       ),
     );
   }
+}
 
-  Column outreachFormField({
-    required Function(String value) onChanged,
-    required String? Function(String? value) validator,
-    Widget? customFormfield,
-    String hintText = '',
-    String title = '',
-    bool price = false,
-    bool number = false,
-    bool multiline = false,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        title.isEmpty ? SizedBox() : SizedBox(height: 20),
-        title.isEmpty
-            ? SizedBox()
-            : Text(
-                title,
-                style: kTextSmallBold,
-              ),
-        TextFormField(
-          autofocus: true,
-          keyboardType: price || number
-              ? TextInputType.numberWithOptions(decimal: true)
-              : multiline
-                  ? TextInputType.multiline
-                  : null,
-          textCapitalization: TextCapitalization.sentences,
-          maxLines: null,
-          onChanged: onChanged,
-          validator: validator,
-          cursorColor: Colors.black,
-          style: const TextStyle(fontSize: 18),
-          decoration: InputDecoration(
-            suffix: price ? const Text('DKK') : null,
-            enabledBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            hintMaxLines: 20,
-            hintText: hintText,
-          ),
+class VerkerButton extends StatelessWidget {
+  const VerkerButton({
+    Key? key,
+    required this.text,
+    required this.onPressed,
+    required this.active,
+  }) : super(key: key);
+
+  final void Function() onPressed;
+  final bool active;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: active ? onPressed : () {},
+      child: Container(
+        // margin: EdgeInsets.only(right: 10),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        color: active ? Colors.black : Colors.grey,
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.white),
         ),
-        SizedBox(height: 20),
-      ],
+      ),
     );
   }
 }

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stream_chat_flutter/scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
+import 'package:verker_prof/blocs/offer_bloc/offer_bloc.dart';
 import 'package:verker_prof/models/outreach.dart';
 import 'package:verker_prof/screens/make_offer_screen/make_offer.dart';
 import 'package:verker_prof/screens/project_details_screen/project_details_screen.dart';
 import 'package:verker_prof/services/variables.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
-import 'package:verker_prof/theme/fonts/icons.dart';
-import 'package:verker_prof/widgets/components.dart';
 
 class ChannelPage extends StatefulWidget {
   final Outreach outreach;
@@ -208,7 +206,12 @@ class _ChannelPageState extends State<ChannelPage> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => MakeOffer()));
+                                            builder: (context) =>
+                                                BlocProvider<OfferBloc>(
+                                                  create: (context) =>
+                                                      OfferBloc(),
+                                                  child: OfferFormWrap(),
+                                                )));
                                   },
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(

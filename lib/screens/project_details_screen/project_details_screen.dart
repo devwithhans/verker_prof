@@ -7,7 +7,8 @@ import 'package:verker_prof/blocs/projects_bloc/projects_event.dart';
 import 'package:verker_prof/blocs/swipe_bloc/swipe_bloc.dart';
 import 'package:verker_prof/models/project.dart';
 import 'package:verker_prof/screens/project_details_screen/sections/image_inspect.dart';
-import 'package:verker_prof/screens/project_details_screen/send_outreach.dart';
+import 'package:verker_prof/screens/project_details_screen/sections/send_outreach.dart';
+
 import 'package:verker_prof/services/variables.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
 import 'package:verker_prof/widgets/buttons.dart';
@@ -165,7 +166,7 @@ class OutreachButton extends StatelessWidget {
                         topRight: Radius.circular(15),
                         topLeft: Radius.circular(15))),
                 child: Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: BlocBuilder<OutreachBloc, OutreachState>(
                     builder: (context, state) {
                       if (state.status == OutreachStatus.succes) {
@@ -184,8 +185,11 @@ class OutreachButton extends StatelessWidget {
                           projectId: project.id!,
                         );
                       }
-
-                      return CircularProgressIndicator();
+                      return const SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: CircularProgressIndicator(),
+                      );
                     },
                   ),
                 ),

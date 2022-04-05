@@ -9,6 +9,7 @@ import 'package:verker_prof/repositories/authRepo.dart';
 import 'package:verker_prof/repositories/chatRepo.dart';
 import 'package:verker_prof/screens/login_screens/login.dart';
 import 'package:verker_prof/screens/login_screens/register.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:verker_prof/wrapper.dart';
 
 void main() async {
@@ -22,7 +23,7 @@ class App extends StatelessWidget {
   final _streamChatClient = StreamChatClient(
     'cm6ynpu8m6f9',
     logLevel: Level.OFF,
-  ); // We initialise the streamchat client
+  ); // We initialise the streamchat client 1$
 
   App({Key? key}) : super(key: key);
 
@@ -56,6 +57,8 @@ class App extends StatelessWidget {
           )
         ],
         child: MaterialApp(
+          localizationsDelegates: [GlobalMaterialLocalizations.delegate],
+          supportedLocales: [const Locale('da')],
           builder: (context, child) => StreamChat(
             child: child,
             client: _streamChatClient,
