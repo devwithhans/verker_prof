@@ -1,3 +1,5 @@
+// This is a materal model, that is used when making and managing offers
+
 class VerkerMaterial {
   String name;
   double quantity;

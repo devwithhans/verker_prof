@@ -11,7 +11,6 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        print(state);
         if (state is UnAuthorised) {
           return WelcomeScreen();
         }

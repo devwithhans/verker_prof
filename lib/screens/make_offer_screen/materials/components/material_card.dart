@@ -3,31 +3,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:verker_prof/blocs/offer_bloc/offer_bloc.dart';
 import 'package:verker_prof/models/material.dart';
+import 'package:verker_prof/screens/make_offer_screen/materials/components/formats.dart';
 import 'package:verker_prof/screens/make_offer_screen/materials/components/new_material.dart';
 
 class MaterialCard extends StatelessWidget {
   const MaterialCard({
     Key? key,
     required this.e,
+    this.canEdit = true,
   }) : super(key: key);
-
+  final bool canEdit;
   final VerkerMaterial e;
 
   @override
   Widget build(BuildContext context) {
-    var quantity = NumberFormat("###.##", "de_DK");
-    var currency = NumberFormat.currency(
-        locale: "de_DK", symbol: "kr.", customPattern: '###,###.00 kr');
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => BlocProvider.value(
-                    value: BlocProvider.of<OfferBloc>(context),
-                    child: AddMaterial(
-                      verkerMaterial: e,
-                    ))));
+        canEdit
+            ? Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                        value: BlocProvider.of<OfferBloc>(context),
+                        child: AddMaterial(
+                          verkerMaterial: e,
+                        ))))
+            : null;
       },
       child: Container(
         padding: EdgeInsets.all(10),
@@ -57,35 +58,37 @@ class MaterialCard extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'Styk pris: ' + currency.format(e.price),
+                  'Styk pris: ' + kFormatCurrency.format(e.price),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 6),
                 Text(
-                  'Antal: ' + quantity.format(e.quantity),
+                  'Antal: ' + kFormatQuantity.format(e.quantity),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 6),
                 Text(
-                  'Total pris: ' + currency.format(e.quantity * e.price),
+                  'Total pris: ' + kFormatCurrency.format(e.quantity * e.price),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    context
-                        .read<OfferBloc>()
-                        .add(DeleteMaterial(verkerMaterial: e));
-                  },
-                  child: Icon(
-                    Icons.delete,
-                  ),
-                )
-              ],
-            )
+            canEdit
+                ? Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          context
+                              .read<OfferBloc>()
+                              .add(DeleteMaterial(verkerMaterial: e));
+                        },
+                        child: Icon(
+                          Icons.delete,
+                        ),
+                      )
+                    ],
+                  )
+                : SizedBox(),
           ],
         ),
       ),

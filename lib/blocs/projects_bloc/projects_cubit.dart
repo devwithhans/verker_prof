@@ -30,7 +30,6 @@ class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
       if (result.data != null) {
         List rawList = result.data!['verkerGetProjects'];
 
-        print(rawList.length);
         for (var i in rawList) {
           try {
             Channel channel = channels

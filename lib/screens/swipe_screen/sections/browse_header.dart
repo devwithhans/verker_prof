@@ -13,7 +13,6 @@ class BrowseHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SwipeState state = BlocProvider.of<SwipeBloc>(context).state;
-    print(state);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(

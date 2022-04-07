@@ -1,3 +1,5 @@
+// This model is used for managing the parameters for the swipe-browse filter
+
 class ProjectSearchFilter {
   final List<double> position;
   final String type;

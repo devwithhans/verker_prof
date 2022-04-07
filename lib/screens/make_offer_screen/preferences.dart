@@ -17,7 +17,7 @@ class Preferences extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Det med småt',
+                'Angiv vigtige informationer',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               VerkerDatePicker(

@@ -4,10 +4,13 @@ import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
 import 'package:verker_prof/blocs/offer_bloc/offer_bloc.dart';
 import 'package:verker_prof/models/outreach.dart';
+import 'package:verker_prof/screens/chat_screen/sections/chat_notification_button.dart';
+import 'package:verker_prof/screens/chat_screen/sections/date_divider.dart';
+import 'package:verker_prof/screens/chat_screen/sections/message_buble.dart';
+import 'package:verker_prof/screens/chat_screen/sections/send_form.dart';
 import 'package:verker_prof/screens/make_offer_screen/make_offer.dart';
 import 'package:verker_prof/screens/project_details_screen/project_details_screen.dart';
 import 'package:verker_prof/services/variables.dart';
-import 'package:verker_prof/theme/constants/textstyle.dart';
 
 class ChannelPage extends StatefulWidget {
   final Outreach outreach;
@@ -60,7 +63,6 @@ class _ChannelPageState extends State<ChannelPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 2,
-        actions: [],
         titleSpacing: 5,
         title: InkWell(
           onTap: (() {
@@ -186,8 +188,6 @@ class _ChannelPageState extends State<ChannelPage> {
                             final client = StreamChatCore.of(context).client;
                             Message message = messages[index];
 
-                            print(message.type);
-
                             return VerkerMessageBuble(
                               item: message,
                               recieved: message.user!.id ==
@@ -195,43 +195,20 @@ class _ChannelPageState extends State<ChannelPage> {
                             );
                           },
                         ),
-                        SizedBox(
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                BlocProvider<OfferBloc>(
-                                                  create: (context) =>
-                                                      OfferBloc(),
-                                                  child: OfferFormWrap(),
-                                                )));
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 5),
-                                    color: Colors.black.withOpacity(0.5),
-                                    child: const Center(
-                                      child: Text(
-                                        'Lav tilbud til kunden',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                            decoration:
-                                                TextDecoration.underline),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                        ChatNotiButton(
+                          text: 'Lav tilbud til kunden',
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        BlocProvider<OfferBloc>(
+                                          create: (context) => OfferBloc(),
+                                          child: OfferFormWrap(
+                                            project: widget.outreach.project,
+                                          ),
+                                        )));
+                          },
                         ),
                       ],
                     ),
@@ -264,158 +241,6 @@ class _ChannelPageState extends State<ChannelPage> {
                 },
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class VerkerMessageBuble extends StatelessWidget {
-  final bool recieved;
-
-  const VerkerMessageBuble({
-    required this.recieved,
-    Key? key,
-    required this.item,
-  }) : super(key: key);
-
-  final Message item;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: recieved
-          ? EdgeInsets.fromLTRB(30, 2, 10, 2)
-          : EdgeInsets.fromLTRB(10, 2, 30, 2),
-      child: Column(
-        crossAxisAlignment:
-            recieved ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-        children: [
-          Material(
-            borderRadius:
-                recieved ? kMessageSideRadiusRight : kMessageSideRadiusLeft,
-            color: recieved ? Colors.lightBlueAccent : Colors.grey[200],
-            child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: Column(
-                  children: [
-                    Text(item.text!,
-                        style: TextStyle(
-                            color: recieved ? Colors.white : Colors.black,
-                            fontSize: 15)),
-                  ],
-                )),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class SendForm extends StatelessWidget {
-  final TextEditingController controller;
-  final void Function() onSend;
-
-  const SendForm({required this.controller, required this.onSend, Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.fromLTRB(20, 15, 20, 30),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            flex: 5,
-            child: TextFormField(
-              textCapitalization: TextCapitalization.sentences,
-              controller: controller,
-              maxLines: null,
-              keyboardType: TextInputType.multiline,
-              obscureText: false,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(20, 10, 10, 10),
-                filled: true,
-                fillColor: Color(0xffF1F5F9),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                hintText: 'Svar Verker',
-              ),
-            ),
-          ),
-          Expanded(
-            child: IconButton(icon: Icon(Icons.send), onPressed: onSend),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-String getTranslatedDatetime(DateTime dateTime) {
-  final createdAt = Jiffy(dateTime);
-  final now = Jiffy(DateTime.now());
-
-  var dayInfo = createdAt.MMMd;
-  if (createdAt.isSame(now, Units.DAY)) {
-    dayInfo = createdAt.Hm;
-  } else if (createdAt.isSame(now.subtract(days: 1), Units.DAY)) {
-    dayInfo = 'I går ${createdAt.Hm}';
-  } else if (createdAt.isAfter(now.subtract(days: 7), Units.DAY)) {
-    dayInfo = '${createdAt.MMMd} ${createdAt.Hm}';
-  }
-  return dayInfo;
-}
-
-class VerkerDateDivider extends StatelessWidget {
-  /// Constructor for creating a [DateDivider]
-  const VerkerDateDivider({
-    Key? key,
-    required this.dateTime,
-    this.uppercase = false,
-  }) : super(key: key);
-
-  /// [DateTime] to display
-  final DateTime dateTime;
-
-  /// If text is uppercase
-  final bool uppercase;
-
-  @override
-  Widget build(BuildContext context) {
-    final createdAt = Jiffy(dateTime);
-    final now = Jiffy(DateTime.now());
-
-    var dayInfo = createdAt.MMMd;
-    if (createdAt.isSame(now, Units.DAY)) {
-      dayInfo = createdAt.Hm;
-    } else if (createdAt.isSame(now.subtract(days: 1), Units.DAY)) {
-      dayInfo = 'I går ${createdAt.Hm}';
-    } else if (createdAt.isAfter(now.subtract(days: 7), Units.DAY)) {
-      dayInfo = createdAt.EEEE;
-    } else if (createdAt.isAfter(now.subtract(years: 1), Units.DAY)) {
-      dayInfo = createdAt.MMMd;
-    }
-
-    if (uppercase) dayInfo = dayInfo.toUpperCase();
-
-    final chatThemeData = StreamChatTheme.of(context);
-    return Center(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
-        decoration: BoxDecoration(
-          color: chatThemeData.colorTheme.overlayDark,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Text(
-          dayInfo,
-          style: chatThemeData.textTheme.footnote.copyWith(
-            color: chatThemeData.colorTheme.barsBg,
           ),
         ),
       ),

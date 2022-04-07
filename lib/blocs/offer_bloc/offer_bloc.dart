@@ -14,14 +14,29 @@ class OfferBloc extends Bloc<OfferEvent, OfferState> {
     on<TypeHours>(_typeHours);
     on<StartDate>(_startDate);
     on<OfferExpires>(_offerExpires);
+    on<SaveOfferAsDraft>(_safeOfferAsDraft);
+  }
+
+  void _safeOfferAsDraft(SaveOfferAsDraft event, Emitter emit) async {
+    emit(state.copyWith(status: OfferStatus.loading));
+    await Future.delayed(Duration(milliseconds: 500));
+    emit(state.copyWith(status: OfferStatus.succes));
   }
 
   void _offerExpires(OfferExpires event, Emitter emit) {
-    emit(state.copyWith(offerExpires: event.date));
+    emit(state.copyWith(
+      offerExpires: event.date,
+    ));
+    emit(state.copyWith(
+        finishedSteps: _validator(
+            logic: state.offerExpires != null && state.startDate != null)));
   }
 
   void _startDate(StartDate event, Emitter emit) {
     emit(state.copyWith(startDate: event.date));
+    emit(state.copyWith(
+        finishedSteps: _validator(
+            logic: state.offerExpires != null && state.startDate != null)));
   }
 
   void _typeHours(TypeHours event, Emitter emit) {
@@ -29,7 +44,7 @@ class OfferBloc extends Bloc<OfferEvent, OfferState> {
 
     emit(state.copyWith(
       finishedSteps:
-          _validator(logic: event.hourlyRate != null && event.hours != null),
+          _validator(logic: state.hourlyRate != null && state.hours != null),
     ));
   }
 
@@ -44,7 +59,6 @@ class OfferBloc extends Bloc<OfferEvent, OfferState> {
       offerDescription: event.text,
       finishedSteps: _validator(logic: event.text.isNotEmpty),
     ));
-    print(state.finishedSteps);
   }
 
   void _deleteMaterial(DeleteMaterial event, Emitter emit) {

@@ -44,3 +44,5 @@ class OfferExpires extends OfferEvent {
   DateTime date;
   OfferExpires(this.date);
 }
+
+class SaveOfferAsDraft extends OfferEvent {}

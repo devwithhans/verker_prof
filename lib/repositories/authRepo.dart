@@ -28,7 +28,6 @@ class AuthenticationRepository {
     String? jwt = await storage.read(key: 'jwt');
     // await storage.delete(key: 'jwt');
     if (jwt != null) {
-      print(jwt);
       QueryResult result = await _graphQLService.performQuery(getUser);
       if (result.hasException) {
         yield UnAuthorised();

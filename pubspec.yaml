@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   photo_view: ^0.13.0
+  slide_to_confirm: ^1.1.0
   bloc: 
   flutter_bloc: 
   equatable: ^2.0.3

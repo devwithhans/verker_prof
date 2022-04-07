@@ -79,7 +79,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           },
                           onSubmit: () {
                             if (_formKey.currentState!.validate()) {
-                              print('sheee');
                               // context.read<LoginBloc>().selectScreen(index + 1);
                             }
                           },
