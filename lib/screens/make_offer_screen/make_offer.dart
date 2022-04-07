@@ -3,11 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/offer_bloc/offer_bloc.dart';
 import 'package:verker_prof/models/project.dart';
 import 'package:verker_prof/screens/make_offer_screen/materials/materials.dart';
-import 'package:verker_prof/screens/make_offer_screen/offer_description.dart';
-import 'package:verker_prof/screens/make_offer_screen/preferences.dart';
-import 'package:verker_prof/screens/make_offer_screen/preview.dart';
-import 'package:verker_prof/screens/make_offer_screen/salary.dart';
-import 'package:verker_prof/screens/make_offer_screen/swipe_to_confirm.dart';
+import 'package:verker_prof/screens/make_offer_screen/offer_description/offer_description.dart';
+import 'package:verker_prof/screens/make_offer_screen/preferences/preferences.dart';
+import 'package:verker_prof/screens/make_offer_screen/preview_offer/preview.dart';
+import 'package:verker_prof/screens/make_offer_screen/salary/salary.dart';
+import 'package:verker_prof/theme/components/swipe_to_confirm.dart';
+import 'package:verker_prof/theme/components/verker_button.dart';
 
 class OfferFormWrap extends StatelessWidget {
   ProjectModel project;
@@ -108,36 +109,6 @@ class OfferFormWrap extends StatelessWidget {
                   ],
                 );
         },
-      ),
-    );
-  }
-}
-
-class VerkerButton extends StatelessWidget {
-  const VerkerButton({
-    Key? key,
-    required this.text,
-    required this.onPressed,
-    required this.active,
-  }) : super(key: key);
-
-  final void Function() onPressed;
-  final bool active;
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: active ? onPressed : () {},
-      child: Container(
-        // margin: EdgeInsets.only(right: 10),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        color: active ? Colors.black : Colors.grey,
-        child: Text(
-          text,
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white),
-        ),
       ),
     );
   }

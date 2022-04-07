@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slide_to_confirm/slide_to_confirm.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/blocs/offer_bloc/offer_bloc.dart';
 import 'package:verker_prof/models/project.dart';
 import 'package:verker_prof/screens/make_offer_screen/materials/components/formats.dart';
-import 'package:verker_prof/screens/make_offer_screen/swipe_to_confirm.dart';
 
 class Preview extends StatelessWidget {
   final ProjectModel project;

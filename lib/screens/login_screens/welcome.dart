@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:verker_prof/screens/login_screens/register.dart';
+import 'package:verker_prof/screens/login_screens/sections.dart/register.dart';
 import 'package:verker_prof/widgets/buttons.dart';
 
 class WelcomeScreen extends StatelessWidget {

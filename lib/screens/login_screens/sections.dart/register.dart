@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
-import 'package:verker_prof/screens/login_screens/login.dart';
+import 'package:verker_prof/screens/login_screens/sections.dart/login.dart';
 import 'package:verker_prof/widgets/buttons.dart';
 import 'package:verker_prof/widgets/input.dart';
 
