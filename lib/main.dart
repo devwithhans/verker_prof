@@ -58,7 +58,7 @@ class App extends StatelessWidget {
         ],
         child: MaterialApp(
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
-          supportedLocales: [const Locale('da')],
+          supportedLocales: const [Locale('da')],
           builder: (context, child) => StreamChat(
             child: child,
             client: _streamChatClient,

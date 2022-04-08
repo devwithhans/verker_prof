@@ -46,48 +46,44 @@ class Offer {
           .toList();
     }
 
-    try {
-      return Offer(
-        id: response['offerId'] ??= null,
-        status: response['status'] ??= null,
-        consumerName: response['consumerName'] ??= null,
-        consumerAddress: Address(
-          address: response['consumerAddress']['address'],
-          zip: response['consumerAddress']['zip'],
-        ),
-        companyName: response['companyName'] ??= null,
-        cvr: response['cvr'] ??= null,
-        companyAddress: Address(
-          address: response['companyAddress']['address'] ??= null,
-          zip: response['companyAddress']['zip'],
-        ),
-        companyEmail: response['companyEmail'] ??= null,
-        offerSent: DateTime.now(),
-        description: response['description'] ??= null,
-        startDate: DateTime.parse(response['startDate'] ??= null),
-        materials: _getMaterials(response['materials'] ??= null),
-      );
-    } catch (e) {}
+    int hours = response['hours'];
+    int hourlyRate = response['hourlyRate'];
+    int startDate = int.parse(response['startDate']);
+
+    return Offer(
+      id: response['_id'] ??= null,
+      status: response['status'] ??= null,
+      consumerName: response['consumerName'] ??= null,
+      consumerAddress: Address(
+        address: response['consumerAddress']['address'],
+        zip: response['consumerAddress']['zip'],
+      ),
+      companyName: response['companyName'] ??= null,
+      cvr: response['cvr'] ??= null,
+      companyAddress: Address(
+        address: response['companyAddress']['address'] ??= null,
+        zip: response['companyAddress']['zip'],
+      ),
+      companyEmail: response['companyEmail'] ??= null,
+      offerSent: DateTime.now(),
+      description: response['description'] ??= null,
+      startDate: DateTime.fromMillisecondsSinceEpoch(startDate),
+      materials: _getMaterials(response['materials'] ??= null),
+      hours: hours.toDouble(),
+      hourlyRate: hourlyRate.toDouble(),
+    );
   }
 }
 
-
-        // status: String!
-        // offerId: ID
-        // projectId: ID!
-        // outreachId: ID!
-        // verkerId: ID!
-        // consumerId: ID!
-        // consumerName: String!
-        // consumerAddress: InputAddress!
-        // companyId: ID!
-        // companyName: String!
-        // cvr: Int!
-        // companyAddress: InputAddress!
-        // companyEmail: String!
-        // description: String
-        // materials: [MaterialInputData]
-        // hours: Float
-        // hourlyRate: Float
-        // startDate: String
-        // offerExpires: String
+        //  if (offer != null) {
+        //                       // offerData = Offer.convert(offer);
+        //                       // if (offerData != null) {
+        //                       print(offer);
+        //                       return BlocProvider<OfferbubleCubit>(
+        //                         create: (context) =>
+        //                             OfferbubleCubit()..getOfferById(offer),
+        //                         child: OfferBuble(),
+        //                       );
+        //                       // }
+        //                     } 
+        

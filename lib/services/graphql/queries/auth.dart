@@ -1,6 +1,7 @@
 const String signInUser = """
 query SigninUser(\$email: String!, \$password: String!) { 
   signinUser(email: \$email, password: \$password, verker: true){
+    
     jwt
     user {
       verker
@@ -25,6 +26,7 @@ query SigninUser(\$email: String!, \$password: String!) {
 String getUser = """
 query {
   getUser(email:"s"){
+
     verker
     _id
     firstName

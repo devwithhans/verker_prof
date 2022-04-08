@@ -1,132 +1,123 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+import 'package:verker_prof/blocs/offerBuble_cubit/offerbuble_cubit.dart';
+import 'package:verker_prof/models/material.dart';
 import 'package:verker_prof/models/offer.dart';
 import 'package:verker_prof/screens/make_offer_screen/materials/components/formats.dart';
+import 'package:verker_prof/theme/constants/textstyle.dart';
+import 'package:verker_prof/widgets/components.dart';
 
 class OfferBuble extends StatelessWidget {
   const OfferBuble({
     Key? key,
-    required this.offer,
   }) : super(key: key);
 
-  final Offer offer;
   @override
   Widget build(BuildContext context) {
-    Color offerColor =
-        offer.status == "oldOffer" ? Colors.grey : Color(0xff838D72);
+    OfferbubleCubit offerbubleCubit = BlocProvider.of<OfferbubleCubit>(context);
 
-    return Padding(
-      padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 3,
-              blurRadius: 5,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(15)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+    return BlocBuilder<OfferbubleCubit, OfferbubleState>(
+      builder: (context, state) {
+        if (state is OfferbubleSucces) {
+          Offer offer = state.offer;
+
+          Color offerColor =
+              offer.status == "oldOffer" ? Colors.grey : Color(0xff838D72);
+          return Padding(
+            padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
+            child: Container(
               decoration: BoxDecoration(
-                color: offerColor,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Her er dit tilbud',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.white),
-                  ),
-                  Text(
-                    'Sendt: ${Jiffy(offer.offerSent).format('dd-MM-yyyy')}',
-                    style: TextStyle(fontSize: 15, color: Colors.white),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 3,
+                    blurRadius: 5,
+                    offset: Offset(0, 3), // changes position of shadow
                   ),
                 ],
+                borderRadius: BorderRadius.all(Radius.circular(15)),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  titleBodyPair('Beskrivelse: ',
-                      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd"),
-                  titleBodyPair('Mulig opstart: ',
-                      Jiffy(offer.startDate!).format('dd-MM-yyyy')),
-                  Text(
-                    'Materialer',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    decoration: BoxDecoration(
+                      color: offerColor,
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Her er dit tilbud',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.white),
+                        ),
+                        Text(
+                          'Sendt: ${Jiffy(offer.offerSent).format('dd-MM-yyyy')}',
+                          style: TextStyle(fontSize: 15, color: Colors.white),
+                        ),
+                      ],
+                    ),
                   ),
-                  Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 4,
-                        child: Text("Beskrivelse",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                      ),
-                      Expanded(
-                        child: Text("Stykpris",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        flex: 3,
-                      ),
-                      Expanded(
-                        child: Text("Antal",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        flex: 3,
-                      ),
-                      Expanded(
-                        child: Text("Pris",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        flex: 3,
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: offer.materials
-                        .map((e) => Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(e.name),
-                                  flex: 4,
-                                ),
-                                Expanded(
-                                    flex: 3,
-                                    child:
-                                        Text(kFormatCurrency.format(e.price))),
-                                Expanded(
-                                    flex: 3,
-                                    child: Text(
-                                        kFormatQuantity.format(e.quantity))),
-                                Expanded(
-                                    flex: 3,
-                                    child: Text(kFormatCurrency
-                                        .format(e.price * e.quantity))),
-                              ],
-                            ))
-                        .toList(),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        titleBodyPair('Beskrivelse: ',
+                            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd"),
+                        titleBodyPair('Mulig opstart: ',
+                            Jiffy(offer.startDate!).format('dd-MM-yyyy')),
+                        Text(
+                          'Pris:',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Beskrivelse',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(width: 30),
+                            Text(
+                              'Pris',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        )
+                        // Text(
+                        //   'Materialer:',
+                        //   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                        // ),
+                        // SizedBox(height: 5),
+                        // Column(
+                        //   children: offer.materials
+                        //       .map(
+                        //         (e) => MaterialTile(
+                        //           material: e,
+                        //         ),
+                        //       )
+                        //       .toList(),
+                        // ),
+                      ],
+                    ),
                   )
                 ],
               ),
-            )
-          ],
-        ),
-      ),
+            ),
+          );
+        }
+        return Text('FAIL');
+      },
     );
   }
 
@@ -144,6 +135,61 @@ class OfferBuble extends StatelessWidget {
         ),
         SizedBox(height: 20)
       ],
+    );
+  }
+}
+
+class MaterialTile extends StatelessWidget {
+  const MaterialTile({
+    required this.material,
+    Key? key,
+  }) : super(key: key);
+
+  final VerkerMaterial material;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 4,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        material.name,
+                        style: kTextSmallBold,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Enheder: ${kFormatQuantity.format(material.quantity)}",
+                    ),
+                    Text(
+                      "Pris: ${kFormatCurrency.format(material.price * material.quantity)}",
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

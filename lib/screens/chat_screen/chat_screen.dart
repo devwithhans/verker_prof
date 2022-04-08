@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
+import 'package:verker_prof/blocs/offerBuble_cubit/offerbuble_cubit.dart';
 import 'package:verker_prof/blocs/offer_bloc/offer_bloc.dart';
 import 'package:verker_prof/models/outreach.dart';
 import 'package:verker_prof/screens/chat_screen/sections/chat_notification_button.dart';
 import 'package:verker_prof/screens/chat_screen/sections/date_divider.dart';
 import 'package:verker_prof/screens/chat_screen/sections/message_buble.dart';
+import 'package:verker_prof/screens/chat_screen/sections/offer_buble.dart';
 import 'package:verker_prof/screens/chat_screen/sections/send_form.dart';
 import 'package:verker_prof/screens/make_offer_screen/make_offer.dart';
 import 'package:verker_prof/screens/project_details_screen/project_details_screen.dart';
@@ -125,93 +127,120 @@ class _ChannelPageState extends State<ChannelPage> {
                     messageListBuilder: (
                       BuildContext context,
                       List<Message> messages,
-                    ) =>
-                        Stack(
-                      children: [
-                        ListView.separated(
-                          controller: _scrollController,
-                          itemCount: messages.length,
-                          reverse: true,
-                          separatorBuilder: (BuildContext context, int index) {
-                            Message message = messages[index];
-                            Message nextMessage = messages[index + 1];
+                    ) {
+                      print('hej');
 
-                            if (!Jiffy(message.createdAt.toLocal()).isSame(
-                              nextMessage.createdAt.toLocal(),
-                              Units.HOUR,
-                            )) {
-                              final divider = Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 12),
-                                child: VerkerDateDivider(
-                                  dateTime: message.createdAt.toLocal(),
-                                ),
+                      for (var i in messages.where(
+                          (element) => element.extraData['offer'] != null)) {}
+
+                      return Stack(
+                        children: [
+                          ListView.separated(
+                            addAutomaticKeepAlives: false,
+                            addRepaintBoundaries: false,
+                            controller: _scrollController,
+                            itemCount: messages.length,
+                            reverse: true,
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              Message message = messages[index];
+                              Message nextMessage = messages[index + 1];
+
+                              if (!Jiffy(message.createdAt.toLocal()).isSame(
+                                nextMessage.createdAt.toLocal(),
+                                Units.HOUR,
+                              )) {
+                                final divider = Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 12),
+                                  child: VerkerDateDivider(
+                                    dateTime: message.createdAt.toLocal(),
+                                  ),
+                                );
+                                return divider;
+                              }
+                              final timeDiff =
+                                  Jiffy(nextMessage.createdAt.toLocal()).diff(
+                                message.createdAt.toLocal(),
+                                Units.MINUTE,
                               );
-                              return divider;
-                            }
-                            final timeDiff =
-                                Jiffy(nextMessage.createdAt.toLocal()).diff(
-                              message.createdAt.toLocal(),
-                              Units.MINUTE,
-                            );
 
-                            final spacingRules = <SpacingType>[];
+                              final spacingRules = <SpacingType>[];
 
-                            final isNextUserSame =
-                                message.user!.id == nextMessage.user?.id;
-                            final isThread = message.replyCount! > 0;
-                            final isDeleted = message.isDeleted;
-                            final hasTimeDiff = timeDiff >= 1;
+                              final isNextUserSame =
+                                  message.user!.id == nextMessage.user?.id;
+                              final isThread = message.replyCount! > 0;
+                              final isDeleted = message.isDeleted;
+                              final hasTimeDiff = timeDiff >= 1;
 
-                            if (hasTimeDiff) {
-                              spacingRules.add(SpacingType.timeDiff);
-                            }
+                              if (hasTimeDiff) {
+                                spacingRules.add(SpacingType.timeDiff);
+                              }
 
-                            if (!isNextUserSame) {
-                              spacingRules.add(SpacingType.otherUser);
-                            }
+                              if (!isNextUserSame) {
+                                spacingRules.add(SpacingType.otherUser);
+                              }
 
-                            if (isThread) {
-                              spacingRules.add(SpacingType.thread);
-                            }
+                              if (isThread) {
+                                spacingRules.add(SpacingType.thread);
+                              }
 
-                            if (isDeleted) {
-                              spacingRules.add(SpacingType.deleted);
-                            }
+                              if (isDeleted) {
+                                spacingRules.add(SpacingType.deleted);
+                              }
 
-                            if (spacingRules.isNotEmpty) {
-                              return const SizedBox(height: 8);
-                            }
-                            return const SizedBox(height: 2);
-                          },
-                          itemBuilder: (BuildContext context, int index) {
-                            final client = StreamChatCore.of(context).client;
-                            Message message = messages[index];
+                              if (spacingRules.isNotEmpty) {
+                                return const SizedBox(height: 8);
+                              }
+                              return const SizedBox(height: 2);
+                            },
+                            itemBuilder: (BuildContext context, int index) {
+                              final client = StreamChatCore.of(context).client;
+                              Message message = messages[index];
 
-                            return VerkerMessageBuble(
-                              item: message,
-                              recieved: message.user!.id ==
-                                  client.state.currentUser!.id,
-                            );
-                          },
-                        ),
-                        ChatNotiButton(
-                          text: 'Lav tilbud til kunden',
-                          onPressed: () {
-                            Navigator.push(
+                              dynamic offer = message.extraData['offer'];
+                              // Offer? offerData;
+
+                              if (offer != null) {
+                                // offerData = Offer.convert(offer);
+                                // if (offerData != null) {
+                                print(offer);
+                                return AutomaticKeepAlive(
+                                  child: BlocProvider<OfferbubleCubit>(
+                                    create: (context) =>
+                                        OfferbubleCubit()..getOfferById(offer),
+                                    child: OfferBuble(),
+                                  ),
+                                );
+                                // }
+                              } else {
+                                return VerkerMessageBuble(
+                                  item: message,
+                                  recieved: message.user!.id ==
+                                      client.state.currentUser!.id,
+                                );
+                              }
+                            },
+                          ),
+                          ChatNotiButton(
+                            text: 'Lav tilbud til kunden',
+                            onPressed: () {
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        BlocProvider<OfferBloc>(
-                                          create: (context) => OfferBloc(),
-                                          child: OfferFormWrap(
-                                            project: widget.outreach.project,
-                                          ),
-                                        )));
-                          },
-                        ),
-                      ],
-                    ),
+                                  builder: (context) => BlocProvider<OfferBloc>(
+                                    create: (context) => OfferBloc(),
+                                    child: OfferFormWrap(
+                                      project: widget.outreach.project,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      );
+                    },
                     errorBuilder: (BuildContext context, error) {
                       print(error.toString());
                       return const Center(

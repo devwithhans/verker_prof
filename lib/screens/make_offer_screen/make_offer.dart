@@ -28,87 +28,93 @@ class OfferFormWrap extends StatelessWidget {
       ),
     ];
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 2,
-        titleSpacing: 5,
-        title: Text(
-          'Lav tilbud',
-          style: TextStyle(color: Colors.black),
+    return BlocListener<OfferBloc, OfferState>(
+      listener: (context, state) {
+        if (state.status == OfferStatus.succes) {
+          Navigator.pop(context);
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 2,
+          titleSpacing: 5,
+          title: Text(
+            'Lav tilbud',
+            style: TextStyle(color: Colors.black),
+          ),
         ),
-      ),
-      body: BlocBuilder<OfferBloc, OfferState>(
-        builder: (context, state) {
-          bool validForm = state.finishedSteps.contains(state.currentPage);
-          bool atEnd = state.currentPage == steps.length - 1;
-          bool atStart = state.currentPage == 0;
-          if (state.status == OfferStatus.succes) {
-            Navigator.pop(context);
-          }
-          return state.status == OfferStatus.loading
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Stack(
-                  children: [
-                    steps[state.currentPage],
-                    Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                atEnd
-                                    ? SwipeToConfirm(
-                                        title: Text(
-                                          'Send tilbud til kunden',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        icon: Icon(
-                                            Icons.arrow_forward_ios_rounded),
-                                        onConfirmed: () {
-                                          offerBloc.add(SaveOfferAsDraft());
-                                        },
-                                      )
-                                    : SizedBox(),
-                                SizedBox(height: 20),
-                                Row(
-                                  children: [
-                                    !atStart
-                                        ? Expanded(
-                                            child: VerkerButton(
-                                              active: true,
-                                              onPressed: () {
-                                                offerBloc.add(GoToStep(
-                                                    state.currentPage - 1));
-                                              },
-                                              text: 'Tilbage',
-                                            ),
-                                          )
-                                        : SizedBox(),
-                                    SizedBox(width: !atStart ? 10 : 0),
-                                    !atEnd
-                                        ? Expanded(
-                                            child: VerkerButton(
-                                              active: validForm,
-                                              onPressed: () {
-                                                offerBloc.add(GoToStep(
-                                                    state.currentPage + 1));
-                                              },
-                                              text: 'Næste',
-                                            ),
-                                          )
-                                        : SizedBox(),
-                                  ],
-                                ),
-                              ],
-                            )))
-                  ],
-                );
-        },
+        body: BlocBuilder<OfferBloc, OfferState>(
+          builder: (context, state) {
+            bool validForm = state.finishedSteps.contains(state.currentPage);
+            bool atEnd = state.currentPage == steps.length - 1;
+            bool atStart = state.currentPage == 0;
+
+            return state.status == OfferStatus.loading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Stack(
+                    children: [
+                      steps[state.currentPage],
+                      Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(20, 20, 20, 30),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  atEnd
+                                      ? SwipeToConfirm(
+                                          title: Text(
+                                            'Send tilbud til kunden',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          icon: Icon(
+                                              Icons.arrow_forward_ios_rounded),
+                                          onConfirmed: () {
+                                            offerBloc.add(SaveOfferAsDraft());
+                                          },
+                                        )
+                                      : SizedBox(),
+                                  SizedBox(height: 20),
+                                  Row(
+                                    children: [
+                                      !atStart
+                                          ? Expanded(
+                                              child: VerkerButton(
+                                                active: true,
+                                                onPressed: () {
+                                                  offerBloc.add(GoToStep(
+                                                      state.currentPage - 1));
+                                                },
+                                                text: 'Tilbage',
+                                              ),
+                                            )
+                                          : SizedBox(),
+                                      SizedBox(width: !atStart ? 10 : 0),
+                                      !atEnd
+                                          ? Expanded(
+                                              child: VerkerButton(
+                                                active: validForm,
+                                                onPressed: () {
+                                                  offerBloc.add(GoToStep(
+                                                      state.currentPage + 1));
+                                                },
+                                                text: 'Næste',
+                                              ),
+                                            )
+                                          : SizedBox(),
+                                    ],
+                                  ),
+                                ],
+                              )))
+                    ],
+                  );
+          },
+        ),
       ),
     );
   }

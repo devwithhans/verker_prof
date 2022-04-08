@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+import 'package:verker_prof/blocs/offerBuble_cubit/offerbuble_cubit.dart';
 import 'package:verker_prof/models/offer.dart';
 import 'package:verker_prof/screens/chat_screen/sections/offer_buble.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
@@ -17,16 +19,6 @@ class VerkerMessageBuble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic offer = item.extraData['offer'];
-    Offer? offerData;
-
-    if (offer != null) {
-      offerData = Offer.convert(offer);
-      if (offerData != null) {
-        return OfferBuble(offer: offerData);
-      }
-    }
-
     return Padding(
       padding: recieved
           ? EdgeInsets.fromLTRB(30, 2, 10, 2)
