@@ -25,7 +25,7 @@ class App extends StatelessWidget {
   final _streamChatClient = StreamChatClient(
     'cm6ynpu8m6f9',
     logLevel: Level.OFF,
-  ); // We initialise the streamchat client 1$
+  ); // We initialise the streamchat client
 
   App({Key? key}) : super(key: key);
 

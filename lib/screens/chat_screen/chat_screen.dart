@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
-import 'package:verker_prof/blocs/offer_bloc/offer_bloc.dart';
 import 'package:verker_prof/models/outreach.dart';
-import 'package:verker_prof/screens/chat_screen/sections/chat_notification_button.dart';
 import 'package:verker_prof/screens/chat_screen/sections/date_divider.dart';
 import 'package:verker_prof/screens/chat_screen/sections/message_buble.dart';
-import 'package:verker_prof/screens/chat_screen/sections/offer_buble.dart';
 import 'package:verker_prof/screens/chat_screen/sections/send_form.dart';
-import 'package:verker_prof/screens/make_offer_screen/make_offer.dart';
 import 'package:verker_prof/screens/project_details_screen/project_details_screen.dart';
 import 'package:verker_prof/services/variables.dart';
 
@@ -247,22 +243,6 @@ class MessageListViewSeparated extends StatelessWidget {
             return VerkerMessageBuble(
               item: message,
               recieved: message.user!.id == client.state.currentUser!.id,
-            );
-          },
-        ),
-        ChatNotiButton(
-          text: 'Lav tilbud til kunden',
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BlocProvider<OfferBloc>(
-                  create: (context) => OfferBloc(),
-                  child: OfferFormWrap(
-                    project: widget.outreach.project,
-                  ),
-                ),
-              ),
             );
           },
         ),
