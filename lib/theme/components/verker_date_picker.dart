@@ -19,7 +19,7 @@ class VerkerDatePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime? _startDate;
-    return VerkerFormField(
+    return StandardInputForm(
       controller: TextEditingController(
         text: value == null ? null : Jiffy(value).format('dd-MM-yyyy'),
       ),

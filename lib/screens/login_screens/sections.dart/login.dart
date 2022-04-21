@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
 import 'package:verker_prof/screens/login_screens/sections.dart/register.dart';
+import 'package:verker_prof/theme/components/verker_formfield.dart';
 import 'package:verker_prof/widgets/buttons.dart';
 import 'package:verker_prof/widgets/input.dart';
 
@@ -107,9 +108,9 @@ class _RegisterScreenState extends State<LoginScreen> {
   Widget _nameAndEmailTab() {
     return Column(
       children: [
-        UnderLineInput(
+        StandardInputForm(
           controller: TextEditingController(text: _email),
-          onChange: (value) {
+          onChanged: (value) {
             _email = value;
           },
           validator: (value) {
@@ -124,13 +125,13 @@ class _RegisterScreenState extends State<LoginScreen> {
             }
           },
           keyboardType: TextInputType.emailAddress,
-          label: 'Email.',
+          title: 'Email.',
           hintText: 'Din email',
         ),
         const SizedBox(
           height: 40,
         ),
-        UnderLineInput(
+        StandardInputForm(
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Husk en kode';
@@ -139,11 +140,11 @@ class _RegisterScreenState extends State<LoginScreen> {
           },
           controller: TextEditingController(text: _password),
           textCapitalization: TextCapitalization.words,
-          onChange: (v) {
+          onChanged: (v) {
             _password = v;
           },
           obscureText: true,
-          label: 'Password.',
+          title: 'Password.',
           hintText: 'Indtast dit password',
         ),
         const SizedBox(

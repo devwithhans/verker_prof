@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
 
-class VerkerFormField extends StatelessWidget {
+class StandardInputForm extends StatelessWidget {
   Function(String) onChanged;
   String? Function(String? value) validator;
   void Function()? onTap;
@@ -15,8 +14,12 @@ class VerkerFormField extends StatelessWidget {
   bool focused;
   String? initialValue;
   TextEditingController? controller;
+  TextInputType? keyboardType;
+  bool obscureText;
 
-  VerkerFormField({
+  StandardInputForm({
+    this.obscureText = false,
+    this.keyboardType,
     this.controller,
     this.focused = true,
     this.onTap,
@@ -45,11 +48,12 @@ class VerkerFormField extends StatelessWidget {
                 style: kTextSmallBold,
               ),
         TextFormField(
+          obscureText: obscureText,
           controller: controller,
           onTap: onTap,
           initialValue: initialValue,
           autofocus: focused,
-          keyboardType: price || number
+          keyboardType: keyboardType ??= price || number
               ? const TextInputType.numberWithOptions(decimal: true)
               : multiline
                   ? TextInputType.multiline

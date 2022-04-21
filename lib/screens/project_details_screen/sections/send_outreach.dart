@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:verker_prof/blocs/outreach_bloc/outreach_bloc.dart';
+import 'package:verker_prof/theme/components/verker_formfield.dart';
 
 import 'package:verker_prof/theme/constants/textstyle.dart';
 import 'package:verker_prof/widgets/buttons.dart';
@@ -33,19 +34,20 @@ class _SendOutreachSheetState extends State<SendOutreachSheet> {
           const Divider(
             height: 0,
           ),
-          outreachFormField(
-              validator: ((value) {
-                if (_message.isEmpty) {
-                  return 'Husk denne besked';
-                }
-              }),
-              multiline: true,
-              title: 'Skriv en besked',
-              hintText:
-                  'Forklar hvorfor netop du er den bedste til dette projekt',
-              onChanged: (v) {
-                _message = v;
-              }),
+          StandardInputForm(
+            multiline: true,
+            title: 'Skriv en besked',
+            hintText:
+                'Forklar hvorfor netop du er den bedste til dette projekt',
+            onChanged: (v) {
+              _message = v;
+            },
+            validator: ((value) {
+              if (_message.isEmpty) {
+                return 'Husk denne besked';
+              }
+            }),
+          ),
           Row(
             children: [
               Expanded(
@@ -69,54 +71,6 @@ class _SendOutreachSheetState extends State<SendOutreachSheet> {
           ),
         ],
       ),
-    );
-  }
-
-  Column outreachFormField({
-    required Function(String value) onChanged,
-    required String? Function(String? value) validator,
-    Widget? customFormfield,
-    String hintText = '',
-    String title = '',
-    bool price = false,
-    bool number = false,
-    bool multiline = false,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 20),
-        Text(
-          title,
-          style: kTextSmallBold,
-        ),
-        TextFormField(
-          autofocus: true,
-          keyboardType: price || number
-              ? TextInputType.number
-              : multiline
-                  ? TextInputType.multiline
-                  : null,
-          textCapitalization: TextCapitalization.sentences,
-          maxLines: null,
-          onChanged: onChanged,
-          validator: validator,
-          cursorColor: Colors.black,
-          style: const TextStyle(fontSize: 18),
-          decoration: InputDecoration(
-            suffix: price ? const Text('DKK') : null,
-            enabledBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            hintMaxLines: 20,
-            hintText: hintText,
-          ),
-        ),
-        SizedBox(height: 20),
-      ],
     );
   }
 }
