@@ -82,41 +82,14 @@ class _FilterState extends State<Filter> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Afstand',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Text(
-                            '${_distance.toInt()} Km',
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                        ],
-                      ),
-                      const Text(
-                        'Søg på afstand fra virksomhedens addresse',
-                        style: TextStyle(fontSize: 13),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Slider(
-                        label: 'Km',
-                        value: _distance.toDouble(),
-                        min: 10,
-                        max: 500,
-                        onChanged: (v) {
-                          setState(() {
-                            _distance = v.toInt();
-                          });
-                        },
-                      ),
-                    ],
+                  StandardSlider(
+                    min: 10,
+                    max: 500,
+                    title: 'Aftandspræference',
+                    initialValue: _distance.toDouble(),
+                    onChanged: (v) {
+                      _distance = v.toInt();
+                    },
                   ),
                   const SizedBox(height: 50),
                   CommentBox(
@@ -149,6 +122,70 @@ class _FilterState extends State<Filter> {
             const SizedBox(height: 40),
           ],
         ));
+  }
+}
+
+class StandardSlider extends StatefulWidget {
+  const StandardSlider({
+    required this.initialValue,
+    required this.max,
+    required this.min,
+    required this.onChanged,
+    required this.title,
+    Key? key,
+  }) : super(key: key);
+
+  final double min;
+  final double max;
+  final double initialValue;
+  final void Function(double value) onChanged;
+  final String title;
+
+  @override
+  State<StandardSlider> createState() => _StandardSliderState();
+}
+
+class _StandardSliderState extends State<StandardSlider> {
+  @override
+  Widget build(BuildContext context) {
+    double _value = widget.initialValue;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Afstand',
+              style: TextStyle(fontSize: 20),
+            ),
+            Text(
+              '${_value.toInt()} Km',
+              style: const TextStyle(fontSize: 20),
+            ),
+          ],
+        ),
+        const Text(
+          'Søg på afstand fra virksomhedens addresse',
+          style: TextStyle(fontSize: 13),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Slider(
+          label: 'Km',
+          value: _value,
+          min: 10,
+          max: 500,
+          onChanged: (v) {
+            setState(() {
+              widget.onChanged(v);
+            });
+          },
+        ),
+      ],
+    );
   }
 }
 
