@@ -1,31 +1,31 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql/client.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/models/offer.dart';
 import 'package:verker_prof/services/graphql/GrapgQLService.dart';
 import 'package:verker_prof/services/graphql/queries/offer.dart';
 
-part 'offerbuble_state.dart';
+part 'query_state.dart';
 
-class OfferbubleCubit extends Cubit<OfferbubleState> {
-  OfferbubleCubit() : super(OfferbubleInitial());
+class QueryCubit extends Cubit<QueryState> {
+  QueryCubit() : super(QueryInitial());
 
   void getOfferById(String id) async {
-    emit(OfferbubleLoading());
+    emit(QueryLoading());
+
     QueryResult result = await GraphQLService()
         .performQuery(getOffer, variables: {"offerId": id});
 
     if (result.hasException) {
       print('Exception');
-
-      emit(OfferbubleFailed());
+      emit(QueryFailed());
     } else {
       try {
         Offer offer = Offer.convert(result.data!['getOffer']);
-        print(offer);
-        emit(OfferbubleSucces(offer));
+        emit(QueryLoadedOffer(offer));
       } catch (e) {
-        emit(OfferbubleFailed());
+        emit(QueryFailed());
       }
     }
   }

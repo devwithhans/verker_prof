@@ -17,7 +17,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         super(Unknown()) {
     on<LoggedOut>(_onLoggedOut);
     _authenticationStatusSubscription =
-        // ignore: invalid_use_of_visible_for_testing_member
         _authenticationRepository.status.listen((status) => emit(status));
   }
 

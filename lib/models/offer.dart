@@ -1,7 +1,6 @@
-import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/models/address.dart';
 import 'package:verker_prof/models/material.dart';
-import 'package:verker_prof/models/project.dart';
+import 'package:verker_prof/screens/make_offer_screen/materials/components/formats.dart';
 
 class Offer {
   String id;
@@ -14,6 +13,7 @@ class Offer {
   String companyEmail;
   String? description;
   List<VerkerMaterial> materials;
+  double materialPrice;
   double? hours;
   double? hourlyRate;
   DateTime? startDate;
@@ -34,6 +34,7 @@ class Offer {
     this.hourlyRate,
     this.hours,
     this.materials = const [],
+    this.materialPrice = 0,
     this.offerExpires,
     this.startDate,
   });
@@ -46,6 +47,20 @@ class Offer {
           .toList();
     }
 
+    List<VerkerMaterial> materials = _getMaterials(response['materials']);
+
+    _getTotalMaterialPrice(List<VerkerMaterial> material) {
+      double price = 0;
+      print(material);
+      for (var i in material) {
+        price = price + (i.price * i.quantity);
+        print(price);
+      }
+
+      return price;
+    }
+
+    double totalMateralPrice = _getTotalMaterialPrice(materials);
     int hours = response['hours'];
     int hourlyRate = response['hourlyRate'];
     int startDate = int.parse(response['startDate']);
@@ -68,22 +83,33 @@ class Offer {
       offerSent: DateTime.now(),
       description: response['description'] ??= null,
       startDate: DateTime.fromMillisecondsSinceEpoch(startDate),
-      materials: _getMaterials(response['materials'] ??= null),
+      materials: materials,
+      materialPrice: _getTotalMaterialPrice(materials),
       hours: hours.toDouble(),
       hourlyRate: hourlyRate.toDouble(),
     );
   }
 }
 
-        //  if (offer != null) {
-        //                       // offerData = Offer.convert(offer);
-        //                       // if (offerData != null) {
-        //                       print(offer);
-        //                       return BlocProvider<OfferbubleCubit>(
-        //                         create: (context) =>
-        //                             OfferbubleCubit()..getOfferById(offer),
-        //                         child: OfferBuble(),
-        //                       );
-        //                       // }
-        //                     } 
-        
+class ShortOffer {
+  String status;
+  String totalPrice;
+  DateTime offerExpires;
+
+  ShortOffer({
+    required this.totalPrice,
+    required this.offerExpires,
+    required this.status,
+  });
+
+  static ShortOffer convert(response) {
+    int offerExpires = int.parse(response['offerExpires']);
+    String totalPrice = kFormatCurrency.format(response('totalPrice'));
+
+    return ShortOffer(
+      totalPrice: totalPrice,
+      status: response['status'],
+      offerExpires: DateTime.fromMillisecondsSinceEpoch(offerExpires),
+    );
+  }
+}

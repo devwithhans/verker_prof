@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
-import 'package:verker_prof/blocs/offerBuble_cubit/offerbuble_cubit.dart';
 import 'package:verker_prof/models/offer.dart';
-import 'package:verker_prof/screens/chat_screen/sections/offer_buble.dart';
+import 'package:verker_prof/screens/view_offer_screen/view_offer_screen.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
 
 class VerkerMessageBuble extends StatelessWidget {
@@ -19,6 +17,36 @@ class VerkerMessageBuble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ShortOffer shortOffer;
+
+    bool offer = item.extraData['offerId'] != null;
+
+    Widget messageContent() {
+      if (offer) {
+        return Column(
+          children: [
+            Text(
+              'Du har sendt et tilbud 📄',
+              style: TextStyle(
+                decoration: TextDecoration.underline,
+                color: recieved ? Colors.white : Colors.black,
+                fontSize: 15,
+              ),
+            ),
+          ],
+        );
+      } else {
+        return Column(
+          children: [
+            Text(item.text!,
+                style: TextStyle(
+                    color: recieved ? Colors.white : Colors.black,
+                    fontSize: 15)),
+          ],
+        );
+      }
+    }
+
     return Padding(
       padding: recieved
           ? EdgeInsets.fromLTRB(30, 2, 10, 2)
@@ -27,20 +55,29 @@ class VerkerMessageBuble extends StatelessWidget {
         crossAxisAlignment:
             recieved ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          Material(
-            borderRadius:
-                recieved ? kMessageSideRadiusRight : kMessageSideRadiusLeft,
-            color: recieved ? Colors.lightBlueAccent : Colors.grey[200],
-            child: Padding(
+          InkWell(
+            onTap: () {
+              if (offer) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ViewOffer(
+                            offerId: item.extraData['offerId'] as String)));
+              }
+            },
+            child: Material(
+              borderRadius:
+                  recieved ? kMessageSideRadiusRight : kMessageSideRadiusLeft,
+              color: offer
+                  ? Colors.grey
+                  : recieved
+                      ? Colors.lightBlueAccent
+                      : Colors.grey[200],
+              child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: Column(
-                  children: [
-                    Text(item.text!,
-                        style: TextStyle(
-                            color: recieved ? Colors.white : Colors.black,
-                            fontSize: 15)),
-                  ],
-                )),
+                child: messageContent(),
+              ),
+            ),
           ),
         ],
       ),

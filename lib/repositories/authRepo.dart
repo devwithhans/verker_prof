@@ -30,7 +30,7 @@ class AuthenticationRepository {
     if (jwt != null) {
       QueryResult result = await _graphQLService.performQuery(getUser);
       if (result.hasException) {
-        yield UnAuthorised();
+        yield ErrorAccured(ErrorType.networkError);
       }
       if (result.data != null) {
         UserData userData = UserData.convert(result.data!['getUser']);
@@ -61,6 +61,8 @@ class AuthenticationRepository {
         variables: {"email": email, "password": password});
 
     if (result.data!['signinUser']['jwt'] != null) {
+      print('b');
+
       storage.write(key: 'jwt', value: result.data!['signinUser']['jwt']);
       dynamic userData = UserData.convert(result.data!['signinUser']['user']);
       dynamic user = await chatRepository.connectUser(userData);
@@ -68,11 +70,15 @@ class AuthenticationRepository {
       if (user != null) {
         _controller.add(Authorised(user: userData));
       } else {
+        print('c');
         _controller.add(UnAuthorised());
       }
+      print('d');
 
       return user;
     } else {
+      print('a');
+
       _controller.add(UnAuthorised());
       return null;
     }
