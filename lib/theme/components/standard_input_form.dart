@@ -16,8 +16,10 @@ class StandardInputForm extends StatelessWidget {
   TextEditingController? controller;
   TextInputType? keyboardType;
   bool obscureText;
+  TextCapitalization textCapitalization;
 
   StandardInputForm({
+    this.textCapitalization = TextCapitalization.sentences,
     this.obscureText = false,
     this.keyboardType,
     this.controller,
@@ -45,9 +47,10 @@ class StandardInputForm extends StatelessWidget {
             ? SizedBox()
             : Text(
                 title,
-                style: kTextSmallBold,
+                style: kSmallBold,
               ),
         TextFormField(
+          textCapitalization: textCapitalization,
           obscureText: obscureText,
           controller: controller,
           onTap: onTap,
@@ -60,7 +63,6 @@ class StandardInputForm extends StatelessWidget {
                   : onTap != null
                       ? TextInputType.none
                       : TextInputType.text,
-          textCapitalization: TextCapitalization.sentences,
           maxLines: null,
           onChanged: onChanged,
           validator: validator,

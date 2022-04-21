@@ -96,7 +96,7 @@ class ProjectDetails extends StatelessWidget {
                       project.title!,
                       maxLines: 1,
                       overflow: TextOverflow.clip,
-                      style: kTextMediumBold,
+                      style: kMediumBold,
                     ),
                     const SizedBox(
                       height: 10,

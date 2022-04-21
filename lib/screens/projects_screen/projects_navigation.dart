@@ -18,7 +18,7 @@ class ProjectTab extends StatelessWidget {
         elevation: 4,
         title: const Text(
           'Projekter',
-          style: kTextSmallBold,
+          style: kSmallBold,
         ),
       ),
       body: BlocBuilder<ProjectsBloc, ProjectsState>(

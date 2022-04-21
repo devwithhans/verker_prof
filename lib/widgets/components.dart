@@ -335,14 +335,14 @@ class ProjectFormHeader extends StatelessWidget {
       children: [
         Text(
           headerText,
-          style: kTextMediumBold,
+          style: kMediumBold,
         ),
         SizedBox(
           height: bodyText != null ? 0 : 20,
         ),
         Text(
           bodyText ??= '',
-          style: kTextSmallNormal,
+          style: kMediumBold,
         ),
         SizedBox(
           height: bodyText != null ? 20 : 40,

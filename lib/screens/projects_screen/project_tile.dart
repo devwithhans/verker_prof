@@ -4,6 +4,7 @@ import 'package:verker_prof/models/outreach.dart';
 import 'package:verker_prof/models/project.dart';
 import 'package:verker_prof/screens/chat_screen/chat_screen.dart';
 import 'package:verker_prof/services/variables.dart';
+import 'package:verker_prof/theme/constants/textstyle.dart';
 import 'package:verker_prof/widgets/components.dart';
 
 class ProjectTile extends StatelessWidget {
@@ -75,9 +76,7 @@ class ProjectTile extends StatelessWidget {
                                 child: Text(
                                   project.title!,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
+                                  style: kMediumBold,
                                 ),
                               ),
                               StatusBox(

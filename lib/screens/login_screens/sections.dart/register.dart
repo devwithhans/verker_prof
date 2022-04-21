@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
 import 'package:verker_prof/screens/login_screens/sections.dart/login.dart';
+import 'package:verker_prof/theme/components/standard_input_form.dart';
 import 'package:verker_prof/widgets/buttons.dart';
 import 'package:verker_prof/widgets/input.dart';
 
@@ -111,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _nameAndEmailTab() {
     return Column(
       children: [
-        UnderLineInput(
+        StandardInputForm(
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter some text';
@@ -120,18 +121,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
           },
           controller: TextEditingController(text: _name),
           textCapitalization: TextCapitalization.words,
-          onChange: (v) {
+          onChanged: (v) {
             _name = v;
           },
-          label: 'Navn.',
+          title: 'Navn.',
           hintText: 'Dit fornavn og efternavn',
         ),
         SizedBox(
           height: 40,
         ),
-        UnderLineInput(
+        StandardInputForm(
           controller: TextEditingController(text: _email),
-          onChange: (value) {
+          onChanged: (value) {
             _email = value;
           },
           validator: (value) {
@@ -146,7 +147,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             }
           },
           keyboardType: TextInputType.emailAddress,
-          label: 'Email.',
+          title: 'Email.',
           hintText: 'Din email',
         ),
         SizedBox(
@@ -169,9 +170,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _passwordTab() {
     return Column(
       children: [
-        UnderLineInput(
+        StandardInputForm(
           controller: TextEditingController(text: _password),
-          onChange: (v) {
+          onChanged: (v) {
             _password = v;
           },
           validator: (value) {
@@ -180,15 +181,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
             }
           },
           obscureText: true,
-          label: 'Password.',
+          title: 'Password.',
           hintText: 'Mininum 6 tal eller bogstaver',
         ),
         SizedBox(
           height: 40,
         ),
-        UnderLineInput(
+        StandardInputForm(
           controller: TextEditingController(text: _passwordComp),
-          onChange: (v) {
+          onChanged: (v) {
             _passwordComp = v;
           },
           validator: (value) {
@@ -197,7 +198,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             }
           },
           obscureText: true,
-          label: 'Gentag password.',
+          title: 'Gentag password.',
           hintText: 'De 2 kodeord skal være ens',
         ),
         SizedBox(

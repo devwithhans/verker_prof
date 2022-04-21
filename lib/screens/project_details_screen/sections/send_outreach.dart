@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:verker_prof/blocs/outreach_bloc/outreach_bloc.dart';
-import 'package:verker_prof/theme/components/verker_formfield.dart';
+import 'package:verker_prof/theme/components/standard_input_form.dart';
 
 import 'package:verker_prof/theme/constants/textstyle.dart';
 import 'package:verker_prof/widgets/buttons.dart';
@@ -28,7 +28,7 @@ class _SendOutreachSheetState extends State<SendOutreachSheet> {
         children: [
           const Text(
             'Send et overslag',
-            style: kTextMediumBold,
+            style: kMediumBold,
           ),
           SizedBox(height: 20),
           const Divider(

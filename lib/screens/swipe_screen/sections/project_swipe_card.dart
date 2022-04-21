@@ -7,6 +7,7 @@ import 'package:verker_prof/models/project.dart';
 
 import 'package:verker_prof/screens/project_details_screen/project_details_screen.dart';
 import 'package:verker_prof/services/variables.dart';
+import 'package:verker_prof/theme/constants/textstyle.dart';
 
 class ProjectSwipeCard extends StatefulWidget {
   final ProjectModel project;
@@ -92,14 +93,8 @@ class _ProjectSwipeCardState extends State<ProjectSwipeCard> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            widget.project.title!,
-                            maxLines: 1,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
+                          Text(widget.project.title!,
+                              maxLines: 1, style: kLargeBoldWhite),
                           Text(
                               '${widget.project.address!['address'] ??= "N/A"} - ${widget.project.distance!.toInt()} km',
                               style: TextStyle(color: Colors.white)),
