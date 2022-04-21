@@ -16,6 +16,8 @@ void main() async {
   runApp(App());
 }
 
+// HAHAHAHHAA
+
 /// App is the topwidget responisble for initializing global BLoC, repositories and,
 /// other dependisies.
 
