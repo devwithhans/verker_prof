@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:verker_prof/theme/constants/colors.dart';
 import 'package:verker_prof/theme/fonts/icons.dart';
 
 class ContinueButton extends StatelessWidget {
@@ -52,15 +53,17 @@ class ContinueButton extends StatelessWidget {
   }
 }
 
-class NavigationButton extends StatelessWidget {
+class StandardButton extends StatelessWidget {
   void Function()? onPressed;
   String text;
   bool disabled;
   Color? backgroundColor;
   Color? textColor;
+  bool secondary;
   Key? key;
 
-  NavigationButton({
+  StandardButton({
+    this.secondary = false,
     required this.onPressed,
     this.disabled = false,
     this.backgroundColor = Colors.white,
@@ -76,10 +79,19 @@ class NavigationButton extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
       onPressed: disabled ? () {} : onPressed,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      fillColor: disabled ? Colors.grey : backgroundColor,
-      child: Text(text,
-          style: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.bold, color: textColor)),
+      fillColor: disabled
+          ? Colors.grey
+          : secondary
+              ? kColorSecondary
+              : kColorPrimary,
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: secondary ? kColorPrimary : kColorSecondary,
+        ),
+      ),
     );
   }
 }
@@ -171,7 +183,7 @@ class HorizontalNavigationButtons extends StatelessWidget {
       return Row(
         children: [
           Expanded(
-            child: NavigationButton(
+            child: StandardButton(
               text: startText,
               backgroundColor: Colors.black,
               textColor: Colors.white,
@@ -185,7 +197,7 @@ class HorizontalNavigationButtons extends StatelessWidget {
       children: [
         Expanded(
           flex: 2,
-          child: NavigationButton(
+          child: StandardButton(
             text: backText,
             backgroundColor: Colors.grey.shade600,
             textColor: Colors.white,
@@ -195,7 +207,7 @@ class HorizontalNavigationButtons extends StatelessWidget {
         SizedBox(width: 10),
         Expanded(
           flex: 3,
-          child: NavigationButton(
+          child: StandardButton(
             text: index == length ? submitText : nextText,
             backgroundColor: Colors.black,
             textColor: Colors.white,

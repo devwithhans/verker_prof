@@ -62,7 +62,7 @@ class _RegisterScreenState extends State<LoginScreen> {
                               context.read<LoginBloc>().emit(LoginInitial());
                             }
 
-                            return NavigationButton(
+                            return StandardButton(
                               textColor: Colors.white,
                               backgroundColor: Colors.black,
                               text: 'Log Ind',

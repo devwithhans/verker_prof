@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+import 'package:verker_prof/screens/home_screen/home_screen.dart';
 import 'package:verker_prof/screens/projects_screen/projects_navigation.dart';
 import 'package:verker_prof/screens/swipe_screen/swipe_screen.dart';
 import 'package:verker_prof/theme/fonts/icons.dart';
@@ -11,7 +12,7 @@ class NavScreenDeligator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _widgetOptions = <Widget>[
-      CenterText('COMMING SOON'),
+      HomeScreen(),
       BrowseProjects(),
       ProjectTab(),
       CenterText('COMMING SOON'),
@@ -87,7 +88,6 @@ class _NavScreenState extends State<NavScreen> {
                         .totalUnreadCountStream,
                     builder: (context, snapshot) {
                       int unreadCount = 0;
-
                       if (snapshot.hasData) {
                         unreadCount = snapshot.data as int;
                       }

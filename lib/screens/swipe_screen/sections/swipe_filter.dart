@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:verker_prof/blocs/swipe_bloc/swipe_bloc.dart';
 import 'package:verker_prof/models/filter.dart';
+import 'package:verker_prof/theme/components/standard_slider.dart';
 import 'package:verker_prof/widgets/buttons.dart';
 
 class Filter extends StatefulWidget {
@@ -33,7 +34,7 @@ class _FilterState extends State<Filter> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
         ),
-        height: MediaQuery.of(context).size.height * 0.8,
+        height: MediaQuery.of(context).size.height * 0.5,
         child: Column(
           children: [
             const SizedBox(
@@ -91,19 +92,13 @@ class _FilterState extends State<Filter> {
                       _distance = v.toInt();
                     },
                   ),
-                  const SizedBox(height: 50),
-                  CommentBox(
-                    title: 'Giv os din mening! 🙏',
-                    message:
-                        'Har du specifikt øsnke til hvad du skal kunne filterer efter, så vil vi elske at høre om det!',
-                  )
                 ],
               ),
             ),
             const Divider(thickness: 1),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: NavigationButton(
+              child: StandardButton(
                 onPressed: () {
                   BlocProvider.of<SwipeBloc>(context).add(
                     FetchProjects(
@@ -122,103 +117,5 @@ class _FilterState extends State<Filter> {
             const SizedBox(height: 40),
           ],
         ));
-  }
-}
-
-class StandardSlider extends StatefulWidget {
-  const StandardSlider({
-    required this.initialValue,
-    required this.max,
-    required this.min,
-    required this.onChanged,
-    required this.title,
-    Key? key,
-  }) : super(key: key);
-
-  final double min;
-  final double max;
-  final double initialValue;
-  final void Function(double value) onChanged;
-  final String title;
-
-  @override
-  State<StandardSlider> createState() => _StandardSliderState();
-}
-
-class _StandardSliderState extends State<StandardSlider> {
-  @override
-  Widget build(BuildContext context) {
-    double _value = widget.initialValue;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'Afstand',
-              style: TextStyle(fontSize: 20),
-            ),
-            Text(
-              '${_value.toInt()} Km',
-              style: const TextStyle(fontSize: 20),
-            ),
-          ],
-        ),
-        const Text(
-          'Søg på afstand fra virksomhedens addresse',
-          style: TextStyle(fontSize: 13),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Slider(
-          label: 'Km',
-          value: _value,
-          min: 10,
-          max: 500,
-          onChanged: (v) {
-            setState(() {
-              widget.onChanged(v);
-            });
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class CommentBox extends StatelessWidget {
-  String title;
-  String message;
-
-  CommentBox({this.title = "", this.message = ""});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xffEADCBC),
-      padding: EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Text(title, style: TextStyle(fontSize: 20)),
-          const SizedBox(
-            height: 10,
-          ),
-          Text(
-            message,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          NavigationButton(
-            text: 'Send besked til udvikleren',
-            onPressed: () {},
-          )
-        ],
-      ),
-    );
   }
 }

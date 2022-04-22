@@ -56,6 +56,8 @@ class _ChannelPageState extends State<ChannelPage> {
     final consumer = channel.state!.members.firstWhere(
       (element) => element.userId != user.id,
     );
+    channel.markRead();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -77,19 +79,24 @@ class _ChannelPageState extends State<ChannelPage> {
                   foregroundImage: NetworkImage(
                       imageUrl + widget.outreach.project.images.first)),
               SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    consumer.user!.name,
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  Text(
-                    widget.outreach.project.title!,
-                    style: TextStyle(color: Colors.black, fontSize: 14),
-                  )
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      consumer.user!.name,
+                      overflow: TextOverflow.clip,
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    Text(
+                      widget.outreach.project.title!,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: Colors.black, fontSize: 14),
+                    )
+                  ],
+                ),
               ),
+              SizedBox(width: 15),
             ],
           ),
         ),

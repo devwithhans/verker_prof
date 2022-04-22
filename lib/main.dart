@@ -72,6 +72,11 @@ class App extends StatelessWidget {
           },
           title: 'Verker',
           theme: ThemeData(
+            sliderTheme: SliderThemeData(
+              trackHeight: 1.5,
+              overlayShape: SliderComponentShape.noOverlay,
+              thumbShape: RoundSliderThumbShape(elevation: 4),
+            ),
             appBarTheme: const AppBarTheme(
               backgroundColor: Colors.transparent,
               elevation: 0,

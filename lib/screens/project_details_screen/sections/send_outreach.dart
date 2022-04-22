@@ -51,7 +51,7 @@ class _SendOutreachSheetState extends State<SendOutreachSheet> {
           Row(
             children: [
               Expanded(
-                child: NavigationButton(
+                child: StandardButton(
                   textColor: Colors.white,
                   backgroundColor: Colors.black,
                   onPressed: () {
