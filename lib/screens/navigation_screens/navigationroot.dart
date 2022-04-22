@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
+import 'package:verker_prof/blocs/auth_bloc/auth_event.dart';
 import 'package:verker_prof/screens/home_screen/home_screen.dart';
 import 'package:verker_prof/screens/projects_screen/projects_navigation.dart';
 import 'package:verker_prof/screens/swipe_screen/swipe_screen.dart';
 import 'package:verker_prof/theme/fonts/icons.dart';
+import 'package:verker_prof/widgets/buttons.dart';
 
 import 'package:verker_prof/widgets/components.dart';
 
@@ -15,7 +19,14 @@ class NavScreenDeligator extends StatelessWidget {
       HomeScreen(),
       BrowseProjects(),
       ProjectTab(),
-      CenterText('COMMING SOON'),
+      Center(
+        child: StandardButton(
+          onPressed: () {
+            BlocProvider.of<AuthBloc>(context).add(LoggedOut());
+          },
+          text: "SignOut",
+        ),
+      )
     ];
     return NavScreen(_widgetOptions);
   }
