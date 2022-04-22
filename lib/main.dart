@@ -9,7 +9,8 @@ import 'package:verker_prof/repositories/authRepo.dart';
 import 'package:verker_prof/repositories/chatRepo.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:verker_prof/screens/login_screens/sections.dart/login.dart';
-import 'package:verker_prof/screens/login_screens/sections.dart/register.dart';
+import 'package:verker_prof/screens/register_screen/register_screen.dart';
+import 'package:verker_prof/screens/register_screen/register_screen_old.dart';
 import 'package:verker_prof/wrapper.dart';
 
 void main() async {
