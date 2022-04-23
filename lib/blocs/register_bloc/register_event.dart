@@ -25,6 +25,23 @@ class GoToStep extends RegisterEvent {
 }
 
 class AddValues extends RegisterEvent {
-  RegistrationModel registrationModel;
-  AddValues(this.registrationModel);
+  final bool? termsAcceptet;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? password;
+  final String? phone;
+  final String? profileImage;
+  final Address? address;
+
+  const AddValues({
+    this.termsAcceptet,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.password,
+    this.phone,
+    this.profileImage,
+    this.address,
+  });
 }

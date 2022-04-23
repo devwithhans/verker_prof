@@ -1,7 +1,9 @@
 import 'package:verker_prof/models/address.dart';
 
 class RegistrationModel {
-  final String? name;
+  final bool? termsAcceptet;
+  final String? firstName;
+  final String? lastName;
   final String? email;
   final String? password;
   final String? phone;
@@ -9,7 +11,9 @@ class RegistrationModel {
   final Address? address;
 
   const RegistrationModel({
-    this.name,
+    this.termsAcceptet,
+    this.firstName,
+    this.lastName,
     this.email,
     this.password,
     this.phone,
@@ -18,7 +22,9 @@ class RegistrationModel {
   });
 
   RegistrationModel copyWith({
-    String? name,
+    bool? termsAcceptet,
+    String? firstName,
+    String? lastName,
     String? email,
     String? password,
     String? phone,
@@ -27,7 +33,9 @@ class RegistrationModel {
     int? screen,
   }) {
     return RegistrationModel(
-      name: name ?? this.name,
+      termsAcceptet: termsAcceptet ?? this.termsAcceptet,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
       email: email ?? this.email,
       password: password ?? this.password,
       phone: phone ?? this.phone,

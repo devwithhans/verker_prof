@@ -1,11 +1,7 @@
-import 'dart:async';
-import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
 import 'package:verker_prof/models/address.dart';
 import 'package:verker_prof/models/registration.dart';
-import 'package:verker_prof/repositories/authRepo.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
@@ -27,6 +23,18 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   void _addValues(AddValues event, Emitter emit) {
-    emit(state.copyWith(registrationModel: event.registrationModel));
+    emit(
+      state.copyWith(
+        registrationModel: state.registrationModel.copyWith(
+          firstName: event.firstName,
+          lastName: event.lastName,
+          email: event.email,
+          profileImage: event.profileImage,
+          address: event.address,
+          phone: event.phone,
+          termsAcceptet: event.termsAcceptet,
+        ),
+      ),
+    );
   }
 }

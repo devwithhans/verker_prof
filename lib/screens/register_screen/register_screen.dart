@@ -1,107 +1,112 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/register_bloc/register_bloc.dart';
+import 'package:verker_prof/screens/register_screen/sections/navigation_buttons.dart';
 import 'package:verker_prof/screens/register_screen/subscreens/formscreen_one.dart';
 import 'package:verker_prof/screens/register_screen/subscreens/formscreen_two.dart';
-import 'package:verker_prof/theme/components/verker_button.dart';
-import 'package:verker_prof/widgets/buttons.dart';
+import 'package:verker_prof/theme/components/standard_input_form.dart';
+import 'package:verker_prof/widgets/components.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);
 
   static String name = "RegisterScreen";
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
+  int currentStep = 0;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> steps = [
-      FormScreenOne(formKey: _formKey),
-      FormScreenTwo(formKey: _formKey)
+      FormScreenOne(),
+      FormScreenTwo(),
+      CenterText('text'),
+      CenterText('text'),
     ];
+    bool atEnd = currentStep == steps.length - 1;
+    bool atStart = currentStep == 0;
 
-    return BlocProvider<RegisterBloc>(
-      create: (context) => RegisterBloc(),
-      child: Scaffold(
-        appBar: AppBar(),
-        body:
-            BlocBuilder<RegisterBloc, RegisterState>(builder: (context, state) {
-          bool validForm = true;
-          RegisterBloc registerBloc = context.read<RegisterBloc>();
-          bool atStart = state.screen == 0;
-          bool atEnd = state.screen == steps.length - 1;
+    return Scaffold(
+        extendBodyBehindAppBar: true,
 
-          return Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Stack(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Opret dig.',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                        )),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    steps[state.screen],
-                  ],
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        atEnd
-                            ? StandardButton(
-                                onPressed: () {},
-                                text: "Sign Up",
-                              )
-                            : SizedBox(),
-                        SizedBox(height: 20),
-                        Row(
-                          children: [
-                            !atStart
-                                ? Expanded(
-                                    child: VerkerButton(
-                                      active: true,
-                                      onPressed: () {
-                                        registerBloc
-                                            .add(GoToStep(state.screen - 1));
-                                      },
-                                      text: 'Tilbage',
-                                    ),
-                                  )
-                                : SizedBox(),
-                            SizedBox(width: !atStart ? 10 : 0),
-                            !atEnd
-                                ? Expanded(
-                                    child: VerkerButton(
-                                      active: validForm,
-                                      onPressed: () {
-                                        if (_formKey.currentState!.validate()) {
-                                          registerBloc
-                                              .add(GoToStep(state.screen + 1));
-                                        }
-                                      },
-                                      text: 'Næste',
-                                    ),
-                                  )
-                                : SizedBox(),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
+        // appBar: AppBar(),
+        appBar: AppBar(
+          leadingWidth: 80,
+          leading: IconButton(
+            color: Colors.black,
+            splashRadius: 20,
+            focusColor: Colors.black,
+            splashColor: Colors.black,
+            highlightColor: Colors.black,
+            icon: Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                  color: Colors.black, borderRadius: BorderRadius.circular(20)),
+              child: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
             ),
-          );
-        }),
-      ),
-    );
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Stack(
+            children: [
+              ListView(
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Opret dig.',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      )),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Form(
+                    key: _formKey,
+                    child: BlocProvider(
+                      create: (context) => RegisterBloc(),
+                      child: Column(
+                          children: steps.map((e) {
+                        return Visibility(
+                          maintainState: false,
+                          visible: currentStep == steps.indexOf(e),
+                          child: e,
+                        );
+                      }).toList()),
+                    ),
+                  )
+                ],
+              ),
+              NavigationButtons(
+                atEnd: atEnd,
+                atStart: atStart,
+                onPrevius: () {
+                  currentStep--;
+
+                  setState(() {});
+                },
+                onNext: () {
+                  if (_formKey.currentState!.validate()) {
+                    currentStep = currentStep + 1;
+                    setState(() {});
+                  }
+                },
+                onSubmit: () {},
+              )
+            ],
+          ),
+        ));
   }
 }
