@@ -17,42 +17,45 @@ class FormScreenTwo extends StatelessWidget {
         return Column(
           children: [
             StandardInputForm(
-              keyboardType: TextInputType.phone,
-              initialValue: state.registrationModel.phone ?? '',
+              obscureText: true,
+              keyboardType: TextInputType.visiblePassword,
+              initialValue: state.registrationModel.password ?? '',
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter some text';
                 }
+                if (value.length < 8) {
+                  return 'Dit kodeord skal minimum bestå af 8 tegn';
+                }
                 return null;
               },
-              textCapitalization: TextCapitalization.words,
+              textCapitalization: TextCapitalization.none,
               onChanged: (v) {
                 context.read<RegisterBloc>().add(
-                      AddValues(phone: v),
+                      AddValues(password: v),
                     );
               },
-              title: 'Telefonnummer.',
-              hintText: 'Dit telefonnummer',
+              title: 'Password.',
+              hintText: 'Skriv et stærk kodeord',
             ),
             StandardInputForm(
-              initialValue: state.registrationModel.email ?? '',
-              onChanged: (v) {
-                context.read<RegisterBloc>().add(AddValues(email: v));
-              },
+              obscureText: true,
+              keyboardType: TextInputType.visiblePassword,
+              initialValue: state.registrationModel.validationPassword ?? '',
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Indtast venligst et navn';
+                if (value != state.registrationModel.password) {
+                  return 'Kodeordet macher ikke det første';
                 }
-                bool emailValid = RegExp(
-                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                    .hasMatch(value);
-                if (!emailValid) {
-                  return 'Indtast venligst en gyldig mail';
-                }
+                return null;
               },
-              keyboardType: TextInputType.emailAddress,
-              title: 'Email.',
-              hintText: 'Din email',
+              textCapitalization: TextCapitalization.none,
+              onChanged: (v) {
+                context.read<RegisterBloc>().add(
+                      AddValues(validationPassword: v),
+                    );
+              },
+              title: 'Gentag password.',
+              hintText: 'Gentag kodeord',
             ),
           ],
         );

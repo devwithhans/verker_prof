@@ -26,14 +26,15 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     emit(
       state.copyWith(
         registrationModel: state.registrationModel.copyWith(
-          firstName: event.firstName,
-          lastName: event.lastName,
-          email: event.email,
-          profileImage: event.profileImage,
-          address: event.address,
-          phone: event.phone,
-          termsAcceptet: event.termsAcceptet,
-        ),
+            firstName: event.firstName,
+            lastName: event.lastName,
+            email: event.email,
+            profileImage: event.profileImage,
+            address: event.address,
+            phone: event.phone,
+            termsAcceptet: event.termsAcceptet,
+            password: event.password,
+            validationPassword: event.validationPassword),
       ),
     );
   }

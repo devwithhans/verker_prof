@@ -6,6 +6,7 @@ class RegistrationModel {
   final String? lastName;
   final String? email;
   final String? password;
+  final String? validationPassword;
   final String? phone;
   final String? profileImage;
   final Address? address;
@@ -16,6 +17,7 @@ class RegistrationModel {
     this.lastName,
     this.email,
     this.password,
+    this.validationPassword,
     this.phone,
     this.profileImage,
     this.address,
@@ -27,6 +29,7 @@ class RegistrationModel {
     String? lastName,
     String? email,
     String? password,
+    String? validationPassword,
     String? phone,
     String? profileImage,
     Address? address,
@@ -38,6 +41,7 @@ class RegistrationModel {
       lastName: lastName ?? this.lastName,
       email: email ?? this.email,
       password: password ?? this.password,
+      validationPassword: validationPassword ?? this.validationPassword,
       phone: phone ?? this.phone,
       profileImage: profileImage ?? this.profileImage,
       address: address ?? this.address,

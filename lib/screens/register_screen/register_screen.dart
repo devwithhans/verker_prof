@@ -4,7 +4,6 @@ import 'package:verker_prof/blocs/register_bloc/register_bloc.dart';
 import 'package:verker_prof/screens/register_screen/sections/navigation_buttons.dart';
 import 'package:verker_prof/screens/register_screen/subscreens/formscreen_one.dart';
 import 'package:verker_prof/screens/register_screen/subscreens/formscreen_two.dart';
-import 'package:verker_prof/theme/components/standard_input_form.dart';
 import 'package:verker_prof/widgets/components.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -25,16 +24,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     List<Widget> steps = [
       FormScreenOne(),
       FormScreenTwo(),
-      CenterText('text'),
-      CenterText('text'),
     ];
     bool atEnd = currentStep == steps.length - 1;
     bool atStart = currentStep == 0;
 
     return Scaffold(
         extendBodyBehindAppBar: true,
-
-        // appBar: AppBar(),
         appBar: AppBar(
           leadingWidth: 80,
           leading: IconButton(
@@ -59,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
           child: Stack(
             children: [
               ListView(
@@ -77,14 +72,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     key: _formKey,
                     child: BlocProvider(
                       create: (context) => RegisterBloc(),
-                      child: Column(
-                          children: steps.map((e) {
-                        return Visibility(
-                          maintainState: false,
-                          visible: currentStep == steps.indexOf(e),
-                          child: e,
-                        );
-                      }).toList()),
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 100),
+                        child: Column(
+                            children: steps.map((e) {
+                          return Visibility(
+                            maintainState: false,
+                            visible: currentStep == steps.indexOf(e),
+                            child: e,
+                          );
+                        }).toList()),
+                      ),
                     ),
                   )
                 ],

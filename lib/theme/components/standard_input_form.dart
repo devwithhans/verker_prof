@@ -23,7 +23,7 @@ class StandardInputForm extends StatelessWidget {
     this.obscureText = false,
     this.keyboardType,
     this.controller,
-    this.focused = true,
+    this.focused = false,
     this.onTap,
     this.initialValue,
     required this.onChanged,
@@ -63,7 +63,6 @@ class StandardInputForm extends StatelessWidget {
                   : onTap != null
                       ? TextInputType.none
                       : TextInputType.text,
-          maxLines: null,
           onChanged: onChanged,
           validator: validator,
           showCursor: onTap == null,

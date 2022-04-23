@@ -30,6 +30,7 @@ class AddValues extends RegisterEvent {
   final String? lastName;
   final String? email;
   final String? password;
+  final String? validationPassword;
   final String? phone;
   final String? profileImage;
   final Address? address;
@@ -40,6 +41,7 @@ class AddValues extends RegisterEvent {
     this.lastName,
     this.email,
     this.password,
+    this.validationPassword,
     this.phone,
     this.profileImage,
     this.address,

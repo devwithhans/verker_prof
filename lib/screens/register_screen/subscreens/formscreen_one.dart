@@ -20,7 +20,7 @@ class FormScreenOne extends StatelessWidget {
               initialValue: state.registrationModel.firstName ?? '',
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Feltet må ikke være tomt';
                 }
                 return null;
               },
@@ -37,7 +37,7 @@ class FormScreenOne extends StatelessWidget {
               initialValue: state.registrationModel.lastName ?? '',
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Feltet må ikke være tomt';
                 }
                 return null;
               },
@@ -55,7 +55,10 @@ class FormScreenOne extends StatelessWidget {
               initialValue: state.registrationModel.phone ?? '',
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Feltet må ikke være tomt';
+                }
+                if (value.length != 8) {
+                  return 'Angiv venligst et rigtigt telefonnummer';
                 }
                 return null;
               },

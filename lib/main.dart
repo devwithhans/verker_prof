@@ -58,31 +58,36 @@ class App extends StatelessWidget {
                 ProjectsBloc(_streamChatClient)..add(FetchMyProjects()),
           )
         ],
-        child: MaterialApp(
-          localizationsDelegates: GlobalMaterialLocalizations.delegates,
-          supportedLocales: const [Locale('da')],
-          builder: (context, child) => StreamChat(
-            child: child,
-            client: _streamChatClient,
-          ),
-          routes: {
-            '/': (context) => Wrapper(),
-            RegisterScreen.name: (context) => RegisterScreen(),
-            LoginScreen.name: (context) => LoginScreen(),
+        child: GestureDetector(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
           },
-          title: 'Verker',
-          theme: ThemeData(
-            sliderTheme: SliderThemeData(
-              trackHeight: 1.5,
-              overlayShape: SliderComponentShape.noOverlay,
-              thumbShape: RoundSliderThumbShape(elevation: 4),
+          child: MaterialApp(
+            localizationsDelegates: GlobalMaterialLocalizations.delegates,
+            supportedLocales: const [Locale('da')],
+            builder: (context, child) => StreamChat(
+              child: child,
+              client: _streamChatClient,
             ),
-            appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              iconTheme: IconThemeData(color: Colors.black),
+            routes: {
+              '/': (context) => Wrapper(),
+              RegisterScreen.name: (context) => RegisterScreen(),
+              LoginScreen.name: (context) => LoginScreen(),
+            },
+            title: 'Verker',
+            theme: ThemeData(
+              sliderTheme: SliderThemeData(
+                trackHeight: 1.5,
+                overlayShape: SliderComponentShape.noOverlay,
+                thumbShape: RoundSliderThumbShape(elevation: 4),
+              ),
+              appBarTheme: const AppBarTheme(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                iconTheme: IconThemeData(color: Colors.black),
+              ),
+              primarySwatch: Colors.blue,
             ),
-            primarySwatch: Colors.blue,
           ),
         ),
       ),

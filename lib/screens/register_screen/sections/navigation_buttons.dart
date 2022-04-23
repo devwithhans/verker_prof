@@ -22,38 +22,31 @@ class NavigationButtons extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+        child: Row(
           children: [
-            atEnd
-                ? StandardButton(
-                    onPressed: onSubmit,
-                    text: "Sign Up",
+            !atStart
+                ? Expanded(
+                    child: StandardButton(
+                      onPressed: onPrevius,
+                      text: 'Tilbage',
+                    ),
                   )
                 : SizedBox(),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                !atStart
-                    ? Expanded(
-                        child: StandardButton(
-                          onPressed: onPrevius,
-                          text: 'Tilbage',
-                        ),
-                      )
-                    : SizedBox(),
-                SizedBox(width: !atStart ? 10 : 0),
-                !atEnd
-                    ? Expanded(
-                        child: StandardButton(
-                          onPressed: onNext,
-                          text: 'Næste',
-                        ),
-                      )
-                    : SizedBox(),
-              ],
-            ),
+            SizedBox(width: !atStart ? 10 : 0),
+            !atEnd
+                ? Expanded(
+                    child: StandardButton(
+                      onPressed: onNext,
+                      text: 'Næste',
+                    ),
+                  )
+                : Expanded(
+                    child: StandardButton(
+                      onPressed: onSubmit,
+                      text: "Sign Up",
+                    ),
+                  )
           ],
         ),
       ),
