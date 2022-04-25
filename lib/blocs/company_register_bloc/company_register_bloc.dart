@@ -1,7 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+
 import 'package:verker_prof/models/address.dart';
 import 'package:verker_prof/models/company_registration.dart';
+import 'package:verker_prof/services/network_helper.dart';
 
 part 'company_register_state.dart';
 part 'company_register_event.dart';
@@ -16,7 +19,36 @@ class CompanyRegisterBloc
 
   CompanyRegisterBloc() : super(CompanyRegisterState()) {
     on<AddValues>(_addValues);
+    on<SearchCompanyByName>(_searchCompanyByName);
     on<SignUpUser>(_signUpUser);
+  }
+
+  void _searchCompanyByName(SearchCompanyByName event, Emitter emit) async {
+    emit(state.copyWith(cvrSearchStatus: CvrSearchStatus.loading));
+    print(state.companyModel.name);
+    var data = await NetworkHelper(
+            "https://cvrapi.dk/api?country=dk&search=${state.companyModel.name}")
+        .getData();
+    if (data['error'] != null) {
+      emit(state.copyWith(cvrSearchStatus: CvrSearchStatus.failed));
+    } else {
+      emit(state.copyWith(
+        searchResult: data,
+        cvrSearchStatus: CvrSearchStatus.succes,
+        companyModel: state.companyModel.copyWith(
+          name: data["name"],
+          cvr: data["vat"] != null ? data["vat"].toString() : '',
+          phone: data["phone"] != null ? data["phone"].toString() : '',
+          email: data["email"] ?? '',
+          employees: data["employees"],
+          established: data["startData"] ?? '',
+          address: data["address"] ?? '',
+          zip: data["zipcode"] ?? '',
+        ),
+      ));
+    }
+
+    print(data);
   }
 
   Future<void> _signUpUser(SignUpUser event, Emitter emit) async {
@@ -47,6 +79,8 @@ class CompanyRegisterBloc
     emit(
       state.copyWith(
         companyModel: state.companyModel.copyWith(
+          zip: event.zip,
+          type: event.type,
           name: event.name,
           description: event.description,
           cvr: event.cvr,

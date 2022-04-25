@@ -26,17 +26,21 @@ class GoToStep extends CompanyRegisterEvent {
 
 class AddValues extends CompanyRegisterEvent {
   final String? name;
+  final String? type;
   final String? description;
   final String? email;
   final String? cvr;
   final String? phone;
   final int? employees;
-  final int? established;
-  final Address? address;
+  final String? established;
+  final String? address;
+  final String? zip;
   final List<double>? coordinates;
   final String? logo;
 
   const AddValues({
+    this.zip,
+    this.type,
     this.name,
     this.description,
     this.email,
@@ -51,3 +55,5 @@ class AddValues extends CompanyRegisterEvent {
 }
 
 class SignUpUser extends CompanyRegisterEvent {}
+
+class SearchCompanyByName extends CompanyRegisterEvent {}

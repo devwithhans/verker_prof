@@ -7,12 +7,16 @@ class CompanyRegistrationModel {
   final String? cvr;
   final String? phone;
   final int? employees;
-  final int? established;
-  final Address? address;
+  final String? type;
+  final String? established;
+  final String? address;
+  final String? zip;
   final List<double>? coordinates;
   final String? logo;
 
   const CompanyRegistrationModel({
+    this.zip,
+    this.type,
     this.name,
     this.description,
     this.email,
@@ -26,18 +30,22 @@ class CompanyRegistrationModel {
   });
 
   CompanyRegistrationModel copyWith({
+    String? type,
     String? name,
     String? description,
     String? email,
     String? cvr,
     String? phone,
     String? logo,
-    Address? address,
+    String? address,
+    String? zip,
     List<double>? coordinates,
     int? employees,
-    int? established,
+    String? established,
   }) {
     return CompanyRegistrationModel(
+      zip: zip ?? this.zip,
+      type: type ?? this.type,
       name: name ?? this.name,
       description: description ?? this.description,
       email: email ?? this.email,

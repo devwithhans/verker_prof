@@ -14,4 +14,17 @@ class Address {
       lat: data['adresse']['y'],
     );
   }
+
+  Address copyWith({
+    String? address,
+    final String? zip,
+    final double? lon,
+    final double? lat,
+  }) {
+    return Address(
+        address: address ?? this.address,
+        zip: zip ?? this.zip,
+        lon: lon ?? this.lon,
+        lat: lat ?? this.lat);
+  }
 }

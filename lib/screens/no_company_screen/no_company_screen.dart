@@ -34,9 +34,11 @@ class NoCompanyScreen extends StatelessWidget {
                 text: 'Opret virksomhed',
                 onPressed: () {
                   Navigator.pop(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CompanyRegistrationScreen()));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CompanyRegistrationScreen(),
+                    ),
+                  );
                 },
               )
             ],

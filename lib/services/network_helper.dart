@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 class NetworkHelper {
@@ -11,7 +13,8 @@ class NetworkHelper {
 
     if (response.statusCode == 200) {
       data = response.body;
-      return data;
+
+      return jsonDecode(data);
     } else {
       print('Noget gik galt i NetworkingHelper');
     }

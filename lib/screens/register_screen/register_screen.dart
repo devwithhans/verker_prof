@@ -5,6 +5,7 @@ import 'package:verker_prof/blocs/register_bloc/register_bloc.dart';
 import 'package:verker_prof/screens/register_screen/sections/navigation_buttons.dart';
 import 'package:verker_prof/screens/register_screen/subscreens/formscreen_one.dart';
 import 'package:verker_prof/screens/register_screen/subscreens/formscreen_two.dart';
+import 'package:verker_prof/theme/components/step_form.dart';
 
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);
@@ -37,135 +38,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ));
             Navigator.pop(context);
           }
-          return UserRegistrationWrapper(
-              formKey: _formKey,
-              steps: [
-                FormScreenOne(),
-                FormScreenTwo(),
-              ],
-              currentStep: currentStep);
-        },
-      ),
-    );
-  }
-}
-
-class UserRegistrationWrapper extends StatefulWidget {
-  const UserRegistrationWrapper({
-    Key? key,
-    required GlobalKey<FormState> formKey,
-    required this.steps,
-    required this.currentStep,
-  })  : _formKey = formKey,
-        super(key: key);
-
-  final GlobalKey<FormState> _formKey;
-  final List<Widget> steps;
-  final int currentStep;
-
-  @override
-  State<UserRegistrationWrapper> createState() =>
-      _UserRegistrationWrapperState();
-}
-
-class _UserRegistrationWrapperState extends State<UserRegistrationWrapper> {
-  late bool atEnd;
-  late bool atStart;
-  late int currentStep;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    currentStep = widget.currentStep;
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    atEnd = currentStep == widget.steps.length - 1;
-    atStart = currentStep == 0;
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        leadingWidth: 80,
-        leading: IconButton(
-          color: Colors.black,
-          splashRadius: 20,
-          focusColor: Colors.black,
-          splashColor: Colors.black,
-          highlightColor: Colors.black,
-          icon: Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-                color: Colors.black, borderRadius: BorderRadius.circular(20)),
-            child: const Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-        child: Stack(
-          children: [
-            ListView(
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Opret dig.',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                    )),
-                const SizedBox(
-                  height: 20,
-                ),
-                Form(
-                  key: widget._formKey,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 100),
-                    child: Column(
-                      children: widget.steps.map(
-                        (e) {
-                          return Visibility(
-                            maintainState: false,
-                            visible: currentStep == widget.steps.indexOf(e),
-                            child: e,
-                          );
-                        },
-                      ).toList(),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            NavigationButtons(
-              atEnd: atEnd,
-              atStart: atStart,
-              onPrevius: () {
-                currentStep--;
-
+          return StepForm(
+            title: 'Registrer bruger',
+            currentStep: currentStep,
+            onPrevius: () {
+              currentStep--;
+              setState(() {});
+            },
+            onNext: () {
+              if (_formKey.currentState!.validate()) {
+                currentStep = currentStep + 1;
                 setState(() {});
-              },
-              onNext: () {
-                if (widget._formKey.currentState!.validate()) {
-                  currentStep = widget.currentStep + 1;
-                  setState(() {});
-                }
-              },
-              onSubmit: () {
-                if (widget._formKey.currentState!.validate()) {
-                  context.read<RegisterBloc>().add(SignUpUser());
-                }
-              },
-            )
-          ],
-        ),
+              }
+            },
+            onSubmit: () {
+              if (_formKey.currentState!.validate()) {
+                context.read<RegisterBloc>().add(SignUpUser());
+              }
+            },
+            formKey: _formKey,
+            steps: [
+              FormScreenOne(),
+              FormScreenTwo(),
+            ],
+          );
+        },
       ),
     );
   }
