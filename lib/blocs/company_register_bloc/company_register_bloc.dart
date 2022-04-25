@@ -1,9 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql/client.dart';
 
 import 'package:verker_prof/models/address.dart';
 import 'package:verker_prof/models/company_registration.dart';
+import 'package:verker_prof/services/graphql/GrapgQLService.dart';
+import 'package:verker_prof/services/graphql/queries/create_company.dart';
 import 'package:verker_prof/services/network_helper.dart';
 
 part 'company_register_state.dart';
@@ -20,7 +23,7 @@ class CompanyRegisterBloc
   CompanyRegisterBloc() : super(CompanyRegisterState()) {
     on<AddValues>(_addValues);
     on<SearchCompanyByName>(_searchCompanyByName);
-    on<SignUpUser>(_signUpUser);
+    on<RegisterCompany>(_registerCompany);
   }
 
   void _searchCompanyByName(SearchCompanyByName event, Emitter emit) async {
@@ -51,21 +54,27 @@ class CompanyRegisterBloc
     print(data);
   }
 
-  Future<void> _signUpUser(SignUpUser event, Emitter emit) async {
+  Future<void> _registerCompany(RegisterCompany event, Emitter emit) async {
     emit(state.copyWith(registerStatus: CompanyRegisterStatus.loading));
 
     CompanyRegistrationModel companyData = state.companyModel;
 
     try {
-      // QueryResult result =
-      //     await GraphQLService().performMutation(createUser, variables: {
-      //   "firstName": userValues.firstName,
-      //   "lastName": userValues.lastName,
-      //   "phone": userValues.phone,
-      //   "email": userValues.email,
-      //   "password": userValues.password,
-      // });
-      // print(result.exception);
+      QueryResult result =
+          await GraphQLService().performMutation(createCompany, variables: {
+        "name": companyData.name,
+        "description": companyData.description,
+        "phone": companyData.phone,
+        "email": companyData.email,
+        "cvr": companyData.cvr,
+        "type": companyData.type,
+        "employees": companyData.employees,
+        "established": companyData.established,
+        "logo": companyData.logo,
+        "address": companyData.address,
+        "zip": companyData.zip,
+      });
+      print(result.exception);
     } catch (e) {
       print('e');
 
@@ -82,7 +91,7 @@ class CompanyRegisterBloc
           zip: event.zip,
           type: event.type,
           name: event.name,
-          description: event.description,
+          description: event.description ?? '',
           cvr: event.cvr,
           coordinates: event.coordinates,
           address: event.address,
@@ -90,7 +99,7 @@ class CompanyRegisterBloc
           email: event.email,
           employees: event.employees,
           established: event.established,
-          logo: event.logo,
+          logo: event.logo ?? '',
         ),
       ),
     );

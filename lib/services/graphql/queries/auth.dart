@@ -9,7 +9,6 @@ query SigninUser(\$email: String!, \$password: String!) {
       lastName
       profileImage
       deviceToken
-      verker
       address {
         address
         zip

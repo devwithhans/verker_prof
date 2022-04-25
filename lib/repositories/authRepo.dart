@@ -61,14 +61,16 @@ class AuthenticationRepository {
         variables: {"email": email, "password": password});
 
     if (result.data!['signinUser']['jwt'] != null) {
-      print('b');
-
       storage.write(key: 'jwt', value: result.data!['signinUser']['jwt']);
-      dynamic userData = UserData.convert(result.data!['signinUser']['user']);
+
+      UserData userData = UserData.convert(result.data!['signinUser']['user']);
       dynamic user = await chatRepository.connectUser(userData);
 
       if (user != null) {
-        _controller.add(Authorised(user: userData));
+        if (userData.companyId == null) {
+          _controller.add(NoCompany(user: userData));
+        } else
+          _controller.add(Authorised(user: userData));
       } else {
         print('c');
         _controller.add(UnAuthorised());

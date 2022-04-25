@@ -85,7 +85,7 @@ class StepForm extends StatelessWidget {
                   onNext();
                 },
                 onSubmit: onSubmit),
-          )
+          ),
         ],
       ),
     );

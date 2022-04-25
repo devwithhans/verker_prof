@@ -53,7 +53,9 @@ class _CompanyRegistrationScreenState extends State<CompanyRegistrationScreen> {
                 setState(() {});
               }
             },
-            onSubmit: () {},
+            onSubmit: () {
+              context.read<CompanyRegisterBloc>().add(RegisterCompany());
+            },
             formKey: _formKey,
             steps: [
               StartScreen(),

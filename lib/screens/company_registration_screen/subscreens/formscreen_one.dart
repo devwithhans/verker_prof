@@ -87,6 +87,48 @@ class CompanyFormScreenTwo extends StatelessWidget {
                 hintText: 'Telefon',
               ),
               StandardInputForm(
+                initialValue: state.companyModel.established ?? '',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Feltet må ikke være tomt';
+                  }
+                  if (value.length != 4) {
+                    return 'Skriv et gyldigt årstal';
+                  }
+                  return null;
+                },
+                keyboardType: TextInputType.phone,
+                textCapitalization: TextCapitalization.sentences,
+                onChanged: (v) {
+                  context.read<CompanyRegisterBloc>().add(
+                        AddValues(established: v),
+                      );
+                },
+                title: 'Stiftet årstal.',
+                hintText: 'f.eks. 2009',
+              ),
+              StandardInputForm(
+                initialValue: state.companyModel.employees == null
+                    ? ''
+                    : state.companyModel.employees.toString(),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Feltet må ikke være tomt';
+                  }
+
+                  return null;
+                },
+                keyboardType: TextInputType.number,
+                textCapitalization: TextCapitalization.sentences,
+                onChanged: (v) {
+                  context.read<CompanyRegisterBloc>().add(
+                        AddValues(established: v),
+                      );
+                },
+                title: 'Antal medarbejdere.',
+                hintText: 'f.eks. 12',
+              ),
+              StandardInputForm(
                 initialValue: state.companyModel.email ?? '',
                 validator: (value) {
                   if (value == null || value.isEmpty) {

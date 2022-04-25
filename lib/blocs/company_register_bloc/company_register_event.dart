@@ -54,6 +54,6 @@ class AddValues extends CompanyRegisterEvent {
   });
 }
 
-class SignUpUser extends CompanyRegisterEvent {}
+class RegisterCompany extends CompanyRegisterEvent {}
 
 class SearchCompanyByName extends CompanyRegisterEvent {}
