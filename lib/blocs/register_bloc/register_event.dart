@@ -47,3 +47,5 @@ class AddValues extends RegisterEvent {
     this.address,
   });
 }
+
+class SignUpUser extends RegisterEvent {}

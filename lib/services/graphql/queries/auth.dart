@@ -4,7 +4,6 @@ query SigninUser(\$email: String!, \$password: String!) {
     
     jwt
     user {
-      verker
       _id
       firstName
       lastName
@@ -18,6 +17,7 @@ query SigninUser(\$email: String!, \$password: String!) {
       email
       phone
       streamToken
+      companyId
     }
     }
 }
@@ -26,10 +26,9 @@ query SigninUser(\$email: String!, \$password: String!) {
 String getUser = """
 query {
   getUser(email:"s"){
-
-    verker
     _id
     firstName
+    companyId
     lastName
     address {
       address

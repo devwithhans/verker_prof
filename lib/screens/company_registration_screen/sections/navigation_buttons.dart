@@ -4,10 +4,6 @@ import 'package:verker_prof/widgets/buttons.dart';
 class NavigationButtons extends StatelessWidget {
   const NavigationButtons({
     Key? key,
-    this.startText = 'Start',
-    this.backText = 'Tilbage',
-    this.nextText = 'Næste',
-    this.submitText = 'Submit',
     required this.atEnd,
     required this.atStart,
     required this.onNext,
@@ -21,11 +17,6 @@ class NavigationButtons extends StatelessWidget {
   final void Function() onPrevius;
   final void Function() onSubmit;
 
-  final String nextText;
-  final String startText;
-  final String submitText;
-  final String backText;
-
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -38,7 +29,7 @@ class NavigationButtons extends StatelessWidget {
                 ? Expanded(
                     child: StandardButton(
                       onPressed: onPrevius,
-                      text: backText,
+                      text: 'Tilbage',
                     ),
                   )
                 : SizedBox(),
@@ -47,13 +38,13 @@ class NavigationButtons extends StatelessWidget {
                 ? Expanded(
                     child: StandardButton(
                       onPressed: onNext,
-                      text: atStart ? startText : nextText,
+                      text: 'Næste',
                     ),
                   )
                 : Expanded(
                     child: StandardButton(
                       onPressed: onSubmit,
-                      text: submitText,
+                      text: "Sign Up",
                     ),
                   )
           ],

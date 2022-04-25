@@ -23,10 +23,16 @@ class UnAuthorised extends AuthState {
   UnAuthorised({this.unAuthorisedReason = UnAuthorisedReason.unknown});
 }
 
-enum ErrorType { networkError, missingLicence, undefined }
+enum ErrorType { networkError, missingLicence, undefined, notVerker }
 
 class ErrorAccured extends AuthState {
   ErrorType errorType;
 
   ErrorAccured(this.errorType);
+}
+
+class NoCompany extends AuthState {
+  UserData user;
+
+  NoCompany({required this.user}) : super();
 }

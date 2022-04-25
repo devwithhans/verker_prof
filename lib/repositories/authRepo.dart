@@ -32,14 +32,14 @@ class AuthenticationRepository {
       if (result.hasException) {
         yield ErrorAccured(ErrorType.networkError);
       }
-      if (result.data != null) {
-        UserData userData = UserData.convert(result.data!['getUser']);
+      UserData userData = UserData.convert(result.data!['getUser']);
+      if (userData.companyId == null) {
+        yield NoCompany(user: userData);
+      } else {
         try {
           dynamic user = await chatRepository.connectUser(userData);
           if (user != null) {
-            if (userData.verker) {
-              yield Authorised(user: userData);
-            }
+            yield Authorised(user: userData);
           } else {
             _controller.add(UnAuthorised());
           }

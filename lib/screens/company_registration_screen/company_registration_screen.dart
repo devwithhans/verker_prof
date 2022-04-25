@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
 import 'package:verker_prof/blocs/register_bloc/register_bloc.dart';
+import 'package:verker_prof/screens/company_registration_screen/subscreens/formscreen_one.dart';
+import 'package:verker_prof/screens/company_registration_screen/subscreens/formscreen_two.dart';
 import 'package:verker_prof/screens/register_screen/sections/navigation_buttons.dart';
-import 'package:verker_prof/screens/register_screen/subscreens/formscreen_one.dart';
-import 'package:verker_prof/screens/register_screen/subscreens/formscreen_two.dart';
 
-class RegisterScreen extends StatefulWidget {
-  RegisterScreen({Key? key}) : super(key: key);
+class CompanyRegistrationScreen extends StatefulWidget {
+  CompanyRegistrationScreen({Key? key}) : super(key: key);
 
   static String name = "RegisterScreen";
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<CompanyRegistrationScreen> createState() =>
+      _CompanyRegistrationScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _CompanyRegistrationScreenState extends State<CompanyRegistrationScreen> {
   final _formKey = GlobalKey<FormState>();
   int currentStep = 0;
 
@@ -37,11 +38,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ));
             Navigator.pop(context);
           }
-          return UserRegistrationWrapper(
+          return CompanyRegistrationWrapper(
               formKey: _formKey,
               steps: [
-                FormScreenOne(),
-                FormScreenTwo(),
+                CompanyFormScreenOne(),
+                CompanyFormScreenTwo(),
               ],
               currentStep: currentStep);
         },
@@ -50,8 +51,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 }
 
-class UserRegistrationWrapper extends StatefulWidget {
-  const UserRegistrationWrapper({
+class CompanyRegistrationWrapper extends StatefulWidget {
+  const CompanyRegistrationWrapper({
     Key? key,
     required GlobalKey<FormState> formKey,
     required this.steps,
@@ -64,11 +65,12 @@ class UserRegistrationWrapper extends StatefulWidget {
   final int currentStep;
 
   @override
-  State<UserRegistrationWrapper> createState() =>
-      _UserRegistrationWrapperState();
+  State<CompanyRegistrationWrapper> createState() =>
+      _CompanyRegistrationWrapperState();
 }
 
-class _UserRegistrationWrapperState extends State<UserRegistrationWrapper> {
+class _CompanyRegistrationWrapperState
+    extends State<CompanyRegistrationWrapper> {
   late bool atEnd;
   late bool atStart;
   late int currentStep;
@@ -86,30 +88,6 @@ class _UserRegistrationWrapperState extends State<UserRegistrationWrapper> {
     atEnd = currentStep == widget.steps.length - 1;
     atStart = currentStep == 0;
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        leadingWidth: 80,
-        leading: IconButton(
-          color: Colors.black,
-          splashRadius: 20,
-          focusColor: Colors.black,
-          splashColor: Colors.black,
-          highlightColor: Colors.black,
-          icon: Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-                color: Colors.black, borderRadius: BorderRadius.circular(20)),
-            child: const Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
         child: Stack(
@@ -117,14 +95,6 @@ class _UserRegistrationWrapperState extends State<UserRegistrationWrapper> {
             ListView(
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Opret dig.',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                    )),
-                const SizedBox(
-                  height: 20,
-                ),
                 Form(
                   key: widget._formKey,
                   child: Padding(
@@ -144,25 +114,29 @@ class _UserRegistrationWrapperState extends State<UserRegistrationWrapper> {
                 ),
               ],
             ),
-            NavigationButtons(
-              atEnd: atEnd,
-              atStart: atStart,
-              onPrevius: () {
-                currentStep--;
+            Visibility(
+              visible: currentStep != 0,
+              child: NavigationButtons(
+                startText: 'Opret virksomhed',
+                atEnd: atEnd,
+                atStart: atStart,
+                onPrevius: () {
+                  currentStep--;
 
-                setState(() {});
-              },
-              onNext: () {
-                if (widget._formKey.currentState!.validate()) {
-                  currentStep = widget.currentStep + 1;
                   setState(() {});
-                }
-              },
-              onSubmit: () {
-                if (widget._formKey.currentState!.validate()) {
-                  context.read<RegisterBloc>().add(SignUpUser());
-                }
-              },
+                },
+                onNext: () {
+                  if (widget._formKey.currentState!.validate()) {
+                    currentStep = widget.currentStep + 1;
+                    setState(() {});
+                  }
+                },
+                onSubmit: () {
+                  if (widget._formKey.currentState!.validate()) {
+                    context.read<RegisterBloc>().add(SignUpUser());
+                  }
+                },
+              ),
             )
           ],
         ),
