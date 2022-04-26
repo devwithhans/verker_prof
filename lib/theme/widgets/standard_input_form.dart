@@ -17,8 +17,10 @@ class StandardInputForm extends StatelessWidget {
   TextInputType? keyboardType;
   bool obscureText;
   TextCapitalization textCapitalization;
+  String? serverError;
 
   StandardInputForm({
+    this.serverError,
     this.textCapitalization = TextCapitalization.sentences,
     this.obscureText = false,
     this.keyboardType,
@@ -69,6 +71,7 @@ class StandardInputForm extends StatelessWidget {
           cursorColor: Colors.black,
           style: const TextStyle(fontSize: 18),
           decoration: InputDecoration(
+            errorText: serverError,
             suffix: price ? const Text('DKK') : null,
             enabledBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.black),

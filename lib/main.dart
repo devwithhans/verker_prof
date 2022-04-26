@@ -45,12 +45,6 @@ class App extends StatelessWidget {
                   context.read<AuthenticationRepository>(),
             ),
           ),
-          BlocProvider<LoginBloc>(
-            create: (BuildContext context) => LoginBloc(
-              authenticationRepository:
-                  context.read<AuthenticationRepository>(),
-            ),
-          ),
           BlocProvider<ProjectsBloc>(
             create: (BuildContext context) =>
                 ProjectsBloc(_streamChatClient)..add(FetchMyProjects()),

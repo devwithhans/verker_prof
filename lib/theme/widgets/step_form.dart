@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
 import 'package:verker_prof/theme/widgets/navigation_buttons.dart';
 
@@ -37,6 +38,10 @@ class StepForm extends StatelessWidget {
     bool atEnd = currentStep == steps.length - 1;
     bool atStart = currentStep == 0;
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+      ),
       body: Stack(
         children: [
           ListView(

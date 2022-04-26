@@ -25,7 +25,7 @@ class Wrapper extends StatelessWidget {
         if (state is ErrorAccured) {
           // return ErrorScreen();
           return Scaffold(
-            body: CenterText('FUUCK'),
+            body: CenterText('Vi stødte på en fejl'),
           );
         }
         if (state is NoCompany) {

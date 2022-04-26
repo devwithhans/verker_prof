@@ -16,4 +16,14 @@ class Succes extends LoginState {}
 
 class Loading extends LoginState {}
 
-class LoginFailed extends LoginState {}
+class EmailFailed extends LoginState {
+  String errorMessage;
+
+  EmailFailed(this.errorMessage);
+}
+
+class PasswordFailed extends LoginState {
+  String errorMessage;
+
+  PasswordFailed(this.errorMessage);
+}

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:verker_prof/repositories/authRepo.dart';
+import 'package:verker_prof/services/error/errors.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -32,13 +33,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       dynamic result = await _authenticationRepository.logIn(
           email: event.email, password: event.password);
-      if (result == null) {
-        emit(LoginFailed());
+      if (result is ErrorMessage) {
+        if (result.errorName == 'PASSWORD_IS_INCORRECT') {
+          emit(PasswordFailed(result.frontendMessage));
+        } else if (result.errorName == 'EMAIL_NOT_FOUND') {
+          emit(EmailFailed(result.frontendMessage));
+        }
       } else {
         emit(Succes());
       }
     } catch (e) {
-      emit(LoginFailed());
+      print(e);
+      emit(EmailFailed(ErrorMessage.getErrorMessage('UNKNOWN')));
     }
   }
 }

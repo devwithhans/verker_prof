@@ -29,26 +29,26 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  photo_view: ^0.13.0
+  photo_view: 
   bloc: 
   flutter_bloc: 
-  equatable: ^2.0.3
-  graphql: ^5.0.0
-  flutter_secure_storage: ^5.0.2
-  flutter_svg: ^1.0.1
-  google_nav_bar: ^5.0.5
-  carousel_slider: ^4.0.0
-  stream_chat_flutter: ^3.5.0
-  jiffy: ^5.0.0
-  gql: ^0.13.1
-  intl: ^0.17.0
-  image_picker: ^0.8.4
-  file_picker: ^4.4.0
-  video_player: ^2.2.16
-  video_thumbnail: ^0.4.3
-  camera: ^0.9.4
-  cached_network_image: ^3.2.0
-  syncfusion_flutter_datepicker: ^19.4.56
+  equatable: 
+  graphql: 
+  flutter_secure_storage: 
+  flutter_svg:  
+  google_nav_bar:  
+  carousel_slider:  
+  stream_chat_flutter:  
+  jiffy:  
+  gql:  
+  intl: 
+  image_picker:  
+  file_picker:  
+  video_player:  
+  video_thumbnail:  
+  camera: 
+  cached_network_image:  
+  syncfusion_flutter_datepicker: 
   flutter_localizations: 
     sdk: flutter         
 

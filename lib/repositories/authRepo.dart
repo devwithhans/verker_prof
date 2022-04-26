@@ -6,6 +6,7 @@ import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
 import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
 import 'package:verker_prof/models/user.dart';
 import 'package:verker_prof/repositories/chatRepo.dart';
+import 'package:verker_prof/services/error/errors.dart';
 import 'package:verker_prof/services/graphql/GrapgQLService.dart';
 import 'package:verker_prof/services/graphql/queries/auth.dart';
 
@@ -59,9 +60,14 @@ class AuthenticationRepository {
     required String email,
     required String password,
   }) async {
-    _controller.add(LoadingAuthState());
     QueryResult result = await _graphQLService.performQuery(signInUser,
         variables: {"email": email, "password": password});
+
+    print(result.exception);
+
+    if (result.hasException) {
+      return ErrorMessage.getErrorMessage(result);
+    }
 
     if (result.data!['signinUser']['jwt'] != null) {
       storage.write(key: 'jwt', value: result.data!['signinUser']['jwt']);
@@ -74,18 +80,7 @@ class AuthenticationRepository {
           _controller.add(NoCompany(user: userData));
         } else
           _controller.add(Authorised(user: userData));
-      } else {
-        print('c');
-        _controller.add(UnAuthorised());
       }
-      print('d');
-
-      return user;
-    } else {
-      print('a');
-
-      _controller.add(UnAuthorised());
-      return null;
     }
   }
 
@@ -93,7 +88,6 @@ class AuthenticationRepository {
     _controller.add(AuthLoading());
 
     QueryResult result = await _graphQLService.performQuery(refreshJWTString);
-    print(result.data!['refreshJWT']['jwt']);
     if (result.data!['refreshJWT']['jwt'] != null) {
       await storage.delete(key: 'jwt');
       await storage.write(key: 'jwt', value: result.data!['refreshJWT']['jwt']);
