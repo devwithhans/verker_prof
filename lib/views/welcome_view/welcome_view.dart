@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:verker_prof/theme/widgets/buttons.dart';
 import 'package:verker_prof/views/login_view/login_view.dart';
 import 'package:verker_prof/views/register_view/register_view.dart';
-import 'package:verker_prof/widgets/buttons.dart';
 
 class WelcomeView extends StatelessWidget {
   @override

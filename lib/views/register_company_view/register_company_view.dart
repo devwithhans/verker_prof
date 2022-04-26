@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/company_register_bloc/company_register_bloc.dart';
 import 'package:verker_prof/repositories/authRepo.dart';
-import 'package:verker_prof/theme/components/step_form.dart';
+import 'package:verker_prof/theme/widgets/step_form.dart';
+
 import 'package:verker_prof/views/register_company_view/subviews/company_formfields.dart';
 import 'package:verker_prof/views/register_company_view/subviews/initial_company_registration.dart';
 import 'package:verker_prof/views/register_company_view/subviews/select_business_type.dart';

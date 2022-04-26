@@ -5,12 +5,11 @@ import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_event.dart';
 import 'package:verker_prof/theme/fonts/icons.dart';
+import 'package:verker_prof/theme/widgets/buttons.dart';
+import 'package:verker_prof/theme/widgets/components.dart';
 import 'package:verker_prof/views/home_view/home_view.dart';
 import 'package:verker_prof/views/projects_view/projects_view.dart';
 import 'package:verker_prof/views/swipe_view/browse_view.dart';
-import 'package:verker_prof/widgets/buttons.dart';
-
-import 'package:verker_prof/widgets/components.dart';
 
 class NavScreenDeligator extends StatelessWidget {
   @override
@@ -87,7 +86,7 @@ class _NavScreenState extends State<NavScreen> {
             tabs: [
               const GButton(
                 icon: VerkerIcons.company,
-                text: 'Home',
+                text: 'Hjem',
               ),
               const GButton(
                 icon: VerkerIcons.projectSwipe,
@@ -116,7 +115,7 @@ class _NavScreenState extends State<NavScreen> {
               ),
               const GButton(
                 icon: VerkerIcons.profile,
-                text: 'Profile',
+                text: 'Profil',
               ),
             ],
             selectedIndex: _currentIndex,

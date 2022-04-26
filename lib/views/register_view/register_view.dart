@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
 import 'package:verker_prof/blocs/register_bloc/register_bloc.dart';
-import 'package:verker_prof/theme/components/step_form.dart';
+import 'package:verker_prof/theme/widgets/step_form.dart';
 import 'package:verker_prof/views/register_view/subviews/formscreen_one.dart';
 import 'package:verker_prof/views/register_view/subviews/formscreen_two.dart';
 

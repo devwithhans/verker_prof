@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:verker_prof/widgets/buttons.dart';
+import 'package:verker_prof/theme/widgets/buttons.dart';
 
 class NavigationButtons extends StatelessWidget {
   const NavigationButtons({

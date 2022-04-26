@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
-import 'package:verker_prof/theme/components/standard_input_form.dart';
+import 'package:verker_prof/theme/widgets/standard_input_form.dart';
 
 class VerkerDatePicker extends StatelessWidget {
   final Function(DateTime value) onSelect;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/company_register_bloc/company_register_bloc.dart';
-import 'package:verker_prof/theme/components/standard_input_form.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
+import 'package:verker_prof/theme/widgets/standard_input_form.dart';
 
 class CompanyFormFields extends StatelessWidget {
   CompanyFormFields({Key? key}) : super(key: key);

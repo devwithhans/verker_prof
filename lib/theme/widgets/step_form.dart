@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
-import 'package:verker_prof/theme/components/navigation_buttons.dart';
+import 'package:verker_prof/theme/widgets/navigation_buttons.dart';
 
 class StepForm extends StatelessWidget {
   StepForm({

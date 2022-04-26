@@ -4,8 +4,8 @@ import 'package:verker_prof/blocs/projects_bloc/projects_cubit.dart';
 import 'package:verker_prof/blocs/projects_bloc/projects_event.dart';
 import 'package:verker_prof/models/outreach.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
+import 'package:verker_prof/theme/widgets/components.dart';
 import 'package:verker_prof/views/projects_view/projects_widgets/project_tile.dart';
-import 'package:verker_prof/widgets/components.dart';
 
 class ProjectsView extends StatelessWidget {
   const ProjectsView({Key? key}) : super(key: key);

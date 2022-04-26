@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:verker_prof/blocs/swipe_bloc/swipe_bloc.dart';
 import 'package:verker_prof/models/filter.dart';
-import 'package:verker_prof/theme/components/standard_slider.dart';
-import 'package:verker_prof/widgets/buttons.dart';
+import 'package:verker_prof/theme/widgets/buttons.dart';
+import 'package:verker_prof/theme/widgets/standard_slider.dart';
 
 class Filter extends StatefulWidget {
   Filter();

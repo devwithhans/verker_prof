@@ -4,8 +4,8 @@ import 'package:verker_prof/models/outreach.dart';
 import 'package:verker_prof/models/project.dart';
 import 'package:verker_prof/services/variables.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
+import 'package:verker_prof/theme/widgets/components.dart';
 import 'package:verker_prof/views/chat_view/chat_view.dart';
-import 'package:verker_prof/widgets/components.dart';
 
 class ProjectTile extends StatelessWidget {
   const ProjectTile({

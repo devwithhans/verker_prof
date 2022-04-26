@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:verker_prof/blocs/outreach_bloc/outreach_bloc.dart';
-import 'package:verker_prof/theme/components/standard_input_form.dart';
 
 import 'package:verker_prof/theme/constants/textstyle.dart';
-import 'package:verker_prof/widgets/buttons.dart';
+import 'package:verker_prof/theme/widgets/buttons.dart';
+import 'package:verker_prof/theme/widgets/standard_input_form.dart';
 
 class SendOutreachSheet extends StatefulWidget {
   SendOutreachSheet({required this.projectId, Key? key}) : super(key: key);
