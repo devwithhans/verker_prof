@@ -6,19 +6,18 @@ import 'package:verker_prof/blocs/projects_bloc/projects_cubit.dart';
 import 'package:verker_prof/blocs/projects_bloc/projects_event.dart';
 import 'package:verker_prof/blocs/swipe_bloc/swipe_bloc.dart';
 import 'package:verker_prof/models/project.dart';
-import 'package:verker_prof/screens/project_details_screen/sections/image_inspect.dart';
-import 'package:verker_prof/screens/project_details_screen/sections/send_outreach.dart';
-
 import 'package:verker_prof/services/variables.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
+import 'package:verker_prof/views/project_details_view/project_details_widgets/image_inspect.dart';
+import 'package:verker_prof/views/project_details_view/project_details_widgets/send_outreach.dart';
 import 'package:verker_prof/widgets/buttons.dart';
 import 'package:verker_prof/widgets/components.dart';
 
-class ProjectDetails extends StatelessWidget {
+class ProjectDetailsView extends StatelessWidget {
   final ProjectModel project;
   final bool outreach;
 
-  ProjectDetails({required this.project, this.outreach = false, Key? key})
+  ProjectDetailsView({required this.project, this.outreach = false, Key? key})
       : super(key: key);
 
   @override

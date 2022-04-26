@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:verker_prof/screens/login_screens/sections.dart/login.dart';
-import 'package:verker_prof/screens/register_screen/register_screen.dart';
+import 'package:verker_prof/views/login_view/login_view.dart';
+import 'package:verker_prof/views/register_view/register_view.dart';
 import 'package:verker_prof/widgets/buttons.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +42,7 @@ class WelcomeScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(
                       context,
-                      RegisterScreen.name,
+                      RegisterView.name,
                     );
                   },
                   nextIcon: true,
@@ -55,7 +55,7 @@ class WelcomeScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(
                       context,
-                      LoginScreen.name,
+                      LoginView.name,
                     );
                   },
                   nextIcon: true,

@@ -4,8 +4,8 @@ import 'package:verker_prof/blocs/company_register_bloc/company_register_bloc.da
 import 'package:verker_prof/theme/components/standard_input_form.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
 
-class CompanyFormScreenTwo extends StatelessWidget {
-  CompanyFormScreenTwo({Key? key}) : super(key: key);
+class CompanyFormFields extends StatelessWidget {
+  CompanyFormFields({Key? key}) : super(key: key);
 
   bool showComplianceError = false;
 

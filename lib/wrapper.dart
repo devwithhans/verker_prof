@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
-import 'package:verker_prof/screens/company_registration_screen/company_registration_screen.dart';
-import 'package:verker_prof/screens/welcome_screen/welcome_screen.dart';
-import 'package:verker_prof/views/navigation_screens/navigationroot.dart';
+import 'package:verker_prof/views/navigation_root/navigationroot.dart';
+import 'package:verker_prof/views/register_company_view/register_company_view.dart';
+import 'package:verker_prof/views/welcome_view/welcome_view.dart';
 import 'package:verker_prof/widgets/components.dart';
 
 // This screen navigates the user to the right screen depending on their auth status
@@ -15,7 +15,7 @@ class Wrapper extends StatelessWidget {
       builder: (context, state) {
         print(state);
         if (state is UnAuthorised) {
-          return WelcomeScreen();
+          return WelcomeView();
         }
         if (state is Authorised) {
           print(state.user.companyId);
@@ -28,7 +28,7 @@ class Wrapper extends StatelessWidget {
           );
         }
         if (state is NoCompany) {
-          return CompanyRegistrationScreen();
+          return CompanyRegistrationView();
         }
         return const Scaffold(
           body: Center(),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
-import 'package:verker_prof/screens/company_registration_screen/company_registration_screen.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
+import 'package:verker_prof/views/register_company_view/register_company_view.dart';
 import 'package:verker_prof/widgets/buttons.dart';
 
-class NoCompanyScreen extends StatelessWidget {
-  const NoCompanyScreen({Key? key}) : super(key: key);
+class NoCompanyView extends StatelessWidget {
+  const NoCompanyView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class NoCompanyScreen extends StatelessWidget {
                   Navigator.pop(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CompanyRegistrationScreen(),
+                      builder: (context) => CompanyRegistrationView(),
                     ),
                   );
                 },

@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
 import 'package:verker_prof/models/outreach.dart';
-import 'package:verker_prof/screens/chat_screen/sections/listview_separation.dart';
-import 'package:verker_prof/screens/chat_screen/sections/send_form.dart';
-import 'package:verker_prof/screens/project_details_screen/project_details_screen.dart';
 import 'package:verker_prof/services/variables.dart';
+import 'package:verker_prof/views/chat_view/chat_widgets/listview_separation.dart';
+import 'package:verker_prof/views/chat_view/chat_widgets/send_form.dart';
+import 'package:verker_prof/views/project_details_view/project_details_screen.dart';
 
 class ChannelPage extends StatefulWidget {
   final Outreach outreach;
@@ -67,7 +67,7 @@ class _ChannelPageState extends State<ChannelPage> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ProjectDetails(
+                    builder: (context) => ProjectDetailsView(
                           project: widget.outreach.project,
                           outreach: true,
                         )));

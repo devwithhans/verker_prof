@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/swipe_bloc/swipe_bloc.dart';
 import 'package:verker_prof/models/filter.dart';
-import 'package:verker_prof/screens/swipe_screen/sections/swipe_filter.dart';
 import 'package:verker_prof/theme/fonts/icons.dart';
+import 'package:verker_prof/views/swipe_view/browse_widgets/swipe_filter.dart';
 
 class BrowseHeader extends StatelessWidget {
   const BrowseHeader({

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/swipe_bloc/swipe_bloc.dart';
 import 'package:verker_prof/models/project.dart';
-import 'package:verker_prof/screens/swipe_screen/sections/browse_end.dart';
-import 'package:verker_prof/screens/swipe_screen/sections/project_swipe_card.dart';
 import 'package:verker_prof/services/variables.dart';
+import 'package:verker_prof/views/swipe_view/browse_widgets/browse_end.dart';
+import 'package:verker_prof/views/swipe_view/browse_widgets/project_swipe_card.dart';
 import 'package:verker_prof/widgets/components.dart';
 
 class SwipeSection extends StatelessWidget {

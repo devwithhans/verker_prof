@@ -8,8 +8,8 @@ import 'package:verker_prof/blocs/projects_bloc/projects_event.dart';
 import 'package:verker_prof/repositories/authRepo.dart';
 import 'package:verker_prof/repositories/chatRepo.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:verker_prof/screens/login_screens/sections.dart/login.dart';
-import 'package:verker_prof/screens/register_screen/register_screen.dart';
+import 'package:verker_prof/views/login_view/login_view.dart';
+import 'package:verker_prof/views/register_view/register_view.dart';
 import 'package:verker_prof/wrapper.dart';
 
 void main() async {
@@ -71,8 +71,8 @@ class App extends StatelessWidget {
             ),
             routes: {
               '/': (context) => Wrapper(),
-              RegisterScreen.name: (context) => RegisterScreen(),
-              LoginScreen.name: (context) => LoginScreen(),
+              RegisterView.name: (context) => RegisterView(),
+              LoginView.name: (context) => LoginView(),
             },
             title: 'Verker',
             theme: ThemeData(

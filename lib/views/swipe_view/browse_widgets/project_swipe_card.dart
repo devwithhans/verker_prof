@@ -4,10 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/projects_bloc/projects_cubit.dart';
 import 'package:verker_prof/blocs/swipe_bloc/swipe_bloc.dart';
 import 'package:verker_prof/models/project.dart';
-
-import 'package:verker_prof/screens/project_details_screen/project_details_screen.dart';
 import 'package:verker_prof/services/variables.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
+import 'package:verker_prof/views/project_details_view/project_details_screen.dart';
 
 class ProjectSwipeCard extends StatefulWidget {
   final ProjectModel project;
@@ -163,7 +162,7 @@ class _ProjectSwipeCardState extends State<ProjectSwipeCard> {
                         value: context.read<SwipeBloc>(),
                         child: BlocProvider.value(
                           value: context.read<ProjectsBloc>(),
-                          child: ProjectDetails(
+                          child: ProjectDetailsView(
                             project: widget.project,
                           ),
                         ),

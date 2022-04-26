@@ -4,10 +4,10 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_event.dart';
-import 'package:verker_prof/screens/home_screen/home_screen.dart';
-import 'package:verker_prof/screens/projects_screen/projects_navigation.dart';
-import 'package:verker_prof/screens/swipe_screen/swipe_screen.dart';
 import 'package:verker_prof/theme/fonts/icons.dart';
+import 'package:verker_prof/views/home_view/home_view.dart';
+import 'package:verker_prof/views/projects_view/projects_view.dart';
+import 'package:verker_prof/views/swipe_view/browse_view.dart';
 import 'package:verker_prof/widgets/buttons.dart';
 
 import 'package:verker_prof/widgets/components.dart';
@@ -16,9 +16,9 @@ class NavScreenDeligator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _widgetOptions = <Widget>[
-      HomeScreen(),
-      BrowseProjects(),
-      ProjectTab(),
+      HomeView(),
+      BrowseProjectsView(),
+      ProjectsView(),
       Center(
         child: StandardButton(
           onPressed: () {

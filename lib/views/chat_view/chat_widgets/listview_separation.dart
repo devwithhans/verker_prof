@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
-import 'package:verker_prof/screens/chat_screen/chat_screen.dart';
-import 'package:verker_prof/screens/chat_screen/sections/date_divider.dart';
-import 'package:verker_prof/screens/chat_screen/sections/message_buble.dart';
+import 'package:verker_prof/views/chat_view/chat_view.dart';
+import 'package:verker_prof/views/chat_view/chat_widgets/date_divider.dart';
+import 'package:verker_prof/views/chat_view/chat_widgets/message_buble.dart';
 
 class MessageListViewSeparated extends StatelessWidget {
   const MessageListViewSeparated({

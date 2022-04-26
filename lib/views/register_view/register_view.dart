@@ -2,21 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
 import 'package:verker_prof/blocs/register_bloc/register_bloc.dart';
-import 'package:verker_prof/screens/register_screen/sections/navigation_buttons.dart';
-import 'package:verker_prof/screens/register_screen/subscreens/formscreen_one.dart';
-import 'package:verker_prof/screens/register_screen/subscreens/formscreen_two.dart';
 import 'package:verker_prof/theme/components/step_form.dart';
+import 'package:verker_prof/views/register_view/subviews/formscreen_one.dart';
+import 'package:verker_prof/views/register_view/subviews/formscreen_two.dart';
 
-class RegisterScreen extends StatefulWidget {
-  RegisterScreen({Key? key}) : super(key: key);
+class RegisterView extends StatefulWidget {
+  RegisterView({Key? key}) : super(key: key);
 
   static String name = "RegisterScreen";
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<RegisterView> createState() => _RegisterViewState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterViewState extends State<RegisterView> {
   final _formKey = GlobalKey<FormState>();
   int currentStep = 0;
 

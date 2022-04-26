@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/company_register_bloc/company_register_bloc.dart';
 import 'package:verker_prof/repositories/authRepo.dart';
-import 'package:verker_prof/screens/company_registration_screen/subscreens/formscreen_one.dart';
-import 'package:verker_prof/screens/company_registration_screen/subscreens/selectBusinessType.dart';
 import 'package:verker_prof/theme/components/step_form.dart';
-import 'package:verker_prof/views/register_company_view/subscreens/initial_company_registration_view.dart';
+import 'package:verker_prof/views/register_company_view/subviews/company_formfields.dart';
+import 'package:verker_prof/views/register_company_view/subviews/initial_company_registration.dart';
+import 'package:verker_prof/views/register_company_view/subviews/select_business_type.dart';
 
 class CompanyRegistrationView extends StatefulWidget {
   CompanyRegistrationView({Key? key}) : super(key: key);
@@ -53,8 +53,8 @@ class _CompanyRegistrationViewState extends State<CompanyRegistrationView> {
             },
             formKey: _formKey,
             steps: [
-              InitialCompanyRegistrationView(),
-              CompanyFormScreenTwo(),
+              InitialCompanyRegistration(),
+              CompanyFormFields(),
               SelectBusinessType(),
             ],
           );

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/models/outreach.dart';
 import 'package:verker_prof/models/project.dart';
-import 'package:verker_prof/screens/chat_screen/chat_screen.dart';
 import 'package:verker_prof/services/variables.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
+import 'package:verker_prof/views/chat_view/chat_view.dart';
 import 'package:verker_prof/widgets/components.dart';
 
 class ProjectTile extends StatelessWidget {

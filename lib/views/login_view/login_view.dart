@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
-import 'package:verker_prof/screens/register_screen/register_screen.dart';
 
 import 'package:verker_prof/theme/components/standard_input_form.dart';
 import 'package:verker_prof/widgets/buttons.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginView extends StatefulWidget {
   static String name = '/loginscreen';
 
   @override
-  State<LoginScreen> createState() => _RegisterScreenState();
+  State<LoginView> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<LoginView> {
   bool termsAccept = false; // Cannot continue without this true
   final _formKey = GlobalKey<FormState>(); // To validate the userinput
   String _email = '';
@@ -86,14 +85,13 @@ class _RegisterScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-                    LinkTekst(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        Navigator.pushNamed(context, RegisterScreen.name);
-                      },
-                      beforeText: 'Har du ikke en konto? ',
-                      linkText: 'Registrer her',
-                    ),
+                    // LinkTekst(
+                    //   onPressed: () {
+                    //     Navigator.pop(context);
+                    //   },
+                    //   beforeText: 'Har du ikke en konto? ',
+                    //   linkText: 'Registrer her',
+                    // ),
                     const SizedBox(
                       height: 30,
                     ),
