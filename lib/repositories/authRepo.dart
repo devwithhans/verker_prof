@@ -26,7 +26,7 @@ class AuthenticationRepository {
 
   // We create the stream for connecting to the BLoC's
   Stream<AuthState> get status async* {
-    _controller.add(LoadingAuthState());
+    yield LoadingAuthState();
     String? jwt = await storage.read(key: 'jwt');
     // await storage.delete(key: 'jwt');
     if (jwt != null) {

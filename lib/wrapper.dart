@@ -32,7 +32,7 @@ class Wrapper extends StatelessWidget {
           return CompanyRegistrationView();
         }
         return const Scaffold(
-          body: LoadingIndicator(),
+          body: Center(child: LoadingIndicator()),
         );
       },
     );
