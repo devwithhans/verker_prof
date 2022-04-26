@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/company_register_bloc/company_register_bloc.dart';
-import 'package:verker_prof/models/address.dart';
 import 'package:verker_prof/theme/components/standard_input_form.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
-import 'package:verker_prof/widgets/input.dart';
 
 class CompanyFormScreenTwo extends StatelessWidget {
   CompanyFormScreenTwo({Key? key}) : super(key: key);
@@ -17,7 +15,7 @@ class CompanyFormScreenTwo extends StatelessWidget {
     return BlocBuilder<CompanyRegisterBloc, CompanyRegisterState>(
       builder: (context, state) {
         if (state.cvrSearchStatus == CvrSearchStatus.loading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
@@ -108,9 +106,7 @@ class CompanyFormScreenTwo extends StatelessWidget {
                 hintText: 'f.eks. 2009',
               ),
               StandardInputForm(
-                initialValue: state.companyModel.employees == null
-                    ? ''
-                    : state.companyModel.employees.toString(),
+                initialValue: state.companyModel.employees ?? '',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Feltet må ikke være tomt';
@@ -122,7 +118,7 @@ class CompanyFormScreenTwo extends StatelessWidget {
                 textCapitalization: TextCapitalization.sentences,
                 onChanged: (v) {
                   context.read<CompanyRegisterBloc>().add(
-                        AddValues(established: v),
+                        AddValues(employees: v),
                       );
                 },
                 title: 'Antal medarbejdere.',

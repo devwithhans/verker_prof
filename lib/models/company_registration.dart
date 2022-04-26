@@ -1,12 +1,10 @@
-import 'package:verker_prof/models/address.dart';
-
 class CompanyRegistrationModel {
   final String? name;
   final String? description;
   final String? email;
   final String? cvr;
   final String? phone;
-  final int? employees;
+  final String? employees;
   final String? type;
   final String? established;
   final String? address;
@@ -40,7 +38,7 @@ class CompanyRegistrationModel {
     String? address,
     String? zip,
     List<double>? coordinates,
-    int? employees,
+    String? employees,
     String? established,
   }) {
     return CompanyRegistrationModel(

@@ -5,8 +5,8 @@ import 'package:verker_prof/theme/components/standard_input_form.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
 import 'package:verker_prof/widgets/input.dart';
 
-class StartScreen extends StatelessWidget {
-  StartScreen({Key? key}) : super(key: key);
+class InitialCompanyRegistrationView extends StatelessWidget {
+  InitialCompanyRegistrationView({Key? key}) : super(key: key);
 
   bool showComplianceError = false;
 

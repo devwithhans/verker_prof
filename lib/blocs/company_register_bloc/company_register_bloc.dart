@@ -1,10 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:graphql/client.dart';
-
-import 'package:verker_prof/models/address.dart';
 import 'package:verker_prof/models/company_registration.dart';
+import 'package:verker_prof/repositories/authRepo.dart';
 import 'package:verker_prof/services/graphql/GrapgQLService.dart';
 import 'package:verker_prof/services/graphql/queries/create_company.dart';
 import 'package:verker_prof/services/network_helper.dart';
@@ -20,7 +18,9 @@ class CompanyRegisterBloc
     extends Bloc<CompanyRegisterEvent, CompanyRegisterState> {
   // We uses the authenticationRepository to communicate with the database.
 
-  CompanyRegisterBloc() : super(CompanyRegisterState()) {
+  AuthenticationRepository authRepo;
+
+  CompanyRegisterBloc(this.authRepo) : super(CompanyRegisterState()) {
     on<AddValues>(_addValues);
     on<SearchCompanyByName>(_searchCompanyByName);
     on<RegisterCompany>(_registerCompany);
@@ -68,20 +68,20 @@ class CompanyRegisterBloc
         "email": companyData.email,
         "cvr": companyData.cvr,
         "type": companyData.type,
-        "employees": companyData.employees,
+        "employees": int.parse(companyData.employees!),
         "established": companyData.established,
         "logo": companyData.logo,
         "address": companyData.address,
         "zip": companyData.zip,
       });
-      print(result.exception);
     } catch (e) {
       print('e');
 
       return emit(state.copyWith(registerStatus: CompanyRegisterStatus.failed));
     }
-
-    return emit(state.copyWith(registerStatus: CompanyRegisterStatus.succes));
+    print('refreshing');
+    authRepo.refreshJWT();
+    emit(state.copyWith(registerStatus: CompanyRegisterStatus.succes));
   }
 
   void _addValues(AddValues event, Emitter emit) {

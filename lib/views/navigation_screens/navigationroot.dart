@@ -23,6 +23,8 @@ class NavScreenDeligator extends StatelessWidget {
         child: StandardButton(
           onPressed: () {
             BlocProvider.of<AuthBloc>(context).add(LoggedOut());
+            // RepositoryProvider.of<AuthenticationRepository>(context)
+            //     .refreshJWT();
           },
           text: "SignOut",
         ),

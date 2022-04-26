@@ -31,7 +31,7 @@ class AddValues extends CompanyRegisterEvent {
   final String? email;
   final String? cvr;
   final String? phone;
-  final int? employees;
+  final String? employees;
   final String? established;
   final String? address;
   final String? zip;

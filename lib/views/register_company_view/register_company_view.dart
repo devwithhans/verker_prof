@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/company_register_bloc/company_register_bloc.dart';
-import 'package:verker_prof/blocs/register_bloc/register_bloc.dart';
+import 'package:verker_prof/repositories/authRepo.dart';
 import 'package:verker_prof/screens/company_registration_screen/subscreens/formscreen_one.dart';
-import 'package:verker_prof/screens/company_registration_screen/subscreens/register_step_one.dart';
 import 'package:verker_prof/screens/company_registration_screen/subscreens/selectBusinessType.dart';
-import 'package:verker_prof/screens/company_registration_screen/subscreens/startScreen.dart';
 import 'package:verker_prof/theme/components/step_form.dart';
+import 'package:verker_prof/views/register_company_view/subscreens/initial_company_registration_view.dart';
 
-class CompanyRegistrationScreen extends StatefulWidget {
-  CompanyRegistrationScreen({Key? key}) : super(key: key);
+class CompanyRegistrationView extends StatefulWidget {
+  CompanyRegistrationView({Key? key}) : super(key: key);
 
   static String name = "RegisterScreen";
 
   @override
-  State<CompanyRegistrationScreen> createState() =>
-      _CompanyRegistrationScreenState();
+  State<CompanyRegistrationView> createState() =>
+      _CompanyRegistrationViewState();
 }
 
-class _CompanyRegistrationScreenState extends State<CompanyRegistrationScreen> {
+class _CompanyRegistrationViewState extends State<CompanyRegistrationView> {
   final _formKey = GlobalKey<FormState>();
   int currentStep = 0;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CompanyRegisterBloc(),
+      create: (context) =>
+          CompanyRegisterBloc(context.read<AuthenticationRepository>()),
       child: BlocBuilder<CompanyRegisterBloc, CompanyRegisterState>(
         builder: (context, state) {
-          if (state.registerStatus == RegisterStatus.loading) {
-            return Center(child: CircularProgressIndicator());
+          if (state.registerStatus == CompanyRegisterStatus.loading) {
+            return const Center(child: CircularProgressIndicator());
           }
-          if (state.registerStatus == RegisterStatus.succes) {
+          if (state.registerStatus == CompanyRegisterStatus.succes) {
             Navigator.pop(context);
           }
           return StepForm(
@@ -44,11 +44,6 @@ class _CompanyRegistrationScreenState extends State<CompanyRegistrationScreen> {
             },
             onNext: () {
               if (_formKey.currentState!.validate()) {
-                // if (currentStep == 0) {
-                //   context
-                //       .read<CompanyRegisterBloc>()
-                //       .add(SearchCompanyByName());
-                // }
                 currentStep = currentStep + 1;
                 setState(() {});
               }
@@ -58,7 +53,7 @@ class _CompanyRegistrationScreenState extends State<CompanyRegistrationScreen> {
             },
             formKey: _formKey,
             steps: [
-              StartScreen(),
+              InitialCompanyRegistrationView(),
               CompanyFormScreenTwo(),
               SelectBusinessType(),
             ],

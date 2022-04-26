@@ -36,3 +36,5 @@ class NoCompany extends AuthState {
 
   NoCompany({required this.user}) : super();
 }
+
+class AuthLoading extends AuthState {}

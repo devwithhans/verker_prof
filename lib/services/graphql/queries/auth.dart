@@ -22,6 +22,29 @@ query SigninUser(\$email: String!, \$password: String!) {
 }
  """;
 
+const String refreshJWTString = """
+query  {
+  refreshJWT{
+    jwt
+    user {
+      _id
+      firstName
+      lastName
+      profileImage
+      deviceToken
+      address {
+        address
+        zip
+      }
+      email
+      phone
+      streamToken
+      companyId
+    }
+  }
+}
+ """;
+
 String getUser = """
 query {
   getUser(email:"s"){
