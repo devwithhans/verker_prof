@@ -4,6 +4,7 @@ import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
 import 'package:verker_prof/models/outreach.dart';
 import 'package:verker_prof/services/variables.dart';
+import 'package:verker_prof/theme/widgets/loading_indicator.dart';
 import 'package:verker_prof/views/chat_view/chat_widgets/listview_separation.dart';
 import 'package:verker_prof/views/chat_view/chat_widgets/send_form.dart';
 import 'package:verker_prof/views/project_details_view/project_details_screen.dart';
@@ -122,7 +123,7 @@ class _ChannelPageState extends State<ChannelPage> {
                       child: SizedBox(
                         height: 100,
                         width: 100,
-                        child: CircularProgressIndicator(),
+                        child: LoadingIndicator(),
                       ),
                     ),
                     messageListBuilder: (

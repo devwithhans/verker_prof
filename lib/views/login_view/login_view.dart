@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
 import 'package:verker_prof/theme/widgets/buttons.dart';
+import 'package:verker_prof/theme/widgets/loading_indicator.dart';
 import 'package:verker_prof/theme/widgets/standard_input_form.dart';
 
 class LoginView extends StatefulWidget {
@@ -55,7 +56,7 @@ class _RegisterScreenState extends State<LoginView> {
                           child: BlocBuilder<LoginBloc, LoginState>(
                               builder: (context, state) {
                             if (state is Loading) {
-                              CircularProgressIndicator();
+                              LoadingIndicator();
                             }
                             if (state is Succes) {
                               context.read<LoginBloc>().emit(LoginInitial());

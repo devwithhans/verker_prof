@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
 import 'package:verker_prof/theme/widgets/components.dart';
+import 'package:verker_prof/theme/widgets/loading_indicator.dart';
 import 'package:verker_prof/views/navigation_root/navigationroot.dart';
 import 'package:verker_prof/views/register_company_view/register_company_view.dart';
 import 'package:verker_prof/views/welcome_view/welcome_view.dart';
@@ -31,7 +32,7 @@ class Wrapper extends StatelessWidget {
           return CompanyRegistrationView();
         }
         return const Scaffold(
-          body: Center(),
+          body: LoadingIndicator(),
         );
       },
     );

@@ -26,6 +26,7 @@ class AuthenticationRepository {
 
   // We create the stream for connecting to the BLoC's
   Stream<AuthState> get status async* {
+    _controller.add(LoadingAuthState());
     String? jwt = await storage.read(key: 'jwt');
     // await storage.delete(key: 'jwt');
     if (jwt != null) {
@@ -58,6 +59,7 @@ class AuthenticationRepository {
     required String email,
     required String password,
   }) async {
+    _controller.add(LoadingAuthState());
     QueryResult result = await _graphQLService.performQuery(signInUser,
         variables: {"email": email, "password": password});
 

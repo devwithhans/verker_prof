@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
 import 'package:verker_prof/blocs/register_bloc/register_bloc.dart';
+import 'package:verker_prof/theme/widgets/loading_indicator.dart';
 import 'package:verker_prof/theme/widgets/step_form.dart';
 import 'package:verker_prof/views/register_view/subviews/formscreen_one.dart';
 import 'package:verker_prof/views/register_view/subviews/formscreen_two.dart';
@@ -26,7 +27,7 @@ class _RegisterViewState extends State<RegisterView> {
       child: BlocBuilder<RegisterBloc, RegisterState>(
         builder: (context, state) {
           if (state.registerStatus == RegisterStatus.loading) {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: LoadingIndicator());
           }
           if (state.registerStatus == RegisterStatus.succes) {
             print(state.registrationModel.email!.toLowerCase());

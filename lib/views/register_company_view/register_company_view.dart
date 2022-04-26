@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/company_register_bloc/company_register_bloc.dart';
 import 'package:verker_prof/repositories/authRepo.dart';
+import 'package:verker_prof/theme/widgets/loading_indicator.dart';
 import 'package:verker_prof/theme/widgets/step_form.dart';
 
 import 'package:verker_prof/views/register_company_view/subviews/company_formfields.dart';
@@ -30,7 +31,7 @@ class _CompanyRegistrationViewState extends State<CompanyRegistrationView> {
       child: BlocBuilder<CompanyRegisterBloc, CompanyRegisterState>(
         builder: (context, state) {
           if (state.registerStatus == CompanyRegisterStatus.loading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: LoadingIndicator());
           }
           if (state.registerStatus == CompanyRegisterStatus.succes) {
             Navigator.pop(context);

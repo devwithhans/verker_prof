@@ -5,6 +5,7 @@ import 'package:verker_prof/blocs/projects_bloc/projects_event.dart';
 import 'package:verker_prof/models/outreach.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
 import 'package:verker_prof/theme/widgets/components.dart';
+import 'package:verker_prof/theme/widgets/loading_indicator.dart';
 import 'package:verker_prof/views/projects_view/projects_widgets/project_tile.dart';
 
 class ProjectsView extends StatelessWidget {
@@ -32,7 +33,7 @@ class ProjectsView extends StatelessWidget {
             return CenterText('CenterText');
           }
           return const Center(
-            child: CircularProgressIndicator(),
+            child: LoadingIndicator(),
           );
         },
       ),
