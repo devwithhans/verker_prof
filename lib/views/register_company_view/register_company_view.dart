@@ -34,7 +34,9 @@ class _CompanyRegistrationViewState extends State<CompanyRegistrationView> {
             return const Center(child: LoadingIndicator());
           }
           if (state.registerStatus == CompanyRegisterStatus.succes) {
-            Navigator.pop(context);
+            myCallback(() {
+              Navigator.pop(context);
+            });
           }
           return StepForm(
             title: 'Opret virksomhed.',
@@ -63,5 +65,11 @@ class _CompanyRegistrationViewState extends State<CompanyRegistrationView> {
         },
       ),
     );
+  }
+
+  void myCallback(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
   }
 }

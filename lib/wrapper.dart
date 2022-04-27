@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
+import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
+import 'package:verker_prof/repositories/authRepo.dart';
 import 'package:verker_prof/theme/widgets/components.dart';
 import 'package:verker_prof/theme/widgets/loading_indicator.dart';
 import 'package:verker_prof/views/navigation_root/navigationroot.dart';
@@ -14,12 +16,13 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        print(state);
+        if (state is AuthLoading) {
+          Center(child: LoadingIndicator());
+        }
         if (state is UnAuthorised) {
           return WelcomeView();
         }
         if (state is Authorised) {
-          print(state.user.companyId);
           return NavScreenDeligator();
         }
         if (state is ErrorAccured) {

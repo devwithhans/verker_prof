@@ -22,66 +22,63 @@ class _RegisterScreenState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LoginBloc>(
-      create: (BuildContext context) => LoginBloc(
-        authenticationRepository: context.read<AuthenticationRepository>(),
-      ),
-      child: Scaffold(
-        resizeToAvoidBottomInset:
-            false, // Wont move background if the keyboard is active
-        appBar: AppBar(),
-        body: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Log Ind.',
-                        style: kLargeBold,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(height: 20),
-                      _nameAndEmailTab()
-                    ],
-                  ),
-                  BlocBuilder<LoginBloc, LoginState>(
-                    builder: (context, state) {
-                      if (state is Loading) {
-                        CircularProgressIndicator();
-                      }
-                      if (state is Succes) {
+    return Scaffold(
+      resizeToAvoidBottomInset:
+          false, // Wont move background if the keyboard is active
+      appBar: AppBar(),
+      body: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Log Ind.',
+                      style: kLargeBold,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(height: 20),
+                    _nameAndEmailTab()
+                  ],
+                ),
+                BlocBuilder<LoginBloc, LoginState>(
+                  builder: (context, state) {
+                    if (state is Loading) {
+                      CircularProgressIndicator();
+                    }
+                    if (state is Succes) {
+                      myCallback(() {
                         Navigator.pop(context);
-                      }
+                      });
+                    }
 
-                      return StandardButton(
-                        textColor: Colors.white,
-                        backgroundColor: Colors.black,
-                        text: 'Log Ind',
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            context.read<LoginBloc>().add(
-                                  Login(
-                                    email: _email.toLowerCase(),
-                                    password: _password,
-                                  ),
-                                );
-                          }
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            )),
-      ),
+                    return StandardButton(
+                      textColor: Colors.white,
+                      backgroundColor: Colors.black,
+                      text: 'Log Ind',
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          context.read<LoginBloc>().add(
+                                Login(
+                                  email: _email.toLowerCase(),
+                                  password: _password,
+                                ),
+                              );
+                        }
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+          )),
     );
   }
 
@@ -137,5 +134,11 @@ class _RegisterScreenState extends State<LoginView> {
         );
       },
     );
+  }
+
+  void myCallback(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
   }
 }

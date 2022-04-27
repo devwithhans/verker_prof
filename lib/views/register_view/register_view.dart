@@ -30,13 +30,14 @@ class _RegisterViewState extends State<RegisterView> {
             return Center(child: LoadingIndicator());
           }
           if (state.registerStatus == RegisterStatus.succes) {
-            print(state.registrationModel.email!.toLowerCase());
-            print(state.registrationModel.password!);
             context.read<LoginBloc>().add(Login(
                   email: state.registrationModel.email!.toLowerCase(),
                   password: state.registrationModel.password!,
                 ));
-            Navigator.pop(context);
+            myCallback(() {
+              Navigator.pop(context);
+            });
+            // Navigator.pop(context);
           }
           return StepForm(
             title: 'Registrer bruger',
@@ -65,5 +66,11 @@ class _RegisterViewState extends State<RegisterView> {
         },
       ),
     );
+  }
+
+  void myCallback(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
   }
 }
