@@ -8,8 +8,8 @@ import 'package:verker_prof/blocs/projects_bloc/projects_event.dart';
 import 'package:verker_prof/repositories/authRepo.dart';
 import 'package:verker_prof/repositories/chatRepo.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:verker_prof/screens/login_screens/sections.dart/login.dart';
-import 'package:verker_prof/screens/login_screens/sections.dart/register.dart';
+import 'package:verker_prof/views/login_view/login_view.dart';
+import 'package:verker_prof/views/register_view/register_view.dart';
 import 'package:verker_prof/wrapper.dart';
 
 void main() async {
@@ -23,7 +23,7 @@ class App extends StatelessWidget {
   final _streamChatClient = StreamChatClient(
     'cm6ynpu8m6f9',
     logLevel: Level.OFF,
-  ); // We initialise the streamchat client 1$
+  ); // We initialise the streamchat client
 
   App({Key? key}) : super(key: key);
 
@@ -39,14 +39,14 @@ class App extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<AuthBloc>(
-            create: (BuildContext context) => AuthBloc(
+          BlocProvider<LoginBloc>(
+            create: (BuildContext context) => LoginBloc(
               authenticationRepository:
                   context.read<AuthenticationRepository>(),
             ),
           ),
-          BlocProvider<LoginBloc>(
-            create: (BuildContext context) => LoginBloc(
+          BlocProvider<AuthBloc>(
+            create: (BuildContext context) => AuthBloc(
               authenticationRepository:
                   context.read<AuthenticationRepository>(),
             ),
@@ -56,26 +56,36 @@ class App extends StatelessWidget {
                 ProjectsBloc(_streamChatClient)..add(FetchMyProjects()),
           )
         ],
-        child: MaterialApp(
-          localizationsDelegates: GlobalMaterialLocalizations.delegates,
-          supportedLocales: const [Locale('da')],
-          builder: (context, child) => StreamChat(
-            child: child,
-            client: _streamChatClient,
-          ),
-          routes: {
-            '/': (context) => Wrapper(),
-            RegisterScreen.name: (context) => RegisterScreen(),
-            LoginScreen.name: (context) => LoginScreen(),
+        child: GestureDetector(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
           },
-          title: 'Verker',
-          theme: ThemeData(
-            appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              iconTheme: IconThemeData(color: Colors.black),
+          child: MaterialApp(
+            localizationsDelegates: GlobalMaterialLocalizations.delegates,
+            supportedLocales: const [Locale('da')],
+            builder: (context, child) => StreamChat(
+              child: child,
+              client: _streamChatClient,
             ),
-            primarySwatch: Colors.blue,
+            routes: {
+              '/': (context) => Wrapper(),
+              RegisterView.name: (context) => RegisterView(),
+              LoginView.name: (context) => LoginView(),
+            },
+            title: 'Verker',
+            theme: ThemeData(
+              sliderTheme: SliderThemeData(
+                trackHeight: 1.5,
+                overlayShape: SliderComponentShape.noOverlay,
+                thumbShape: RoundSliderThumbShape(elevation: 4),
+              ),
+              appBarTheme: const AppBarTheme(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                iconTheme: IconThemeData(color: Colors.black),
+              ),
+              primarySwatch: Colors.blue,
+            ),
           ),
         ),
       ),

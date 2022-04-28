@@ -7,7 +7,7 @@ abstract class AuthState extends Equatable {
   List<Object> get props => [];
 }
 
-class Unknown extends AuthState {}
+class LoadingAuthState extends AuthState {}
 
 class Authorised extends AuthState {
   UserData user;
@@ -23,10 +23,18 @@ class UnAuthorised extends AuthState {
   UnAuthorised({this.unAuthorisedReason = UnAuthorisedReason.unknown});
 }
 
-enum ErrorType { networkError, missingLicence, undefined }
+enum ErrorType { networkError, missingLicence, undefined, notVerker }
 
 class ErrorAccured extends AuthState {
   ErrorType errorType;
 
   ErrorAccured(this.errorType);
 }
+
+class NoCompany extends AuthState {
+  UserData user;
+
+  NoCompany({required this.user}) : super();
+}
+
+class AuthLoading extends AuthState {}

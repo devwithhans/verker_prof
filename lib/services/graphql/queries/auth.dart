@@ -4,13 +4,11 @@ query SigninUser(\$email: String!, \$password: String!) {
     
     jwt
     user {
-      verker
       _id
       firstName
       lastName
       profileImage
       deviceToken
-      verker
       address {
         address
         zip
@@ -18,18 +16,41 @@ query SigninUser(\$email: String!, \$password: String!) {
       email
       phone
       streamToken
+      companyId
     }
     }
+}
+ """;
+
+const String refreshJWTString = """
+query  {
+  refreshJWT{
+    jwt
+    user {
+      _id
+      firstName
+      lastName
+      profileImage
+      deviceToken
+      address {
+        address
+        zip
+      }
+      email
+      phone
+      streamToken
+      companyId
+    }
+  }
 }
  """;
 
 String getUser = """
 query {
   getUser(email:"s"){
-
-    verker
     _id
     firstName
+    companyId
     lastName
     address {
       address

@@ -3,7 +3,8 @@ import 'package:verker_prof/models/address.dart';
 
 class UserData {
   String id;
-  bool verker;
+  String? companyId;
+  // bool verker;
   String firstName;
   String lastName;
   String profileImage;
@@ -13,7 +14,8 @@ class UserData {
   String phone;
 
   UserData({
-    this.verker = false,
+    this.companyId,
+    // this.verker = false,
     this.id = '',
     this.firstName = '',
     this.lastName = '',
@@ -30,7 +32,8 @@ class UserData {
     }
     return UserData(
       id: response['_id'],
-      verker: response['verker'],
+      companyId: response['companyId'],
+      // verker: response['verker'],
       firstName: response['firstName'],
       lastName: response['lastName'],
       profileImage: response['profileImage'],

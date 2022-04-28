@@ -14,7 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc({required authenticationRepository})
       : _authenticationRepository = authenticationRepository,
-        super(Unknown()) {
+        super(LoadingAuthState()) {
     on<LoggedOut>(_onLoggedOut);
     _authenticationStatusSubscription =
         _authenticationRepository.status.listen((status) => emit(status));
