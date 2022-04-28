@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:graphql/client.dart';
 import 'package:verker_prof/models/address.dart';
 import 'package:verker_prof/models/registration.dart';
+import 'package:verker_prof/services/error/errors.dart';
 import 'package:verker_prof/services/graphql/GrapgQLService.dart';
 import 'package:verker_prof/services/graphql/queries/create_user.dart';
 
@@ -26,20 +27,23 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
     RegistrationModel userValues = state.registrationModel;
 
-    try {
-      QueryResult result =
-          await GraphQLService().performMutation(createUser, variables: {
-        "firstName": userValues.firstName,
-        "lastName": userValues.lastName,
-        "phone": userValues.phone,
-        "email": userValues.email,
-        "password": userValues.password,
-      });
-      print(result.exception);
-    } catch (e) {
-      print('e');
-
-      return emit(state.copyWith(registerStatus: RegisterStatus.failed));
+    QueryResult result =
+        await GraphQLService().performMutation(createUser, variables: {
+      "firstName": userValues.firstName,
+      "lastName": userValues.lastName,
+      "phone": userValues.phone,
+      "email": userValues.email,
+      "password": userValues.password,
+    });
+    if (result.hasException) {
+      String errorMessage =
+          ErrorMessage.getErrorMessage(result)!.frontendMessage;
+      return emit(
+        state.copyWith(
+          registerStatus: RegisterStatus.failed,
+          errorMessage: errorMessage,
+        ),
+      );
     }
 
     return emit(state.copyWith(registerStatus: RegisterStatus.succes));

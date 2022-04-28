@@ -25,7 +25,7 @@ class NavScreenDeligator extends StatelessWidget {
             // RepositoryProvider.of<AuthenticationRepository>(context)
             //     .refreshJWT();
           },
-          text: "SignOut",
+          text: "Log Ud",
         ),
       )
     ];

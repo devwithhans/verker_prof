@@ -99,7 +99,6 @@ class FormScreenOne extends StatelessWidget {
               Compliance(
                 validator: (v) {
                   if (v != null && !v) {
-                    print('not validated');
                     return 'Du skal godkende vores vilkår';
                   }
                 },

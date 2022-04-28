@@ -43,8 +43,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(Succes());
       }
     } catch (e) {
-      print(e);
-      emit(EmailFailed(ErrorMessage.getErrorMessage('UNKNOWN')));
+      emit(EmailFailed(ErrorMessage.getErrorMessage('UNKNOWN')!.errorName));
     }
   }
 }

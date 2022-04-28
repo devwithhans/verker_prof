@@ -63,8 +63,6 @@ class AuthenticationRepository {
     QueryResult result = await _graphQLService.performQuery(signInUser,
         variables: {"email": email, "password": password});
 
-    print(result.exception);
-
     if (result.hasException) {
       return ErrorMessage.getErrorMessage(result);
     }
@@ -101,15 +99,11 @@ class AuthenticationRepository {
         } else
           _controller.add(Authorised(user: userData));
       } else {
-        print('c');
         _controller.add(UnAuthorised());
       }
-      print('d');
 
       return user;
     } else {
-      print('a');
-
       _controller.add(UnAuthorised());
       return null;
     }

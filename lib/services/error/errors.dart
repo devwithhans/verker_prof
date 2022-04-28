@@ -23,7 +23,7 @@ class ErrorMessage {
     ),
     'USER_ALREADY_EXISTS': ErrorMessage(
       developerMessage: '',
-      frontendMessage: '',
+      frontendMessage: 'Email is already in use',
       errorName: 'USER_ALREADY_EXISTS',
     ),
     'NO_JWT': ErrorMessage(
@@ -49,7 +49,7 @@ class ErrorMessage {
     ),
   };
 
-  static getErrorMessage(response) {
+  static ErrorMessage? getErrorMessage(response) {
     String errorName = 'UNKNOWN';
     ;
     try {

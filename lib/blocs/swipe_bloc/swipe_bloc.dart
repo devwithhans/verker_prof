@@ -46,6 +46,7 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
 
     List<ProjectModel> projects = [];
     projects.addAll(state.projects);
+    print(state.projects);
 
     QueryResult result;
     try {

@@ -24,7 +24,6 @@ class ProjectsView extends StatelessWidget {
       ),
       body: BlocBuilder<ProjectsBloc, ProjectsState>(
         builder: (context, state) {
-          print('state: ${state == ProjectsStatus.loading}');
           if (state.status == ProjectsStatus.succes) {
             return tabList(state.projects,
                 'Du har endnu ingen færdige projekter', context);

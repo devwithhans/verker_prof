@@ -6,6 +6,7 @@ import 'package:verker_prof/theme/widgets/navigation_buttons.dart';
 class StepForm extends StatelessWidget {
   StepForm({
     Key? key,
+    this.errorMessage,
     required this.title,
     required this.currentStep,
     required this.formKey,
@@ -27,6 +28,7 @@ class StepForm extends StatelessWidget {
   final void Function() onPrevius;
   final void Function() onSubmit;
 
+  final String? errorMessage;
   final String title;
   final String nextText;
   final String startText;
@@ -76,20 +78,29 @@ class StepForm extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: NavigationButtons(
-                startText: 'Fortsæt',
-                atEnd: atEnd,
-                atStart: atStart,
-                submitText: submitText,
-                nextText: nextText,
-                backText: backText,
-                onPrevius: () {
-                  onPrevius();
-                },
-                onNext: () {
-                  onNext();
-                },
-                onSubmit: onSubmit),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  errorMessage ?? '',
+                  style: TextStyle(color: Colors.red),
+                ),
+                NavigationButtons(
+                    startText: 'Fortsæt',
+                    atEnd: atEnd,
+                    atStart: atStart,
+                    submitText: submitText,
+                    nextText: nextText,
+                    backText: backText,
+                    onPrevius: () {
+                      onPrevius();
+                    },
+                    onNext: () {
+                      onNext();
+                    },
+                    onSubmit: onSubmit),
+              ],
+            ),
           ),
         ],
       ),

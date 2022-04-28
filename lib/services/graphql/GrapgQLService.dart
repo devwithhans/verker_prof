@@ -20,8 +20,10 @@ class GraphQLService {
 
   Future<QueryResult> performQuery(String query,
       {Map<String, dynamic>? variables}) async {
-    QueryOptions options =
-        QueryOptions(document: gql(query), variables: variables ??= {});
+    QueryOptions options = QueryOptions(
+        document: gql(query),
+        variables: variables ??= {},
+        fetchPolicy: FetchPolicy.networkOnly);
 
     final result = await _client.query(options);
     return result;

@@ -85,7 +85,6 @@ class _RegisterScreenState extends State<LoginView> {
   Widget _nameAndEmailTab() {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
-        print(state);
         return Column(
           children: [
             StandardInputForm(

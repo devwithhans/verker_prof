@@ -29,6 +29,9 @@ class _RegisterViewState extends State<RegisterView> {
           if (state.registerStatus == RegisterStatus.loading) {
             return Center(child: LoadingIndicator());
           }
+          if (state.errorMessage != null) {
+            print(state.errorMessage);
+          }
           if (state.registerStatus == RegisterStatus.succes) {
             context.read<LoginBloc>().add(Login(
                   email: state.registrationModel.email!.toLowerCase(),
@@ -37,9 +40,9 @@ class _RegisterViewState extends State<RegisterView> {
             myCallback(() {
               Navigator.pop(context);
             });
-            // Navigator.pop(context);
           }
           return StepForm(
+            errorMessage: state.errorMessage,
             title: 'Registrer bruger',
             currentStep: currentStep,
             onPrevius: () {
