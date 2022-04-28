@@ -10,6 +10,7 @@ import 'package:verker_prof/services/variables.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
 import 'package:verker_prof/theme/widgets/buttons.dart';
 import 'package:verker_prof/theme/widgets/components.dart';
+import 'package:verker_prof/theme/widgets/loading_indicator.dart';
 import 'package:verker_prof/views/project_details_view/project_details_widgets/image_inspect.dart';
 import 'package:verker_prof/views/project_details_view/project_details_widgets/send_outreach.dart';
 
@@ -184,10 +185,8 @@ class OutreachButton extends StatelessWidget {
                           projectId: project.id!,
                         );
                       }
-                      return const SizedBox(
-                        height: 50,
-                        width: 50,
-                        child: CircularProgressIndicator(),
+                      return Center(
+                        child: LoadingIndicator(),
                       );
                     },
                   ),

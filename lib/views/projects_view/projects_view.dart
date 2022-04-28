@@ -5,6 +5,7 @@ import 'package:verker_prof/blocs/projects_bloc/projects_event.dart';
 import 'package:verker_prof/models/outreach.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
 import 'package:verker_prof/theme/widgets/components.dart';
+import 'package:verker_prof/theme/widgets/loading_indicator.dart';
 import 'package:verker_prof/views/projects_view/projects_widgets/project_tile.dart';
 
 class ProjectsView extends StatelessWidget {
@@ -23,16 +24,15 @@ class ProjectsView extends StatelessWidget {
       ),
       body: BlocBuilder<ProjectsBloc, ProjectsState>(
         builder: (context, state) {
-          print('state: ${state == ProjectsStatus.loading}');
           if (state.status == ProjectsStatus.succes) {
             return tabList(state.projects,
                 'Du har endnu ingen færdige projekter', context);
           }
           if (state.status == ProjectsStatus.failed) {
-            return CenterText('CenterText');
+            return CenterText('Vi stødte desværre på en fejl');
           }
           return const Center(
-            child: CircularProgressIndicator(),
+            child: LoadingIndicator(),
           );
         },
       ),

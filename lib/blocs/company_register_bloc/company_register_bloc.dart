@@ -28,7 +28,6 @@ class CompanyRegisterBloc
 
   void _searchCompanyByName(SearchCompanyByName event, Emitter emit) async {
     emit(state.copyWith(cvrSearchStatus: CvrSearchStatus.loading));
-    print(state.companyModel.name);
     var data = await NetworkHelper(
             "https://cvrapi.dk/api?country=dk&search=${state.companyModel.name}")
         .getData();
@@ -50,8 +49,6 @@ class CompanyRegisterBloc
         ),
       ));
     }
-
-    print(data);
   }
 
   Future<void> _registerCompany(RegisterCompany event, Emitter emit) async {
@@ -75,11 +72,8 @@ class CompanyRegisterBloc
         "zip": companyData.zip,
       });
     } catch (e) {
-      print('e');
-
       return emit(state.copyWith(registerStatus: CompanyRegisterStatus.failed));
     }
-    print('refreshing');
     authRepo.refreshJWT();
     emit(state.copyWith(registerStatus: CompanyRegisterStatus.succes));
   }
