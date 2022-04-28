@@ -29,6 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  geolocator:
   photo_view: 
   bloc: 
   flutter_bloc: 
