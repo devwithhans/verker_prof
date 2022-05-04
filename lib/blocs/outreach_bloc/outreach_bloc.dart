@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:graphql/client.dart';
 import 'package:verker_prof/blocs/swipe_bloc/swipe_bloc.dart';
 import 'package:verker_prof/services/graphql/GrapgQLService.dart';
 import 'package:verker_prof/services/graphql/queries/outreach.dart';
@@ -15,16 +16,17 @@ class OutreachBloc extends Bloc<OutreachEvent, OutreachState> {
   }
 
   Future<void> _sendOutreach(SendOutreach event, Emitter emit) async {
-    try {
-      await GraphQLService().performMutation(createOutreach, variables: {
-        "initialMessage": event.message,
-        "projectId": event.projectId,
-      });
-      swipeBloc.add(RemoveProject(event.projectId));
-    } catch (e) {
+    QueryResult result =
+        await GraphQLService().performMutation(createOutreach, variables: {
+      "initialMessage": event.message,
+      "projectId": event.projectId,
+    });
+
+    if (result.hasException) {
       return emit(state.copyWith(status: OutreachStatus.failed));
     }
 
     emit(state.copyWith(status: OutreachStatus.succes));
+    swipeBloc.add(RemoveProject(event.projectId));
   }
 }

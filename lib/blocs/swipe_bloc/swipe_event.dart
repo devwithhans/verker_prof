@@ -19,3 +19,5 @@ class RemoveProject extends SwipeEvent {
 
   RemoveProject(this.id);
 }
+
+class GetLocation extends SwipeEvent {}

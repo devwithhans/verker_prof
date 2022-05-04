@@ -44,5 +44,6 @@ class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
       return emit(
           state.copyWith(status: ProjectsStatus.succes, projects: projects));
     }
+    return emit(state.copyWith(status: ProjectsStatus.failed));
   }
 }

@@ -5,6 +5,4 @@ class AuthEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AppStarted extends AuthEvent {}
-
 class LoggedOut extends AuthEvent {}

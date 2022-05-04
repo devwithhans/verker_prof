@@ -1,12 +1,56 @@
 import 'package:flutter/material.dart';
 
-const kTextSmallBold =
-    TextStyle(color: Colors.black, fontWeight: FontWeight.bold);
+//LargeBold
+const kLargeBold = TextStyle(
+  color: Colors.black,
+  fontSize: 30,
+  fontWeight: FontWeight.bold,
+);
+const kLargeBoldWhite = TextStyle(
+  color: Colors.white,
+  fontSize: 30,
+  fontWeight: FontWeight.bold,
+);
 
-const kTextSmallNormal = TextStyle(color: Colors.black);
+//MediumBold
+const kMediumBold = TextStyle(
+  fontSize: 20,
+  color: Colors.black,
+  fontWeight: FontWeight.bold,
+);
+const kMediumBoldWhite = TextStyle(
+  fontSize: 20,
+  color: Colors.black,
+  fontWeight: FontWeight.bold,
+);
 
-const kTextMediumBold =
-    TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20);
+//SmallBold
+const kSmallBold = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.bold,
+);
+const kSmallBoldWhite = TextStyle(
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
+
+//SmallRegular
+const kSmallRegular = TextStyle(
+  color: Colors.black,
+);
+const kSmallWhite = TextStyle(
+  color: Colors.black,
+);
+
+//MediumRegular
+const kMediumRegular = TextStyle(
+  fontSize: 20,
+  color: Colors.black,
+);
+const kMediumRegularWhite = TextStyle(
+  fontSize: 20,
+  color: Colors.black,
+);
 
 const kMessageSideRadiusRight = BorderRadius.only(
   topLeft: Radius.circular(7),
