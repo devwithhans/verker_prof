@@ -30,7 +30,14 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
 
   Future<void> _fetchProjects(FetchProjects event, Emitter emit) async {
     if (event.projectSearchFilter != null) {
-      List<double> position = await _determinePosition();
+      List<double> position = [];
+      try {
+        position = await _determinePosition();
+      } catch (e) {
+        print(e);
+        return emit(state.copyWith(
+            errorText: e.toString(), status: ProjectStatus.failed));
+      }
       emit(
         const SwipeState().copyWith(
           status: ProjectStatus.loading,
@@ -111,7 +118,7 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
       // Permissions are denied forever, handle appropriately.
 
       return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+          'Du har ikke accepteret at dele lokation, og vi kan derfor ikke vise projekter i nærheden af dig.');
     }
 
     // When we reach here, permissions are granted and we can

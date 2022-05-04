@@ -31,23 +31,17 @@ class _RegisterScreenState extends State<LoginView> {
           child: Form(
             key: _formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Log Ind.',
-                      style: kLargeBold,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SizedBox(height: 20),
-                    _nameAndEmailTab()
-                  ],
+                const Text(
+                  'Log Ind.',
+                  style: kLargeBold,
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(height: 20),
+                _nameAndEmailTab(),
                 BlocBuilder<LoginBloc, LoginState>(
                   builder: (context, state) {
                     if (state is Loading) {

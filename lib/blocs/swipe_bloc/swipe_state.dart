@@ -7,12 +7,14 @@ class SwipeState extends Equatable {
   final List<ProjectModel> projects;
   final bool hasReachedMax;
   final int currentIndex;
+  final String? errorText;
 
   final List<double> position;
   final String type;
   final int maxDistance;
 
   const SwipeState({
+    this.errorText,
     this.currentIndex = 0,
     this.maxDistance = 100000,
     this.position = const [],
@@ -23,6 +25,7 @@ class SwipeState extends Equatable {
   });
 
   SwipeState copyWith({
+    String? errorText,
     int? currentIndex,
     ProjectStatus? status,
     List<ProjectModel>? projects,
@@ -32,6 +35,7 @@ class SwipeState extends Equatable {
     int? maxDistance,
   }) {
     return SwipeState(
+      errorText: errorText ?? this.errorText,
       currentIndex: currentIndex ?? this.currentIndex,
       maxDistance: maxDistance ?? this.maxDistance,
       type: type ?? this.type,

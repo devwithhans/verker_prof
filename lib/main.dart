@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
@@ -11,10 +12,18 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:verker_prof/views/login_view/login_view.dart';
 import 'package:verker_prof/views/register_view/register_view.dart';
 import 'package:verker_prof/wrapper.dart';
+import 'firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(App());
 }
+// void main() async {
+//   runApp(App());
+// }
 
 /// App is the topwidget responisble for initializing global BLoC, repositories and,
 /// other dependisies.
