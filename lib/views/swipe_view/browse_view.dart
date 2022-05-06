@@ -13,28 +13,16 @@ class BrowseProjectsView extends StatelessWidget {
   Widget build(BuildContext context) {
     var user = BlocProvider.of<AuthBloc>(context).state.user;
 
-    return BlocProvider<SwipeBloc>(
-      create: (context) => SwipeBloc()
-        ..add(
-          FetchProjects(
-            projectSearchFilter: ProjectSearchFilter(
-              position: const [55.617616, 11.641377],
-              type: 'Tømrer',
-              maxDistance: 500000,
-            ),
+    return Scaffold(
+        body: SafeArea(
+      child: Column(
+        children: const [
+          BrowseHeader(),
+          Expanded(
+            child: SwipeSection(),
           ),
-        ),
-      child: Scaffold(
-          body: SafeArea(
-        child: Column(
-          children: const [
-            BrowseHeader(),
-            Expanded(
-              child: SwipeSection(),
-            ),
-          ],
-        ),
-      )),
-    );
+        ],
+      ),
+    ));
   }
 }

@@ -6,6 +6,8 @@ import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
 import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
 import 'package:verker_prof/blocs/projects_bloc/projects_cubit.dart';
 import 'package:verker_prof/blocs/projects_bloc/projects_event.dart';
+import 'package:verker_prof/blocs/swipe_bloc/swipe_bloc.dart';
+import 'package:verker_prof/models/filter.dart';
 import 'package:verker_prof/repositories/authRepo.dart';
 import 'package:verker_prof/repositories/chatRepo.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -21,12 +23,6 @@ void main() async {
   );
   runApp(App());
 }
-// void main() async {
-//   runApp(App());
-// }
-
-/// App is the topwidget responisble for initializing global BLoC, repositories and,
-/// other dependisies.
 
 class App extends StatelessWidget {
   final _streamChatClient = StreamChatClient(
@@ -48,6 +44,15 @@ class App extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider<SwipeBloc>(
+              create: (context) => SwipeBloc()
+                ..add(FetchProjects(
+                  projectSearchFilter: ProjectSearchFilter(
+                    position: const [55.617616, 11.641377],
+                    type: 'Tømrer',
+                    maxDistance: 500000,
+                  ),
+                ))),
           BlocProvider<LoginBloc>(
             create: (BuildContext context) => LoginBloc(
               authenticationRepository:

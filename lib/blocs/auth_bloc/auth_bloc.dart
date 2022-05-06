@@ -7,6 +7,8 @@ import 'package:verker_prof/repositories/authRepo.dart';
 
 part 'auth_state.dart';
 
+// The authbloc wraps the login of all authentication logic. We use the AuthenticationRepository to do all the logic
+
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthenticationRepository _authenticationRepository;
 

@@ -52,10 +52,11 @@ class _NavScreenState extends State<NavScreen> {
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(index: _currentIndex, children: widget.screens),
+      body: widget.screens[_currentIndex],
+
+      // IndexedStack(index: _currentIndex, children: widget.screens),
 
       // _widgetOptions.elementAt(_currentIndex),
       bottomNavigationBar: Container(
