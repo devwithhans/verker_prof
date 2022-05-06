@@ -59,48 +59,45 @@ class StepForm extends StatelessWidget {
               SizedBox(height: 20),
               Form(
                 key: formKey,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 100),
-                  child: Column(
-                    children: steps.map(
-                      (e) {
-                        return Visibility(
-                          maintainState: false,
-                          visible: currentStep == steps.indexOf(e),
-                          child: e,
-                        );
-                      },
-                    ).toList(),
-                  ),
+                child: Column(
+                  children: steps.map(
+                    (e) {
+                      return Visibility(
+                        maintainState: false,
+                        visible: currentStep == steps.indexOf(e),
+                        child: e,
+                      );
+                    },
+                  ).toList(),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      errorMessage ?? '',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    NavigationButtons(
+                        startText: 'Fortsæt',
+                        atEnd: atEnd,
+                        atStart: atStart,
+                        submitText: submitText,
+                        nextText: nextText,
+                        backText: backText,
+                        onPrevius: () {
+                          onPrevius();
+                        },
+                        onNext: () {
+                          onNext();
+                        },
+                        onSubmit: onSubmit),
+                  ],
                 ),
               ),
             ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  errorMessage ?? '',
-                  style: TextStyle(color: Colors.red),
-                ),
-                NavigationButtons(
-                    startText: 'Fortsæt',
-                    atEnd: atEnd,
-                    atStart: atStart,
-                    submitText: submitText,
-                    nextText: nextText,
-                    backText: backText,
-                    onPrevius: () {
-                      onPrevius();
-                    },
-                    onNext: () {
-                      onNext();
-                    },
-                    onSubmit: onSubmit),
-              ],
-            ),
           ),
         ],
       ),

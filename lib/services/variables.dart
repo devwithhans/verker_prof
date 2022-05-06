@@ -1,2 +1,4 @@
-String serverUrl = 'http://8294-80-208-65-182.ngrok.io';
+String serverUrl =
+    'http://verker-backend.eba-kxu33wda.eu-central-1.elasticbeanstalk.com';
+
 String imageUrl = '$serverUrl/file/image/';

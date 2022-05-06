@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/swipe_bloc/swipe_bloc.dart';
 import 'package:verker_prof/models/project.dart';
 import 'package:verker_prof/services/variables.dart';
+import 'package:verker_prof/theme/constants/textstyle.dart';
 import 'package:verker_prof/theme/widgets/components.dart';
 import 'package:verker_prof/views/swipe_view/browse_widgets/browse_end.dart';
 import 'package:verker_prof/views/swipe_view/browse_widgets/project_swipe_card.dart';
@@ -17,10 +18,18 @@ class SwipeSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SwipeBloc, SwipeState>(
       builder: (context, state) {
+        if (state.status == ProjectStatus.failed) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CenterText(
+              'Du har ikke accepteret at dele lokation, og vi kan derfor ikke vise projekter i nærheden af dig.',
+              style: kMediumBold,
+            ),
+          );
+        }
         if (state.projects.isEmpty) {
           return CenterText('Vi kunne ikke finde nogen projekter desværre');
         }
-        if (state.status == ProjectStatus.failed) {}
         if (state.projects.isNotEmpty) {
           return CarouselSlider.builder(
               options: CarouselOptions(

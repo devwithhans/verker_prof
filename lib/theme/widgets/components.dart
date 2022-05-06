@@ -3,12 +3,17 @@ import 'package:verker_prof/theme/constants/textstyle.dart';
 
 class CenterText extends StatelessWidget {
   String text;
+  TextStyle? style;
 
-  CenterText(this.text);
+  CenterText(this.text, {this.style});
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(text),
+      child: Text(
+        text,
+        style: style,
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }

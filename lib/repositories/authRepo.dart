@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql/client.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
-import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
 import 'package:verker_prof/models/user.dart';
 import 'package:verker_prof/repositories/chatRepo.dart';
 import 'package:verker_prof/services/error/errors.dart';
@@ -33,6 +32,7 @@ class AuthenticationRepository {
     if (jwt != null) {
       QueryResult result = await _graphQLService.performQuery(getUser);
       if (result.hasException) {
+        print('has exception');
         yield ErrorAccured(ErrorType.networkError);
       }
       UserData userData = UserData.convert(result.data!['getUser']);
@@ -47,6 +47,7 @@ class AuthenticationRepository {
             _controller.add(UnAuthorised());
           }
         } catch (e) {
+          print(e);
           yield ErrorAccured(ErrorType.missingLicence);
         }
       }

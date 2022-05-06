@@ -27,6 +27,7 @@ class Wrapper extends StatelessWidget {
         }
         if (state is ErrorAccured) {
           // return ErrorScreen();
+          print(state.errorType);
           return Scaffold(
             body: CenterText('Vi stødte på en fejl'),
           );
