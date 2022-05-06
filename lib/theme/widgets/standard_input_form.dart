@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
 
 class StandardInputForm extends StatelessWidget {
-  Function(String) onChanged;
-  String? Function(String? value) validator;
-  void Function()? onTap;
-  Widget? customFormfield;
-  String hintText;
-  String title;
-  bool price;
-  bool number;
-  bool multiline;
-  bool focused;
-  String? initialValue;
-  TextEditingController? controller;
-  TextInputType? keyboardType;
-  bool obscureText;
-  TextCapitalization textCapitalization;
-  String? serverError;
+  final Function(String) onChanged;
+  final String? Function(String? value) validator;
+  final void Function()? onTap;
+  final Widget? customFormfield;
+  final String hintText;
+  final String title;
+  final bool price;
+  final bool number;
+  final bool multiline;
+  final bool focused;
+  final String? initialValue;
+  final TextEditingController? controller;
+  final TextInputType? keyboardType;
+  final bool obscureText;
+  final TextCapitalization textCapitalization;
+  final String? serverError;
 
-  StandardInputForm({
+  const StandardInputForm({
     this.serverError,
     this.textCapitalization = TextCapitalization.sentences,
     this.obscureText = false,
@@ -41,12 +41,22 @@ class StandardInputForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextInputType _textInputType() {
+      return price || number
+          ? const TextInputType.numberWithOptions(decimal: true)
+          : multiline
+              ? TextInputType.multiline
+              : onTap != null
+                  ? TextInputType.none
+                  : TextInputType.text;
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        title.isEmpty ? SizedBox() : SizedBox(height: 20),
+        title.isEmpty ? const SizedBox() : const SizedBox(height: 20),
         title.isEmpty
-            ? SizedBox()
+            ? const SizedBox()
             : Text(
                 title,
                 style: kSmallBold,
@@ -58,13 +68,7 @@ class StandardInputForm extends StatelessWidget {
           onTap: onTap,
           initialValue: initialValue,
           autofocus: focused,
-          keyboardType: keyboardType ??= price || number
-              ? const TextInputType.numberWithOptions(decimal: true)
-              : multiline
-                  ? TextInputType.multiline
-                  : onTap != null
-                      ? TextInputType.none
-                      : TextInputType.text,
+          keyboardType: keyboardType ?? _textInputType(),
           onChanged: onChanged,
           validator: validator,
           showCursor: onTap == null,
@@ -83,7 +87,7 @@ class StandardInputForm extends StatelessWidget {
             hintText: hintText,
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
       ],
     );
   }

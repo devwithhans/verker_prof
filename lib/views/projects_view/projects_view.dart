@@ -29,7 +29,7 @@ class ProjectsView extends StatelessWidget {
                 'Du har endnu ingen færdige projekter', context);
           }
           if (state.status == ProjectsStatus.failed) {
-            return CenterText('Vi stødte desværre på en fejl');
+            return const CenterText('Vi stødte desværre på en fejl');
           }
           return const Center(
             child: LoadingIndicator(),

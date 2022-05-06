@@ -4,11 +4,11 @@ import 'package:verker_prof/blocs/register_bloc/register_bloc.dart';
 import 'package:verker_prof/theme/widgets/standard_input_form.dart';
 
 class FormScreenTwo extends StatelessWidget {
-  FormScreenTwo({Key? key}) : super(key: key);
+  const FormScreenTwo({Key? key}) : super(key: key);
 
-  bool showComplianceError = false;
+  final bool showComplianceError = false;
 
-  bool termsAccept = false;
+  final bool termsAccept = false;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RegisterBloc, RegisterState>(

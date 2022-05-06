@@ -12,12 +12,14 @@ import 'package:verker_prof/views/projects_view/projects_view.dart';
 import 'package:verker_prof/views/swipe_view/browse_view.dart';
 
 class NavScreenDeligator extends StatelessWidget {
+  const NavScreenDeligator({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> _widgetOptions = <Widget>[
-      HomeView(),
-      BrowseProjectsView(),
-      ProjectsView(),
+      const HomeView(),
+      const BrowseProjectsView(),
+      const ProjectsView(),
       Center(
         child: StandardButton(
           onPressed: () {
@@ -36,7 +38,7 @@ class NavScreenDeligator extends StatelessWidget {
 class NavScreen extends StatefulWidget {
   final List<Widget> screens;
 
-  NavScreen(this.screens);
+  const NavScreen(this.screens, {Key? key}) : super(key: key);
 
   @override
   State<NavScreen> createState() => _NavScreenState();

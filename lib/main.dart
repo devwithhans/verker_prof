@@ -8,8 +8,8 @@ import 'package:verker_prof/blocs/projects_bloc/projects_cubit.dart';
 import 'package:verker_prof/blocs/projects_bloc/projects_event.dart';
 import 'package:verker_prof/blocs/swipe_bloc/swipe_bloc.dart';
 import 'package:verker_prof/models/filter.dart';
-import 'package:verker_prof/repositories/authRepo.dart';
-import 'package:verker_prof/repositories/chatRepo.dart';
+import 'package:verker_prof/repositories/auth_repo.dart';
+import 'package:verker_prof/repositories/chat_repo.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:verker_prof/views/login_view/login_view.dart';
 import 'package:verker_prof/views/register_view/register_view.dart';
@@ -82,16 +82,16 @@ class App extends StatelessWidget {
               client: _streamChatClient,
             ),
             routes: {
-              '/': (context) => Wrapper(),
-              RegisterView.name: (context) => RegisterView(),
-              LoginView.name: (context) => LoginView(),
+              '/': (context) => const Wrapper(),
+              RegisterView.name: (context) => const RegisterView(),
+              LoginView.name: (context) => const LoginView(),
             },
             title: 'Verker',
             theme: ThemeData(
               sliderTheme: SliderThemeData(
                 trackHeight: 1.5,
                 overlayShape: SliderComponentShape.noOverlay,
-                thumbShape: RoundSliderThumbShape(elevation: 4),
+                thumbShape: const RoundSliderThumbShape(elevation: 4),
               ),
               appBarTheme: const AppBarTheme(
                 backgroundColor: Colors.transparent,

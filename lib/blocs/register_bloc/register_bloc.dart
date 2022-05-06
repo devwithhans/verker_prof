@@ -4,7 +4,7 @@ import 'package:graphql/client.dart';
 import 'package:verker_prof/models/address.dart';
 import 'package:verker_prof/models/registration.dart';
 import 'package:verker_prof/services/error/errors.dart';
-import 'package:verker_prof/services/graphql/GrapgQLService.dart';
+import 'package:verker_prof/services/graphql/graphql_service.dart';
 import 'package:verker_prof/services/graphql/queries/create_user.dart';
 
 part 'register_event.dart';
@@ -17,7 +17,7 @@ part 'register_state.dart';
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   // We uses the authenticationRepository to communicate with the database.
 
-  RegisterBloc() : super(RegisterState()) {
+  RegisterBloc() : super(const RegisterState()) {
     on<AddValues>(_addValues);
     on<SignUpUser>(_signUpUser);
   }

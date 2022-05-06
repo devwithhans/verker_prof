@@ -6,11 +6,11 @@ import 'package:verker_prof/theme/widgets/loading_indicator.dart';
 import 'package:verker_prof/theme/widgets/standard_input_form.dart';
 
 class CompanyFormFields extends StatelessWidget {
-  CompanyFormFields({Key? key}) : super(key: key);
+  const CompanyFormFields({Key? key}) : super(key: key);
 
-  bool showComplianceError = false;
+  final bool showComplianceError = false;
 
-  bool termsAccept = false;
+  final bool termsAccept = false;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CompanyRegisterBloc, CompanyRegisterState>(

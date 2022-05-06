@@ -1,12 +1,11 @@
 import 'dart:async';
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql/client.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
 import 'package:verker_prof/models/user.dart';
-import 'package:verker_prof/repositories/chatRepo.dart';
+import 'package:verker_prof/repositories/chat_repo.dart';
 import 'package:verker_prof/services/error/errors.dart';
-import 'package:verker_prof/services/graphql/GrapgQLService.dart';
+import 'package:verker_prof/services/graphql/graphql_service.dart';
 import 'package:verker_prof/services/graphql/queries/auth.dart';
 
 // This repo contains all the logic of authentication
@@ -16,7 +15,7 @@ class AuthenticationRepository {
 
   final ChatRepository chatRepository;
 
-  final storage = FlutterSecureStorage();
+  FlutterSecureStorage flutterSecureStorage = const FlutterSecureStorage();
 
   late GraphQLService _graphQLService;
 
@@ -27,12 +26,11 @@ class AuthenticationRepository {
   // We create the stream for connecting to the BLoC's
   Stream<AuthState> get status async* {
     yield LoadingAuthState();
-    String? jwt = await storage.read(key: 'jwt');
+    String? jwt = await flutterSecureStorage.read(key: 'jwt');
     // await storage.delete(key: 'jwt');
     if (jwt != null) {
       QueryResult result = await _graphQLService.performQuery(getUser);
       if (result.hasException) {
-        print('has exception');
         yield ErrorAccured(ErrorType.networkError);
       }
       UserData userData = UserData.convert(result.data!['getUser']);
@@ -47,7 +45,6 @@ class AuthenticationRepository {
             _controller.add(UnAuthorised());
           }
         } catch (e) {
-          print(e);
           yield ErrorAccured(ErrorType.missingLicence);
         }
       }
@@ -69,7 +66,8 @@ class AuthenticationRepository {
     }
 
     if (result.data!['signinUser']['jwt'] != null) {
-      storage.write(key: 'jwt', value: result.data!['signinUser']['jwt']);
+      flutterSecureStorage.write(
+          key: 'jwt', value: result.data!['signinUser']['jwt']);
 
       UserData userData = UserData.convert(result.data!['signinUser']['user']);
       dynamic user = await chatRepository.connectUser(userData);
@@ -77,8 +75,9 @@ class AuthenticationRepository {
       if (user != null) {
         if (userData.companyId == null) {
           _controller.add(NoCompany(user: userData));
-        } else
+        } else {
           _controller.add(Authorised(user: userData));
+        }
       }
     }
   }
@@ -88,8 +87,9 @@ class AuthenticationRepository {
 
     QueryResult result = await _graphQLService.performQuery(refreshJWTString);
     if (result.data!['refreshJWT']['jwt'] != null) {
-      await storage.delete(key: 'jwt');
-      await storage.write(key: 'jwt', value: result.data!['refreshJWT']['jwt']);
+      await flutterSecureStorage.delete(key: 'jwt');
+      await flutterSecureStorage.write(
+          key: 'jwt', value: result.data!['refreshJWT']['jwt']);
 
       UserData userData = UserData.convert(result.data!['refreshJWT']['user']);
       dynamic user = await chatRepository.connectUser(userData);
@@ -97,8 +97,9 @@ class AuthenticationRepository {
       if (user != null) {
         if (userData.companyId == null) {
           _controller.add(NoCompany(user: userData));
-        } else
+        } else {
           _controller.add(Authorised(user: userData));
+        }
       } else {
         _controller.add(UnAuthorised());
       }
@@ -111,7 +112,7 @@ class AuthenticationRepository {
   }
 
   void logOut() async {
-    await storage.delete(key: 'jwt');
+    await flutterSecureStorage.delete(key: 'jwt');
     _controller.add(UnAuthorised());
   }
 

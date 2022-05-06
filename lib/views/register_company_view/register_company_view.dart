@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/company_register_bloc/company_register_bloc.dart';
-import 'package:verker_prof/repositories/authRepo.dart';
+import 'package:verker_prof/repositories/auth_repo.dart';
 import 'package:verker_prof/theme/widgets/loading_indicator.dart';
 import 'package:verker_prof/theme/widgets/step_form.dart';
 
@@ -10,7 +10,7 @@ import 'package:verker_prof/views/register_company_view/subviews/initial_company
 import 'package:verker_prof/views/register_company_view/subviews/select_business_type.dart';
 
 class CompanyRegistrationView extends StatefulWidget {
-  CompanyRegistrationView({Key? key}) : super(key: key);
+  const CompanyRegistrationView({Key? key}) : super(key: key);
 
   static String name = "RegisterScreen";
 
@@ -56,7 +56,7 @@ class _CompanyRegistrationViewState extends State<CompanyRegistrationView> {
               context.read<CompanyRegisterBloc>().add(RegisterCompany());
             },
             formKey: _formKey,
-            steps: [
+            steps: const [
               InitialCompanyRegistration(),
               CompanyFormFields(),
               SelectBusinessType(),

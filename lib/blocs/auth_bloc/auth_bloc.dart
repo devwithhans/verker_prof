@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_event.dart';
 import 'package:verker_prof/models/user.dart';
-import 'package:verker_prof/repositories/authRepo.dart';
+import 'package:verker_prof/repositories/auth_repo.dart';
 
 part 'auth_state.dart';
 
@@ -19,6 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         super(LoadingAuthState()) {
     on<LoggedOut>(_onLoggedOut);
     _authenticationStatusSubscription =
+        // ignore: invalid_use_of_visible_for_testing_member
         _authenticationRepository.status.listen((status) => emit(status));
   }
 

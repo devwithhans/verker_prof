@@ -40,7 +40,7 @@ class _SwipeToConfirmState extends State<SwipeToConfirm> {
 
   double getOpasity() {
     double opacity = ((widget.width - _position) / widget.width);
-    if (opacity != null && opacity >= 0.0 && opacity <= 1.0) {
+    if (opacity >= 0.0 && opacity <= 1.0) {
       return opacity;
     } else if (opacity <= 0.0) {
       return 0;
@@ -78,12 +78,12 @@ class _SwipeToConfirmState extends State<SwipeToConfirm> {
           Container(
             height: widget.height,
             decoration: BoxDecoration(
-              color: Color(0xff40C0A7),
+              color: const Color(0xff40C0A7),
               borderRadius: BorderRadius.circular(100),
             ),
             child: AnimatedOpacity(
               opacity: getOpasity() < 0.6 ? 0 : 1,
-              duration: Duration(milliseconds: 80),
+              duration: const Duration(milliseconds: 80),
               child: Center(
                 child: widget.title,
               ),
@@ -100,7 +100,7 @@ class _SwipeToConfirmState extends State<SwipeToConfirm> {
               sliderReleased(details);
             },
             child: Container(
-              margin: EdgeInsets.all(2.5),
+              margin: const EdgeInsets.all(2.5),
               width: widget.height - 5,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
@@ -109,7 +109,7 @@ class _SwipeToConfirmState extends State<SwipeToConfirm> {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 3,
                     blurRadius: 5,
-                    offset: Offset(0, 3), // changes position of shadow
+                    offset: const Offset(0, 3), // changes position of shadow
                   ),
                 ],
                 // borderRadius: BorderRadius.circular(100),

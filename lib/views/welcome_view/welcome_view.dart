@@ -4,6 +4,8 @@ import 'package:verker_prof/views/login_view/login_view.dart';
 import 'package:verker_prof/views/register_view/register_view.dart';
 
 class WelcomeView extends StatelessWidget {
+  const WelcomeView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +38,7 @@ class WelcomeView extends StatelessWidget {
                       style: TextStyle(color: Colors.white, fontSize: 18),
                       textAlign: TextAlign.center,
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 ContinueButton(
@@ -49,7 +51,7 @@ class WelcomeView extends StatelessWidget {
                   nextIcon: true,
                   text: 'Opret bruger',
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ContinueButton(
                   textColor: Colors.white,
                   backgroundColor: Colors.black,
@@ -62,7 +64,7 @@ class WelcomeView extends StatelessWidget {
                   nextIcon: true,
                   text: 'Log ind',
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 60,
                 ),
               ],

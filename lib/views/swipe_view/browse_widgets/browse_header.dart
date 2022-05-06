@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/swipe_bloc/swipe_bloc.dart';
-import 'package:verker_prof/models/filter.dart';
 import 'package:verker_prof/theme/fonts/icons.dart';
 import 'package:verker_prof/views/swipe_view/browse_widgets/swipe_filter.dart';
 
@@ -12,7 +11,6 @@ class BrowseHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SwipeState state = BlocProvider.of<SwipeBloc>(context).state;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -25,14 +23,14 @@ class BrowseHeader extends StatelessWidget {
           ),
           IconButton(
               onPressed: () async {
-                ProjectSearchFilter? filter = await showModalBottomSheet(
+                showModalBottomSheet(
                     isScrollControlled: true,
                     context: context,
                     backgroundColor: Colors.transparent,
                     builder: (_) {
                       return BlocProvider.value(
                           value: BlocProvider.of<SwipeBloc>(context),
-                          child: Filter());
+                          child: const Filter());
                     });
               },
               icon: const Icon(VerkerIcons.slider))

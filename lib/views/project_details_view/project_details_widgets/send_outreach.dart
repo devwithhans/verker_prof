@@ -8,8 +8,9 @@ import 'package:verker_prof/theme/widgets/buttons.dart';
 import 'package:verker_prof/theme/widgets/standard_input_form.dart';
 
 class SendOutreachSheet extends StatefulWidget {
-  SendOutreachSheet({required this.projectId, Key? key}) : super(key: key);
-  String projectId;
+  const SendOutreachSheet({required this.projectId, Key? key})
+      : super(key: key);
+  final String projectId;
   @override
   State<SendOutreachSheet> createState() => _SendOutreachSheetState();
 }
@@ -28,7 +29,7 @@ class _SendOutreachSheetState extends State<SendOutreachSheet> {
             'Send et overslag',
             style: kMediumBold,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           const Divider(
             height: 0,
           ),
@@ -44,6 +45,7 @@ class _SendOutreachSheetState extends State<SendOutreachSheet> {
               if (_message.isEmpty) {
                 return 'Husk denne besked';
               }
+              return null;
             }),
           ),
           Row(

@@ -4,13 +4,13 @@ import 'package:graphql/client.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/blocs/projects_bloc/projects_event.dart';
 import 'package:verker_prof/models/outreach.dart';
-import 'package:verker_prof/services/graphql/GrapgQLService.dart';
+import 'package:verker_prof/services/graphql/graphql_service.dart';
 import 'package:verker_prof/services/graphql/queries/project.dart';
 
 part 'projects_state.dart';
 
 class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
-  ProjectsBloc(this.streamChatClient) : super(ProjectsState()) {
+  ProjectsBloc(this.streamChatClient) : super(const ProjectsState()) {
     on<FetchMyProjects>(_getMyProjects);
   }
 

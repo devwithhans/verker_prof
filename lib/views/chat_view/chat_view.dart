@@ -78,7 +78,7 @@ class _ChannelPageState extends State<ChannelPage> {
               CircleAvatar(
                   foregroundImage: NetworkImage(
                       imageUrl + widget.outreach.project.images.first)),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,17 +86,17 @@ class _ChannelPageState extends State<ChannelPage> {
                     Text(
                       consumer.user!.name,
                       overflow: TextOverflow.clip,
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                     ),
                     Text(
                       widget.outreach.project.title!,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.black, fontSize: 14),
+                      style: const TextStyle(color: Colors.black, fontSize: 14),
                     )
                   ],
                 ),
               ),
-              SizedBox(width: 15),
+              const SizedBox(width: 15),
             ],
           ),
         ),
@@ -136,7 +136,6 @@ class _ChannelPageState extends State<ChannelPage> {
                           widget: widget);
                     },
                     errorBuilder: (BuildContext context, error) {
-                      print(error.toString());
                       return const Center(
                         child: SizedBox(
                           height: 100,

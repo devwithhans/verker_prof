@@ -8,7 +8,7 @@ import 'package:verker_prof/views/register_view/subviews/formscreen_one.dart';
 import 'package:verker_prof/views/register_view/subviews/formscreen_two.dart';
 
 class RegisterView extends StatefulWidget {
-  RegisterView({Key? key}) : super(key: key);
+  const RegisterView({Key? key}) : super(key: key);
 
   static String name = "RegisterScreen";
 
@@ -27,11 +27,9 @@ class _RegisterViewState extends State<RegisterView> {
       child: BlocBuilder<RegisterBloc, RegisterState>(
         builder: (context, state) {
           if (state.registerStatus == RegisterStatus.loading) {
-            return Center(child: LoadingIndicator());
+            return const Center(child: LoadingIndicator());
           }
-          if (state.errorMessage != null) {
-            print(state.errorMessage);
-          }
+          if (state.errorMessage != null) {}
           if (state.registerStatus == RegisterStatus.succes) {
             context.read<LoginBloc>().add(Login(
                   email: state.registrationModel.email!.toLowerCase(),
@@ -61,7 +59,7 @@ class _RegisterViewState extends State<RegisterView> {
               }
             },
             formKey: _formKey,
-            steps: [
+            steps: const [
               FormScreenOne(),
               FormScreenTwo(),
             ],

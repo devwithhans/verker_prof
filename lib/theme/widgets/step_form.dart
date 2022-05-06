@@ -4,7 +4,7 @@ import 'package:verker_prof/theme/constants/textstyle.dart';
 import 'package:verker_prof/theme/widgets/navigation_buttons.dart';
 
 class StepForm extends StatelessWidget {
-  StepForm({
+  const StepForm({
     Key? key,
     this.errorMessage,
     required this.title,
@@ -21,7 +21,7 @@ class StepForm extends StatelessWidget {
   }) : super(key: key);
 
   final List<Widget> steps;
-  final formKey;
+  final GlobalKey formKey;
   final int currentStep;
 
   final void Function() onNext;
@@ -56,7 +56,7 @@ class StepForm extends StatelessWidget {
                   style: kLargeBold,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Form(
                 key: formKey,
                 child: Column(
@@ -78,7 +78,7 @@ class StepForm extends StatelessWidget {
                   children: [
                     Text(
                       errorMessage ?? '',
-                      style: TextStyle(color: Colors.red),
+                      style: const TextStyle(color: Colors.red),
                     ),
                     NavigationButtons(
                         startText: 'Fortsæt',

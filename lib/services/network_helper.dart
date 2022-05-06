@@ -15,8 +15,6 @@ class NetworkHelper {
       data = response.body;
 
       return jsonDecode(data);
-    } else {
-      print('Noget gik galt i NetworkingHelper');
-    }
+    } else {}
   }
 }

@@ -1,5 +1,3 @@
-import 'package:graphql/client.dart';
-
 class ErrorMessage {
   final String frontendMessage;
   final String developerMessage;
@@ -51,11 +49,12 @@ class ErrorMessage {
 
   static ErrorMessage? getErrorMessage(response) {
     String errorName = 'UNKNOWN';
-    ;
     try {
       errorName = response.exception.linkException.parsedResponse.errors[0]
           .extensions['errorName'] ??= 'UNKNOWN';
-    } catch (e) {}
+    } catch (e) {
+      return ErrorMessage.errors[errorName];
+    }
 
     return ErrorMessage.errors[errorName];
   }

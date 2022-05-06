@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
-import 'package:verker_prof/repositories/authRepo.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
 import 'package:verker_prof/theme/widgets/buttons.dart';
-import 'package:verker_prof/theme/widgets/loading_indicator.dart';
 import 'package:verker_prof/theme/widgets/standard_input_form.dart';
 
 class LoginView extends StatefulWidget {
   static String name = '/loginscreen';
+
+  const LoginView({Key? key}) : super(key: key);
 
   @override
   State<LoginView> createState() => _RegisterScreenState();
@@ -40,12 +40,12 @@ class _RegisterScreenState extends State<LoginView> {
                 const SizedBox(
                   height: 20,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 _nameAndEmailTab(),
                 BlocBuilder<LoginBloc, LoginState>(
                   builder: (context, state) {
                     if (state is Loading) {
-                      CircularProgressIndicator();
+                      const CircularProgressIndicator();
                     }
                     if (state is Succes) {
                       myCallback(() {
@@ -98,6 +98,7 @@ class _RegisterScreenState extends State<LoginView> {
                 if (!emailValid) {
                   return 'Indtast venligst en gyldig mail';
                 }
+                return null;
               },
               keyboardType: TextInputType.emailAddress,
               title: 'Email.',

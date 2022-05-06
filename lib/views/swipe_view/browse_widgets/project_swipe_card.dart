@@ -7,15 +7,17 @@ import 'package:verker_prof/models/project.dart';
 import 'package:verker_prof/services/variables.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
 import 'package:verker_prof/views/project_details_view/project_details_screen.dart';
+import 'package:verker_prof/views/swipe_view/browse_widgets/swipe_carousel.dart';
 
 class ProjectSwipeCard extends StatefulWidget {
   final ProjectModel project;
   final void Function() onButtonPress;
 
-  ProjectSwipeCard({
+  const ProjectSwipeCard({
+    Key? key,
     required this.project,
     required this.onButtonPress,
-  });
+  }) : super(key: key);
 
   @override
   State<ProjectSwipeCard> createState() => _ProjectSwipeCardState();
@@ -23,6 +25,13 @@ class ProjectSwipeCard extends StatefulWidget {
 
 class _ProjectSwipeCardState extends State<ProjectSwipeCard> {
   int _currentImage = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    precacheImages(widget.project.images, context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +44,12 @@ class _ProjectSwipeCardState extends State<ProjectSwipeCard> {
             color: Colors.grey.withOpacity(0.3),
             spreadRadius: 5,
             blurRadius: 7,
-            offset: Offset(0, 5), // changes position of shadow
+            offset: const Offset(0, 5), // changes position of shadow
           ),
         ],
         color: Colors.white,
       ),
-      margin: EdgeInsets.all(14),
+      margin: const EdgeInsets.all(14),
       width: MediaQuery.of(context).size.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,7 +95,7 @@ class _ProjectSwipeCardState extends State<ProjectSwipeCard> {
                 Positioned(
                   bottom: 20,
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                     child: SizedBox(
                       width: 300,
                       child: Column(
@@ -96,15 +105,15 @@ class _ProjectSwipeCardState extends State<ProjectSwipeCard> {
                               maxLines: 1, style: kLargeBoldWhite),
                           Text(
                               '${widget.project.address!['address'] ??= "N/A"} - ${widget.project.distance!.toInt()} km',
-                              style: TextStyle(color: Colors.white)),
-                          SizedBox(
+                              style: const TextStyle(color: Colors.white)),
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(
                             widget.project.description!,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ],
                       ),
@@ -171,14 +180,15 @@ class _ProjectSwipeCardState extends State<ProjectSwipeCard> {
                   );
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  decoration: BoxDecoration(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(7),
                         bottomRight: Radius.circular(7)),
                     color: Colors.black,
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       'Se hele projektet',
                       style: TextStyle(color: Colors.white, fontSize: 18),

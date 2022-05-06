@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql/client.dart';
 import 'package:verker_prof/models/company_registration.dart';
-import 'package:verker_prof/repositories/authRepo.dart';
-import 'package:verker_prof/services/graphql/GrapgQLService.dart';
+import 'package:verker_prof/repositories/auth_repo.dart';
+import 'package:verker_prof/services/graphql/graphql_service.dart';
 import 'package:verker_prof/services/graphql/queries/create_company.dart';
 import 'package:verker_prof/services/network_helper.dart';
 
@@ -20,7 +20,7 @@ class CompanyRegisterBloc
 
   AuthenticationRepository authRepo;
 
-  CompanyRegisterBloc(this.authRepo) : super(CompanyRegisterState()) {
+  CompanyRegisterBloc(this.authRepo) : super(const CompanyRegisterState()) {
     on<AddValues>(_addValues);
     on<SearchCompanyByName>(_searchCompanyByName);
     on<RegisterCompany>(_registerCompany);
@@ -57,6 +57,7 @@ class CompanyRegisterBloc
     CompanyRegistrationModel companyData = state.companyModel;
 
     try {
+      // ignore: unused_local_variable
       QueryResult result =
           await GraphQLService().performMutation(createCompany, variables: {
         "name": companyData.name,

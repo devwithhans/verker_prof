@@ -19,8 +19,8 @@ class VerkerMessageBuble extends StatelessWidget {
 
     return Padding(
         padding: recieved
-            ? EdgeInsets.fromLTRB(30, 2, 10, 2)
-            : EdgeInsets.fromLTRB(10, 2, 30, 2),
+            ? const EdgeInsets.fromLTRB(30, 2, 10, 2)
+            : const EdgeInsets.fromLTRB(10, 2, 30, 2),
         child: Column(
             crossAxisAlignment:
                 recieved ? CrossAxisAlignment.end : CrossAxisAlignment.start,
@@ -34,7 +34,8 @@ class VerkerMessageBuble extends StatelessWidget {
                         ? Colors.lightBlueAccent
                         : Colors.grey[200],
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Column(
                     children: [
                       Text(item.text!,

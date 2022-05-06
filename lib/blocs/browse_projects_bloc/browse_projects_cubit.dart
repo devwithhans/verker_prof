@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql/client.dart';
 import 'package:verker_prof/models/project.dart';
-import 'package:verker_prof/services/graphql/GrapgQLService.dart';
-import 'package:verker_prof/services/graphql/queries/getOutreaches.dart';
+import 'package:verker_prof/services/graphql/graphql_service.dart';
+import 'package:verker_prof/services/graphql/queries/get_outreaches.dart';
 
 part 'browse_projects_state.dart';
 

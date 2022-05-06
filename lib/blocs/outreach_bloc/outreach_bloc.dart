@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphql/client.dart';
 import 'package:verker_prof/blocs/swipe_bloc/swipe_bloc.dart';
-import 'package:verker_prof/services/graphql/GrapgQLService.dart';
+import 'package:verker_prof/services/graphql/graphql_service.dart';
 import 'package:verker_prof/services/graphql/queries/outreach.dart';
 
 part 'outreach_event.dart';

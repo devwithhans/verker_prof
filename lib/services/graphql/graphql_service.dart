@@ -5,13 +5,11 @@ import 'package:verker_prof/services/variables.dart';
 /// This is the service used to process our graphql quries to our own backend.
 /// We do this with the graphql package.
 
-// TODO: Extract the final url to an ignored .env file.
-
 class GraphQLService {
   late GraphQLClient _client;
   GraphQLService() {
     final Link link = AuthLink(getToken: () async {
-      String? token = await FlutterSecureStorage().read(key: "jwt");
+      String? token = await const FlutterSecureStorage().read(key: "jwt");
       return "Bearer $token";
     }).concat(HttpLink('$serverUrl/graphql'));
 

@@ -11,11 +11,11 @@ List<String> types = [
 ];
 
 class SelectBusinessType extends StatelessWidget {
-  SelectBusinessType({Key? key}) : super(key: key);
+  const SelectBusinessType({Key? key}) : super(key: key);
 
-  bool showComplianceError = false;
+  final bool showComplianceError = false;
 
-  bool termsAccept = false;
+  final bool termsAccept = false;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CompanyRegisterBloc, CompanyRegisterState>(
@@ -23,14 +23,14 @@ class SelectBusinessType extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Text(
                 'Vælg din branche:',
                 style: kMediumBold,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: types
@@ -44,7 +44,7 @@ class SelectBusinessType extends StatelessWidget {
                           color: e == state.companyModel.type
                               ? Colors.grey.withOpacity(0.5)
                               : null,
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 20),
                           child: Text(
                             e,

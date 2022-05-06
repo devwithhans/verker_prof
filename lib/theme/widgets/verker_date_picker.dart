@@ -31,7 +31,7 @@ class VerkerDatePicker extends StatelessWidget {
           builder: (context, child) {
             return Theme(
               data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme.light(
+                colorScheme: const ColorScheme.light(
                   primary: Colors.black, // header background color
                   onPrimary: Colors.white, // header text color
                   onSurface: Colors.black, // body text color
@@ -60,7 +60,9 @@ class VerkerDatePicker extends StatelessWidget {
       title: title,
       hintText: hintText,
       onChanged: (v) {},
-      validator: (v) {},
+      validator: (v) {
+        return null;
+      },
     );
   }
 }

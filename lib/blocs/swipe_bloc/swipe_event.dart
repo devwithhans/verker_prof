@@ -15,9 +15,9 @@ class FetchProjects extends SwipeEvent {
 }
 
 class RemoveProject extends SwipeEvent {
-  String id;
+  final String id;
 
-  RemoveProject(this.id);
+  const RemoveProject(this.id);
 }
 
 class GetLocation extends SwipeEvent {}

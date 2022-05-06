@@ -46,7 +46,7 @@ class ProjectTile extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.only(bottom: 15),
               color: Colors.transparent,
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

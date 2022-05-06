@@ -19,8 +19,8 @@ class SwipeSection extends StatelessWidget {
     return BlocBuilder<SwipeBloc, SwipeState>(
       builder: (context, state) {
         if (state.status == ProjectStatus.failed) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
+          return const Padding(
+            padding: EdgeInsets.all(8.0),
             child: CenterText(
               'Du har ikke accepteret at dele lokation, og vi kan derfor ikke vise projekter i nærheden af dig.',
               style: kMediumBold,
@@ -28,7 +28,8 @@ class SwipeSection extends StatelessWidget {
           );
         }
         if (state.projects.isEmpty) {
-          return CenterText('Vi kunne ikke finde nogen projekter desværre');
+          return const CenterText(
+              'Vi kunne ikke finde nogen projekter desværre');
         }
         if (state.projects.isNotEmpty) {
           return CarouselSlider.builder(
@@ -43,8 +44,8 @@ class SwipeSection extends StatelessWidget {
               itemBuilder: (context, indexOne, indexTwo) {
                 if (indexOne == state.projects.length) {
                   return state.status == ProjectStatus.loading
-                      ? CenterText('LOADING')
-                      : BrowseEnd();
+                      ? const CenterText('LOADING')
+                      : const BrowseEnd();
                 }
                 if (indexOne != state.projects.length - 1) {
                   precacheImages(state.projects[indexOne + 1].images, context);

@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:verker_prof/theme/constants/colors.dart';
 import 'package:verker_prof/theme/fonts/icons.dart';
 
 class ContinueButton extends StatelessWidget {
-  void Function()? onPressed;
-  String text;
+  final void Function()? onPressed;
+  final String text;
 
-  Color? backgroundColor;
-  Color? textColor;
-  bool nextIcon;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final bool nextIcon;
 
-  ContinueButton({
+  const ContinueButton({
+    Key? key,
     this.nextIcon = false,
     required this.onPressed,
     this.backgroundColor = Colors.white,
     this.text = 'button',
     this.textColor = Colors.black,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,23 +54,22 @@ class ContinueButton extends StatelessWidget {
 }
 
 class StandardButton extends StatelessWidget {
-  void Function()? onPressed;
-  String text;
-  bool disabled;
-  Color? backgroundColor;
-  Color? textColor;
-  bool secondary;
-  Key? key;
+  final void Function()? onPressed;
+  final String text;
+  final bool disabled;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final bool secondary;
 
-  StandardButton({
+  const StandardButton({
+    Key? key,
     this.secondary = false,
     required this.onPressed,
     this.disabled = false,
     this.backgroundColor = Colors.white,
     this.text = 'button',
     this.textColor = Colors.black,
-    this.key,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -97,21 +96,20 @@ class StandardButton extends StatelessWidget {
 }
 
 class KIconButton extends StatelessWidget {
-  void Function()? onPressed;
-  String text;
-  Color? backgroundColor;
-  Color? textColor;
-  IconData? icon;
-  Key? key;
+  final void Function()? onPressed;
+  final String text;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final IconData? icon;
 
-  KIconButton({
+  const KIconButton({
+    Key? key,
     required this.onPressed,
     this.icon = VerkerIcons.camera,
     this.backgroundColor = Colors.white,
     this.text = 'Tag ny video eller foto',
     this.textColor = Colors.black,
-    this.key,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +133,7 @@ class KIconButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Text(
@@ -166,7 +164,8 @@ class HorizontalNavigationButtons extends StatelessWidget {
   final void Function()? onSubmit;
   final void Function()? onBack;
 
-  HorizontalNavigationButtons({
+  const HorizontalNavigationButtons({
+    Key? key,
     required this.index,
     required this.length,
     this.backText = 'Forrige',
@@ -176,8 +175,9 @@ class HorizontalNavigationButtons extends StatelessWidget {
     this.onNext,
     this.onSubmit,
     this.onBack,
-  });
+  }) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     if (index == 0) {
       return Row(
@@ -204,7 +204,7 @@ class HorizontalNavigationButtons extends StatelessWidget {
             onPressed: onBack,
           ),
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Expanded(
           flex: 3,
           child: StandardButton(
@@ -220,16 +220,18 @@ class HorizontalNavigationButtons extends StatelessWidget {
 }
 
 class LinkTekst extends StatelessWidget {
-  void Function() onPressed;
-  String beforeText;
-  String linkText;
-  double fontSize;
+  final void Function() onPressed;
+  final String beforeText;
+  final String linkText;
+  final double fontSize;
 
-  LinkTekst(
-      {required this.onPressed,
+  const LinkTekst(
+      {Key? key,
+      required this.onPressed,
       this.beforeText = '',
       this.linkText = '',
-      this.fontSize = 16});
+      this.fontSize = 16})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -244,7 +246,7 @@ class LinkTekst extends StatelessWidget {
           onTap: onPressed,
           child: Container(
             color: Colors.transparent,
-            padding: EdgeInsets.all(3),
+            padding: const EdgeInsets.all(3),
             child: Text(linkText,
                 style: TextStyle(
                   decoration: TextDecoration.underline,

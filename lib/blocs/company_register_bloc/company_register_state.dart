@@ -7,6 +7,7 @@ class CompanyRegisterState extends Equatable {
   final CompanyRegisterStatus registerStatus;
   final CompanyRegistrationModel companyModel;
   final CvrSearchStatus cvrSearchStatus;
+  // ignore: prefer_typing_uninitialized_variables
   final searchResult;
   const CompanyRegisterState({
     this.cvrSearchStatus = CvrSearchStatus.initial,

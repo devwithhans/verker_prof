@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:verker_prof/repositories/authRepo.dart';
+import 'package:verker_prof/repositories/auth_repo.dart';
 import 'package:verker_prof/services/error/errors.dart';
 
 part 'login_event.dart';
@@ -19,13 +19,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   })  : _authenticationRepository = authenticationRepository,
         super(LoginInitial()) {
     on<Login>(_onLogin);
-  }
-
-  void selectScreen(screen) {
-    LoginInitial newState = LoginInitial();
-    newState.screen = screen;
-    emit(ScreenChanged());
-    emit(newState);
   }
 
   Future<void> _onLogin(Login event, emit) async {

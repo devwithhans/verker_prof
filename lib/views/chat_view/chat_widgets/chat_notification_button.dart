@@ -27,7 +27,7 @@ class ChatNotiButton extends StatelessWidget {
                 child: Center(
                   child: Text(
                     text,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
                         decoration: TextDecoration.underline),

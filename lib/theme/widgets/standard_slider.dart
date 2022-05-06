@@ -38,7 +38,7 @@ class _StandardSliderState extends State<StandardSlider> {
           children: [
             Text(
               widget.title,
-              style: TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 20),
             ),
             Text(
               '${_value.toInt()} Km',

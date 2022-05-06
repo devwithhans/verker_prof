@@ -5,11 +5,11 @@ import 'package:verker_prof/theme/widgets/input.dart';
 import 'package:verker_prof/theme/widgets/standard_input_form.dart';
 
 class FormScreenOne extends StatelessWidget {
-  FormScreenOne({Key? key}) : super(key: key);
+  const FormScreenOne({Key? key}) : super(key: key);
 
-  bool showComplianceError = false;
+  final bool showComplianceError = false;
 
-  bool termsAccept = false;
+  final bool termsAccept = false;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RegisterBloc, RegisterState>(
@@ -88,6 +88,7 @@ class FormScreenOne extends StatelessWidget {
                   if (!emailValid) {
                     return 'Indtast venligst en gyldig mail';
                   }
+                  return null;
                 },
                 keyboardType: TextInputType.emailAddress,
                 title: 'Email.',
@@ -101,6 +102,7 @@ class FormScreenOne extends StatelessWidget {
                   if (v != null && !v) {
                     return 'Du skal godkende vores vilkår';
                   }
+                  return null;
                 },
                 showError: showComplianceError,
                 errorText: 'Du skal godkende vores vilkår',

@@ -20,24 +20,24 @@ class HomeView extends StatelessWidget {
                 'Kære ${state.user.firstName}',
                 style: kMediumBold,
               ),
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              const Text(
                 'Vi kan ikke beskrive hvor meget vi sætter pris på din hjælp. Vi har en drøm om at bygge en platform sammen med vores brugere, og du er derfor altid velkommen til at kontakte os. Hvad syntes du f.eks. der skal være synligt på hjem skærmen?',
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'Med Venlig hilsen.',
               ),
-              SizedBox(height: 5),
-              Text(
+              const SizedBox(height: 5),
+              const Text(
                 'Gustav Brun og Hans-Christian Bøge',
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'Telefon: 53 86 26 03',
               ),
-              SizedBox(height: 5),
-              Text(
+              const SizedBox(height: 5),
+              const Text(
                 'Email: gustav@verker.app',
               ),
             ],

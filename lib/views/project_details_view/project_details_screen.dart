@@ -14,11 +14,12 @@ import 'package:verker_prof/theme/widgets/loading_indicator.dart';
 import 'package:verker_prof/views/project_details_view/project_details_widgets/image_inspect.dart';
 import 'package:verker_prof/views/project_details_view/project_details_widgets/send_outreach.dart';
 
+// ignore: must_be_immutable
 class ProjectDetailsView extends StatelessWidget {
   final ProjectModel project;
   final bool outreach;
 
-  ProjectDetailsView({required this.project, this.outreach = false, Key? key})
+  ProjectDetailsView({Key? key, required this.project, this.outreach = false})
       : super(key: key);
 
   @override
@@ -53,7 +54,7 @@ class ProjectDetailsView extends StatelessWidget {
       body: Stack(
         children: [
           ListView(
-            padding: EdgeInsets.symmetric(horizontal: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 0),
             children: [
               SizedBox(
                   height: 500,
@@ -85,11 +86,11 @@ class ProjectDetailsView extends StatelessWidget {
                         );
                       })),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Text(
@@ -111,14 +112,14 @@ class ProjectDetailsView extends StatelessWidget {
                     ),
                     Text(
                       project.description!,
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-          outreach ? SizedBox() : OutreachButton(project: project)
+          outreach ? const SizedBox() : OutreachButton(project: project)
         ],
       ),
     );
@@ -135,7 +136,7 @@ class ProjectDetailsView extends StatelessWidget {
 }
 
 class OutreachButton extends StatelessWidget {
-  OutreachButton({
+  const OutreachButton({
     Key? key,
     required this.project,
   }) : super(key: key);
@@ -177,7 +178,7 @@ class OutreachButton extends StatelessWidget {
                         projectsCubit.add(FetchMyProjects());
                       }
                       if (state.status == OutreachStatus.failed) {
-                        return CenterText(
+                        return const CenterText(
                             'Vi kunne ikke sende din besked, prøv igen senere');
                       }
                       if (state.status == OutreachStatus.initial) {
@@ -185,7 +186,7 @@ class OutreachButton extends StatelessWidget {
                           projectId: project.id!,
                         );
                       }
-                      return Center(
+                      return const Center(
                         child: LoadingIndicator(),
                       );
                     },

@@ -1,6 +1,6 @@
 import 'package:graphql/client.dart';
 import 'package:verker_prof/models/project.dart';
-import 'package:verker_prof/services/graphql/GrapgQLService.dart';
+import 'package:verker_prof/services/graphql/graphql_service.dart';
 import 'package:verker_prof/services/graphql/queries/project.dart';
 
 /// The browse repo makes it posible to browse projects with pagination. This repo is used with the swipe_screen

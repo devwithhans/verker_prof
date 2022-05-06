@@ -3,9 +3,9 @@ part of 'projects_cubit.dart';
 enum ProjectsStatus { succes, initial, failed, loading }
 
 class ProjectsState extends Equatable {
-  List<Outreach> projects;
-  ProjectsStatus status;
-  ProjectsState(
+  final List<Outreach> projects;
+  final ProjectsStatus status;
+  const ProjectsState(
       {this.projects = const [], this.status = ProjectsStatus.initial});
 
   ProjectsState copyWith({

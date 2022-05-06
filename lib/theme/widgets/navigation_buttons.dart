@@ -41,7 +41,7 @@ class NavigationButtons extends StatelessWidget {
                       text: backText,
                     ),
                   )
-                : SizedBox(),
+                : const SizedBox(),
             SizedBox(width: !atStart ? 10 : 0),
             !atEnd
                 ? Expanded(

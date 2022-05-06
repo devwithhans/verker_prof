@@ -8,14 +8,15 @@ class Compliance extends StatefulWidget {
   final String errorText;
   final bool showError;
 
-  Compliance({
+  const Compliance({
+    Key? key,
     required this.validator,
     this.errorText = '',
     this.initialValue = false,
     required this.onChange,
     this.text = '',
     this.showError = false,
-  });
+  }) : super(key: key);
 
   @override
   State<Compliance> createState() => _ComplianceState();
@@ -26,7 +27,6 @@ class _ComplianceState extends State<Compliance> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     termsAccept = widget.initialValue;
   }
@@ -44,6 +44,7 @@ class _ComplianceState extends State<Compliance> {
         onTap: () {
           termsAccept = !termsAccept;
 
+          // ignore: invalid_use_of_protected_member
           state.setValue(termsAccept);
           _onChange(termsAccept);
           setState(() {});
@@ -65,16 +66,17 @@ class _ComplianceState extends State<Compliance> {
                       width: 24.0,
                       child: Checkbox(
                         activeColor: Colors.black,
-                        side: BorderSide(width: 1),
+                        side: const BorderSide(width: 1),
                         value: termsAccept,
                         splashRadius: 0,
-                        shape: RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(4),
                           ),
                         ),
                         onChanged: (v) {
                           termsAccept = !termsAccept;
+                          // ignore: invalid_use_of_protected_member
                           state.setValue(termsAccept);
                           _onChange(termsAccept);
                           setState(() {});
@@ -82,12 +84,13 @@ class _ComplianceState extends State<Compliance> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Text(
                     widget.text,
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                        fontSize: 15, fontWeight: FontWeight.w500),
                   ),
                 ],
               ),

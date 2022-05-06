@@ -7,7 +7,7 @@ import 'package:verker_prof/theme/widgets/buttons.dart';
 import 'package:verker_prof/theme/widgets/standard_slider.dart';
 
 class Filter extends StatefulWidget {
-  Filter();
+  const Filter({Key? key}) : super(key: key);
 
   @override
   _FilterState createState() => _FilterState();
@@ -29,7 +29,7 @@ class _FilterState extends State<Filter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(top: 7),
+        padding: const EdgeInsets.only(top: 7),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -48,7 +48,7 @@ class _FilterState extends State<Filter> {
               height: 10,
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
+              padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -56,7 +56,7 @@ class _FilterState extends State<Filter> {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Icon(Icons.close),
+                    child: const Icon(Icons.close),
                   ),
                   const Text(
                     'Filter',

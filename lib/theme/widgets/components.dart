@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:verker_prof/theme/constants/textstyle.dart';
 
 class CenterText extends StatelessWidget {
-  String text;
-  TextStyle? style;
+  final String text;
+  final TextStyle? style;
 
-  CenterText(this.text, {this.style});
+  const CenterText(this.text, {Key? key, this.style}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -25,13 +25,14 @@ class Badge extends StatelessWidget {
   final double horizontal;
   final bool right;
 
-  Badge({
+  const Badge({
+    Key? key,
     required this.icon,
     this.number = 0,
     this.horizontal = -10,
     this.vertical = -8,
     this.right = true,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,31 +65,33 @@ class BadgeContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-          color: Color(0xffFE3650), borderRadius: BorderRadius.circular(100)),
+          color: const Color(0xffFE3650),
+          borderRadius: BorderRadius.circular(100)),
       child: Text(
         number.toString(),
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
     );
   }
 }
 
 class ProductCard extends StatelessWidget {
-  String backgroundImageUrl;
-  String title;
-  String measure;
-  double price;
-  void Function() onPressed;
+  final String backgroundImageUrl;
+  final String title;
+  final String measure;
+  final double price;
+  final void Function() onPressed;
 
-  ProductCard({
+  const ProductCard({
+    Key? key,
     required this.backgroundImageUrl,
     required this.title,
     required this.price,
     this.measure = 'kvm',
     required this.onPressed,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +99,7 @@ class ProductCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.only(right: 20),
+          margin: const EdgeInsets.only(right: 20),
           width: 200,
           height: 200,
           decoration: BoxDecoration(
@@ -106,22 +109,22 @@ class ProductCard extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(13)),
         ),
-        SizedBox(
+        const SizedBox(
           height: 6,
         ),
         Text(
           title,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         Row(
           children: [
             Text(
               '${price.toInt()},-',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Text(
               ' pr. $measure',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
@@ -135,21 +138,21 @@ class ProductCard extends StatelessWidget {
 enum Status { active, offer, done, canceled }
 
 class StatusBox extends StatelessWidget {
-  String outreachStatus;
-  Color backgroundColor;
-  Color textColor;
+  final String outreachStatus;
+  final Color backgroundColor;
+  final Color textColor;
 
-  StatusBox(
-      {Key? key,
-      required this.outreachStatus,
-      this.backgroundColor = Colors.black,
-      this.textColor = Colors.white})
-      : super(key: key);
+  const StatusBox({
+    Key? key,
+    required this.outreachStatus,
+    this.backgroundColor = Colors.black,
+    this.textColor = Colors.white,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         color: backgroundColor,
@@ -162,7 +165,7 @@ class StatusBox extends StatelessWidget {
     );
   }
 
-  Map<String, String> states = {
+  static const Map<String, String> states = {
     'PENDING': 'SALG',
     'ACTIVE': 'AKTIV',
     'LOST': 'TABT',
@@ -200,7 +203,7 @@ class KsliverAppBar extends StatelessWidget {
             width: 40,
             decoration: BoxDecoration(
                 color: Colors.black, borderRadius: BorderRadius.circular(20)),
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
@@ -225,7 +228,7 @@ class KsliverAppBar extends StatelessWidget {
                     alignment: percent < 0.40
                         ? Alignment.center
                         : Alignment.centerLeft,
-                    duration: Duration(milliseconds: 250),
+                    duration: const Duration(milliseconds: 250),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -234,20 +237,20 @@ class KsliverAppBar extends StatelessWidget {
                           flex: 10,
                           child: Text(
                             title,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 fontSize: 20,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Expanded(
+                        const Expanded(
                           flex: 1,
                           child: SizedBox(
                             width: 20,
                           ),
                         ),
-                        StatusBox(
+                        const StatusBox(
                           backgroundColor: Colors.white,
                           textColor: Colors.black,
                           outreachStatus: 'ACTIVE',
@@ -279,12 +282,12 @@ class GradientImage extends StatelessWidget {
     return Stack(children: [
       Container(
         decoration: BoxDecoration(
-          gradient: new LinearGradient(
-            end: const Alignment(0.0, 0.4),
-            begin: const Alignment(0.0, -1),
-            colors: <Color>[const Color(0x8A000000), Colors.black],
+          gradient: const LinearGradient(
+            end: Alignment(0.0, 0.4),
+            begin: Alignment(0.0, -1),
+            colors: <Color>[Color(0x8A000000), Colors.black],
           ),
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(7), topRight: Radius.circular(7)),
           image: DecorationImage(
             image: NetworkImage(image),
@@ -297,10 +300,10 @@ class GradientImage extends StatelessWidget {
         child: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: new BoxDecoration(
-            gradient: new LinearGradient(
-              end: const Alignment(0.0, -0.1),
-              begin: const Alignment(0.0, 1.0),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              end: Alignment(0.0, -0.1),
+              begin: Alignment(0.0, 1.0),
               colors: <Color>[
                 Colors.black,
                 Colors.transparent,
@@ -328,10 +331,11 @@ class GradientImage extends StatelessWidget {
 }
 
 class ProjectFormHeader extends StatelessWidget {
-  String headerText;
-  String? bodyText;
+  final String headerText;
+  final String? bodyText;
 
-  ProjectFormHeader({this.bodyText, required this.headerText});
+  const ProjectFormHeader({Key? key, this.bodyText, required this.headerText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -346,7 +350,7 @@ class ProjectFormHeader extends StatelessWidget {
           height: bodyText != null ? 0 : 20,
         ),
         Text(
-          bodyText ??= '',
+          bodyText ?? '',
           style: kMediumBold,
         ),
         SizedBox(

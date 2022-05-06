@@ -18,12 +18,12 @@ class VerkerButton extends StatelessWidget {
       onTap: active ? onPressed : () {},
       child: Container(
         // margin: EdgeInsets.only(right: 10),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         color: active ? Colors.black : Colors.grey,
         child: Text(
           text,
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     );

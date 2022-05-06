@@ -24,7 +24,7 @@ class ImageInspect extends StatelessWidget {
             width: 40,
             decoration: BoxDecoration(
                 color: Colors.black, borderRadius: BorderRadius.circular(20)),
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
@@ -37,7 +37,7 @@ class ImageInspect extends StatelessWidget {
       backgroundColor: Colors.black,
       body: InteractiveViewer(
         panEnabled: true, // Set it to false
-        boundaryMargin: EdgeInsets.all(0),
+        boundaryMargin: const EdgeInsets.all(0),
         minScale: 1,
         maxScale: 4,
         child: Center(
