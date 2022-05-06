@@ -32,6 +32,7 @@ class AuthenticationRepository {
     if (jwt != null) {
       QueryResult result = await _graphQLService.performQuery(getUser);
       if (result.hasException) {
+        print('has exception');
         yield ErrorAccured(ErrorType.networkError);
       }
       UserData userData = UserData.convert(result.data!['getUser']);
@@ -46,6 +47,7 @@ class AuthenticationRepository {
             _controller.add(UnAuthorised());
           }
         } catch (e) {
+          print(e);
           yield ErrorAccured(ErrorType.missingLicence);
         }
       }
