@@ -8,6 +8,7 @@ import 'package:verker_prof/theme/fonts/icons.dart';
 import 'package:verker_prof/theme/widgets/buttons.dart';
 import 'package:verker_prof/theme/widgets/components.dart';
 import 'package:verker_prof/views/home_view/home_view.dart';
+import 'package:verker_prof/views/new_swipe_view/new_swipe_view.dart';
 import 'package:verker_prof/views/projects_view/projects_view.dart';
 import 'package:verker_prof/views/swipe_view/browse_view.dart';
 
@@ -18,7 +19,8 @@ class NavScreenDeligator extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> _widgetOptions = <Widget>[
       const HomeView(),
-      const BrowseProjectsView(),
+      // const BrowseProjectsView(),
+      const NewSwipeSceen(),
       const ProjectsView(),
       Center(
         child: StandardButton(

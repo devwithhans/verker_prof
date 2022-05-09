@@ -315,7 +315,7 @@ packages:
     source: hosted
     version: "0.6.4"
   flutter_cache_manager:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_cache_manager
       url: "https://pub.dartlang.org"
@@ -469,6 +469,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.0"
+  get_it:
+    dependency: "direct main"
+    description:
+      name: get_it
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "7.2.0"
   google_nav_bar:
     dependency: "direct main"
     description:

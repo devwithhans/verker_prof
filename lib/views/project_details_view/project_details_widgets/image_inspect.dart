@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ImageInspect extends StatelessWidget {
@@ -41,8 +42,8 @@ class ImageInspect extends StatelessWidget {
         minScale: 1,
         maxScale: 4,
         child: Center(
-          child: Image.network(
-            image,
+          child: CachedNetworkImage(
+            imageUrl: image,
             fit: BoxFit.cover,
           ),
         ),

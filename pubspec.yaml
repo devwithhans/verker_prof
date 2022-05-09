@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   geolocator:
+  get_it: ^7.2.0
   photo_view: 
   bloc: 
   flutter_bloc: 
@@ -43,7 +44,7 @@ dependencies:
   jiffy:  
   gql:  
   intl: 
-  
+  flutter_cache_manager: ^3.3.0
   image_picker:  
   file_picker:  
   video_player:  

@@ -5,6 +5,8 @@ import 'package:graphql/client.dart';
 import 'package:verker_prof/models/filter.dart';
 
 import 'package:verker_prof/models/project.dart';
+import 'package:verker_prof/services/download_image_to_cache.dart';
+
 import 'package:verker_prof/services/graphql/graphql_service.dart';
 import 'package:verker_prof/services/graphql/queries/project.dart';
 
@@ -29,6 +31,9 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
   }
 
   Future<void> _fetchProjects(FetchProjects event, Emitter emit) async {
+    emit(state.copyWith(
+      status: ProjectStatus.loading,
+    ));
     if (event.projectSearchFilter != null) {
       List<double> position = [];
       try {
@@ -79,8 +84,12 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
               hasReachedMax: true, status: ProjectStatus.succes));
         }
         for (var i in projectsResult) {
-          projects.add(ProjectModel.convert(i));
+          ProjectModel project = ProjectModel.convert(i);
+          projects.add(project);
+          await downloadImagesToCache(project.images);
+          print('Cacged');
         }
+        print('finished');
         emit(state.copyWith(projects: projects, status: ProjectStatus.succes));
       }
     }

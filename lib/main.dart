@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:get_it/get_it.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:verker_prof/blocs/auth_bloc/auth_bloc.dart';
 import 'package:verker_prof/blocs/login_bloc/login_bloc.dart';
@@ -16,11 +18,15 @@ import 'package:verker_prof/views/register_view/register_view.dart';
 import 'package:verker_prof/wrapper.dart';
 import 'firebase_options.dart';
 
+GetIt getIt = GetIt.instance;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  getIt.registerSingleton<BaseCacheManager>(CacheManager(Config('cache')),
+      signalsReady: true);
   runApp(App());
 }
 

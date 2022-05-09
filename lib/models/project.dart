@@ -1,11 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:verker_prof/services/variables.dart';
+
 class ProjectModel {
   String? id;
   String? consumerId;
   String? title;
   String? description;
   String? projectType;
-  List<dynamic> images;
-  List<dynamic> videos;
+  List<String> images;
+  List<String> videos;
   String? deadline;
   Map? address;
   Map? location;
@@ -28,7 +32,14 @@ class ProjectModel {
   });
 
   static convert(response) {
-    List images = response['projectImages'];
+    List noUrlFiles = List<String>.from(response['projectImages']);
+    List<String> urlFiles = [];
+    noUrlFiles.forEach(((element) => urlFiles.add(imageUrl + element)));
+
+    List<String> images =
+        urlFiles.where((element) => element.split('.').last == 'jpg').toList();
+    List<String> videos =
+        urlFiles.where((element) => element.split('.').last == 'mp4').toList();
 
     return ProjectModel(
       id: response['_id'] ??= null,
@@ -36,10 +47,8 @@ class ProjectModel {
       title: response['title'] ??= null,
       description: response['description'] ??= null,
       projectType: response['projectType'] ??= null,
-      images:
-          images.where((element) => element.split('.').last == 'jpg').toList(),
-      videos:
-          images.where((element) => element.split('.').last == 'mp4').toList(),
+      images: images,
+      videos: videos,
       deadline: response['deadline'] ??= null,
       distance: response['distance'] ??= null,
       createdAt: response['createdAt'] ??= null,

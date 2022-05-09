@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,7 +69,7 @@ class ProjectDetailsView extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => ImageInspect(
-                                  image: imageUrl + project.images[indexOne],
+                                  image: project.images[indexOne],
                                 ),
                               ),
                             );
@@ -77,8 +78,8 @@ class ProjectDetailsView extends StatelessWidget {
                             height: 200,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: NetworkImage(
-                                    imageUrl + project.images[indexOne]),
+                                image: CachedNetworkImageProvider(
+                                    project.images[indexOne]),
                                 fit: BoxFit.cover,
                               ),
                             ),
