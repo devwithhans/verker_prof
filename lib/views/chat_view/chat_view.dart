@@ -76,8 +76,8 @@ class _ChannelPageState extends State<ChannelPage> {
           child: Row(
             children: [
               CircleAvatar(
-                  foregroundImage: NetworkImage(
-                      imageUrl + widget.outreach.project.images.first)),
+                  foregroundImage:
+                      NetworkImage(widget.outreach.project.images.first)),
               const SizedBox(width: 10),
               Expanded(
                 child: Column(

@@ -47,9 +47,6 @@ class SwipeSection extends StatelessWidget {
                       ? const CenterText('LOADING')
                       : const BrowseEnd();
                 }
-                if (indexOne != state.projects.length - 1) {
-                  precacheImages(state.projects[indexOne + 1].images, context);
-                }
                 if (indexOne == state.projects.length - 1 &&
                     !state.hasReachedMax) {
                   context

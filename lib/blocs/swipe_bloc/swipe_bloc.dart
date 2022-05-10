@@ -31,9 +31,6 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
   }
 
   Future<void> _fetchProjects(FetchProjects event, Emitter emit) async {
-    emit(state.copyWith(
-      status: ProjectStatus.loading,
-    ));
     if (event.projectSearchFilter != null) {
       List<double> position = [];
       try {
@@ -53,12 +50,13 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
     } else {
       emit(state.copyWith(
         currentIndex: event.currentIndex,
-        status: ProjectStatus.loading,
+        // status: ProjectStatus.loading,
       ));
     }
 
     List<ProjectModel> projects = [];
     projects.addAll(state.projects);
+    print(projects.length);
 
     QueryResult result;
     try {

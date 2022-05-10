@@ -72,7 +72,7 @@ class _NewSwipeCardState extends State<NewSwipeCard> {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width - 30,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Text(widget.project.title!,
                     //     maxLines: 1, style: kLargeBoldWhite),
